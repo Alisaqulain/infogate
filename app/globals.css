@@ -1,0 +1,350 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Site-wide motion + hover polish */
+@keyframes fxRevealUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fxFlyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--fx-x, 0), var(--fx-y, 0), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+[data-fx-reveal-init="1"][data-fx-reveal-in="0"] {
+  opacity: 0;
+  transform: translate3d(var(--fx-x, 0), var(--fx-y, 0), 0);
+}
+
+[data-fx-reveal-init="1"][data-fx-reveal-in="1"] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  animation: fxFlyIn 560ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+[data-fx-reveal-init="1"][data-fx-from="left"] { --fx-x: -18px; --fx-y: 0px; }
+[data-fx-reveal-init="1"][data-fx-from="right"] { --fx-x: 18px; --fx-y: 0px; }
+[data-fx-reveal-init="1"][data-fx-from="up"] { --fx-x: 0px; --fx-y: -14px; }
+[data-fx-reveal-init="1"][data-fx-from="down"] { --fx-x: 0px; --fx-y: 14px; }
+
+.fx-stagger > * {
+  /* no-op by default; enabled after hydration */
+}
+
+.fx-stagger[data-fx-stagger="in"] > * {
+  opacity: 0;
+  animation: fxRevealUp 720ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(1) { animation-delay: 40ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(2) { animation-delay: 90ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(3) { animation-delay: 140ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(4) { animation-delay: 190ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(5) { animation-delay: 240ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(6) { animation-delay: 290ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(7) { animation-delay: 340ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(8) { animation-delay: 390ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(9) { animation-delay: 440ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(10) { animation-delay: 490ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(11) { animation-delay: 540ms; }
+.fx-stagger[data-fx-stagger="in"] > *:nth-child(12) { animation-delay: 590ms; }
+
+.fx-hoverlift {
+  transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
+  will-change: transform;
+}
+
+.fx-hoverlift:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+.fx-glow {
+  transition: filter 220ms ease;
+}
+
+.fx-glow:hover {
+  filter: brightness(1.05) saturate(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep reveal behavior even with reduced-motion enabled.
+     (We only soften it: no blur, smaller travel, faster duration.) */
+  [data-fx-reveal-init="1"][data-fx-reveal-in="1"] {
+    animation-duration: 420ms !important;
+  }
+  [data-fx-reveal-init="1"][data-fx-from="left"] { --fx-x: -10px; }
+  [data-fx-reveal-init="1"][data-fx-from="right"] { --fx-x: 10px; }
+  [data-fx-reveal-init="1"][data-fx-from="up"] { --fx-y: -8px; }
+  [data-fx-reveal-init="1"][data-fx-from="down"] { --fx-y: 8px; }
+  .fx-stagger > * {
+    opacity: 1;
+    animation: none !important;
+    transform: none !important;
+  }
+  .fx-hoverlift,
+  .fx-glow {
+    transition: none !important;
+  }
+}
+
+/* Shared 3D hover primitives */
+.fx-tilt-glare {
+  background:
+    radial-gradient(
+      420px 280px at var(--fx-px, 50%) var(--fx-py, 50%),
+      rgba(34, 211, 238, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      520px 360px at calc(var(--fx-px, 50%) + 10%) calc(var(--fx-py, 50%) + 10%),
+      rgba(37, 99, 235, 0.16),
+      transparent 70%
+    );
+  mix-blend-mode: screen;
+}
+
+.fx-btn {
+  position: relative;
+  isolation: isolate;
+}
+
+.fx-btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(220px 140px at var(--fx-px, 50%) var(--fx-py, 50%), rgba(255, 255, 255, 0.32), transparent 60%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.fx-btn:hover::after {
+  opacity: 1;
+}
+
+.fx-link {
+  position: relative;
+}
+
+.fx-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.9), rgba(34, 211, 238, 0.9));
+  transition: transform 180ms ease;
+  border-radius: 9999px;
+  opacity: 0.8;
+}
+
+.fx-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Futuristic hero FX (kept in CSS so Tailwind config stays untouched) */
+.fx-perspective {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.fx-rightfill {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  background:
+    radial-gradient(1100px 620px at 86% 50%, rgba(99, 102, 241, 0.34), transparent 62%),
+    radial-gradient(900px 560px at 102% 40%, rgba(168, 85, 247, 0.26), transparent 64%),
+    linear-gradient(to right, rgba(15, 23, 42, 0) 38%, rgba(99, 102, 241, 0.22) 70%, rgba(168, 85, 247, 0.20) 100%);
+  pointer-events: none;
+}
+
+.fx-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(34px);
+  opacity: 0.75;
+  transform-style: preserve-3d;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.fx-blob-a {
+  width: 340px;
+  height: 340px;
+  left: -120px;
+  top: 30px;
+  background: radial-gradient(circle at 30% 35%, rgba(34, 211, 238, 0.55), transparent 60%),
+    radial-gradient(circle at 70% 65%, rgba(37, 99, 235, 0.35), transparent 60%);
+  animation: fxFloatA 9s ease-in-out infinite;
+}
+
+.fx-blob-b {
+  width: 560px;
+  height: 560px;
+  right: -20px;
+  top: 18%;
+  background: radial-gradient(circle at 35% 35%, rgba(59, 130, 246, 0.30), transparent 64%),
+    radial-gradient(circle at 70% 60%, rgba(99, 102, 241, 0.42), transparent 66%);
+  animation: fxFloatB 11s ease-in-out infinite;
+}
+
+.fx-rightwash {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(720px 460px at 96% 58%, rgba(99, 102, 241, 0.38), transparent 62%),
+    radial-gradient(840px 560px at 102% 38%, rgba(168, 85, 247, 0.26), transparent 64%),
+    linear-gradient(to right, transparent 44%, rgba(99, 102, 241, 0.18) 70%, rgba(168, 85, 247, 0.14) 100%);
+  /* Avoid revealing the page background on the far right. */
+  mask-image: none;
+  will-change: opacity;
+}
+
+.fx-blob-c {
+  width: 320px;
+  height: 320px;
+  left: 45%;
+  bottom: -160px;
+  background: radial-gradient(circle at 30% 35%, rgba(14, 165, 233, 0.35), transparent 62%),
+    radial-gradient(circle at 70% 60%, rgba(34, 211, 238, 0.25), transparent 62%);
+  animation: fxFloatC 10s ease-in-out infinite;
+}
+
+.fx-grid {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.22;
+  transform-style: preserve-3d;
+  mix-blend-mode: overlay;
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.10) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(55% 55% at 70% 42%, black, transparent 70%);
+  will-change: transform;
+}
+
+.fx-grid-a {
+  animation: fxGridDrift 14s linear infinite;
+  transform: translateZ(-140px) rotateX(62deg) rotateZ(8deg) translateX(40px);
+}
+
+.fx-ring {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -180px;
+  top: 10%;
+  border-radius: 9999px;
+  border: 1px solid rgba(103, 232, 249, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.10) inset,
+    0 0 80px rgba(34, 211, 238, 0.12);
+  transform-style: preserve-3d;
+  animation: fxRingSpin 18s linear infinite;
+  mask-image: radial-gradient(closest-side, black 75%, transparent 98%);
+  will-change: transform;
+}
+
+.fx-ring-a {
+  transform: translateZ(120px) rotateX(65deg) rotateY(-12deg);
+}
+
+@keyframes fxFloatA {
+  0% { transform: translate3d(0, 0, 90px) rotateZ(0deg); }
+  50% { transform: translate3d(30px, 18px, 140px) rotateZ(8deg); }
+  100% { transform: translate3d(0, 0, 90px) rotateZ(0deg); }
+}
+
+@keyframes fxFloatB {
+  0% { transform: translate3d(0, 0, 60px) rotateZ(0deg); }
+  50% { transform: translate3d(-28px, 22px, 120px) rotateZ(-10deg); }
+  100% { transform: translate3d(0, 0, 60px) rotateZ(0deg); }
+}
+
+@keyframes fxFloatC {
+  0% { transform: translate3d(-30px, 0, 70px) rotateZ(0deg); }
+  50% { transform: translate3d(20px, -18px, 130px) rotateZ(12deg); }
+  100% { transform: translate3d(-30px, 0, 70px) rotateZ(0deg); }
+}
+
+@keyframes fxGridDrift {
+  0% { background-position: 0 0, 0 0; transform: translateZ(-140px) rotateX(62deg) rotateZ(8deg) translateX(40px); }
+  50% { background-position: 140px 80px, 80px 140px; transform: translateZ(-140px) rotateX(62deg) rotateZ(8deg) translateX(20px); }
+  100% { background-position: 280px 160px, 160px 280px; transform: translateZ(-140px) rotateX(62deg) rotateZ(8deg) translateX(40px); }
+}
+
+@keyframes fxRingSpin {
+  0% { transform: translateZ(120px) rotateX(65deg) rotateY(-12deg) rotateZ(0deg); }
+  100% { transform: translateZ(120px) rotateX(65deg) rotateY(-12deg) rotateZ(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-rightwash,
+  .fx-blob-a,
+  .fx-blob-b,
+  .fx-blob-c,
+  .fx-grid-a,
+  .fx-ring {
+    animation: none !important;
+  }
+}
