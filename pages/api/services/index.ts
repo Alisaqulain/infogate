@@ -4,6 +4,10 @@ import { dbConnect } from "@/lib/db";
 import { Service } from "@/models/Service";
 import { createImageUpload, toPublicUploadPath } from "@/lib/multer";
 import { getAdminFromRequest } from "@/lib/adminAuth";
+import {
+  runMulterMiddleware,
+  type NextApiMulterMiddleware,
+} from "@/lib/runMulterMiddleware";
 
 const upload = createImageUpload("services");
 
@@ -13,19 +17,6 @@ const ServiceSchema = z.object({
   description_en: z.string().trim().min(1),
   description_ar: z.string().trim().min(1),
 });
-
-function runMiddleware(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  fn: (req: any, res: any, cb: (result?: unknown) => void) => void
-) {
-  return new Promise<void>((resolve, reject) => {
-    fn(req, res, (result: unknown) => {
-      if (result instanceof Error) return reject(result);
-      resolve();
-    });
-  });
-}
 
 export const config = {
   api: { bodyParser: false },
@@ -51,7 +42,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await runMiddleware(req, res, upload.single("image"));
+    await runMulterMiddleware(
+      req,
+      res,
+      upload.single("image") as unknown as NextApiMulterMiddleware
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed";
     return res.status(400).json({ error: message });

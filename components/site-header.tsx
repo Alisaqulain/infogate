@@ -84,25 +84,26 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out",
+        "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out",
         solid
           ? "border-b border-white/10 bg-slate-950/70 shadow-lg shadow-black/20 backdrop-blur-md"
           : "border-b border-transparent bg-transparent shadow-none backdrop-blur-none"
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex min-h-[3.25rem] max-w-6xl items-center justify-between gap-2 px-3 py-2 sm:min-h-0 sm:gap-4 sm:px-6 sm:py-3">
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-lg outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+          className="flex min-w-0 max-w-[46%] shrink-0 items-center gap-2 rounded-lg outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 sm:max-w-none sm:gap-3"
           onClick={() => setOpen(false)}
         >
           <Image
             src={LOGO_SRC}
             alt={`${SITE_NAME} logo`}
-            width={120}
-            height={48}
-            className="h-auto w-[120px] object-contain sm:w-[60px]"
+            width={160}
+            height={64}
+            className="h-8 w-auto max-h-8 max-w-full object-contain sm:h-9 sm:max-h-9 md:h-10 md:max-h-10"
             priority
+            sizes="(max-width: 640px) 120px, 160px"
           />
         </Link>
 
@@ -131,7 +132,7 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <div className="relative hidden md:block" ref={langMenuRef}>
             <button
               type="button"
@@ -205,10 +206,10 @@ export function SiteHeader() {
             )}
           </div>
 
-          <Magnetic className="hidden sm:inline-block">
+          <Magnetic className="inline-block shrink-0">
             <Link
               href="/contact"
-              className="inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-blue-600/30 transition hover:brightness-110"
+              className="inline-flex max-w-[9.5rem] truncate rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-2.5 py-1.5 text-[11px] font-bold leading-tight text-white shadow-lg shadow-blue-600/30 transition hover:brightness-110 sm:max-w-none sm:px-4 sm:py-2 sm:text-sm"
             >
               {t("nav_get_quote")}
             </Link>
@@ -217,18 +218,22 @@ export function SiteHeader() {
           <button
             type="button"
             className={cn(
-              "inline-flex rounded-lg p-2 md:hidden",
+              "inline-flex touch-manipulation rounded-lg p-2 md:hidden",
               solid
-                ? "border border-white/15 text-white bg-white/10"
-                : "text-white border border-white/30"
+                ? "border border-white/15 bg-white/10 text-white"
+                : "border border-slate-200/90 bg-white/95 text-slate-900 shadow-md shadow-slate-900/10 ring-1 ring-slate-900/10"
             )}
             onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
           >
             <svg
-              className="h-6 w-6"
+              className="h-6 w-6 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              strokeWidth={2.25}
             >
               {open ? (
                 <path
@@ -251,7 +256,10 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-slate-950/90 px-4 py-4 text-slate-100 backdrop-blur md:hidden">
+        <div
+          id="mobile-nav"
+          className="max-h-[min(70vh,calc(100dvh-4rem))] overflow-y-auto overscroll-contain border-t border-white/10 bg-slate-950/95 px-4 py-4 text-slate-100 shadow-inner backdrop-blur-md md:hidden"
+        >
           <div className="flex flex-col gap-1">
             <div className="mb-2 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-2">
               <span className="text-sm font-semibold text-slate-100">

@@ -6,6 +6,10 @@ import { dbConnect } from "@/lib/db";
 import { Blog } from "@/models/Blog";
 import { createImageUpload, toPublicUploadPath } from "@/lib/multer";
 import { getAdminFromRequest } from "@/lib/adminAuth";
+import {
+  runMulterMiddleware,
+  type NextApiMulterMiddleware,
+} from "@/lib/runMulterMiddleware";
 
 const upload = createImageUpload("blogs");
 
@@ -16,19 +20,6 @@ const BlogSchema = z.object({
   content_en: z.string().trim().min(1),
   content_ar: z.string().trim().min(1),
 });
-
-function runMiddleware(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  fn: (req: any, res: any, cb: (result?: unknown) => void) => void
-) {
-  return new Promise<void>((resolve, reject) => {
-    fn(req, res, (result: unknown) => {
-      if (result instanceof Error) return reject(result);
-      resolve();
-    });
-  });
-}
 
 export const config = {
   api: { bodyParser: false },
@@ -48,7 +39,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method !== "PUT") return res.status(405).json({ error: "Method not allowed" });
   try {
-    await runMiddleware(req, res, upload.single("coverImage"));
+    await runMulterMiddleware(
+      req,
+      res,
+      upload.single("coverImage") as unknown as NextApiMulterMiddleware
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed";
     return res.status(400).json({ error: message });
