@@ -1,9 +1,18 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { useTranslation } from "@/i18n/useTranslation";
 import { Magnetic } from "@/components/magnetic";
 import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export function SiteFooter() {
+  const locale = useLocale();
+  const { t } = useTranslation();
+  const isAr = locale === "ar";
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-slate-200">
       <div
@@ -34,23 +43,21 @@ export function SiteFooter() {
               className="h-auto w-[160px] object-contain brightness-110"
             />
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              SEO and growth-focused websites for businesses that want clarity,
-              structure, and measurable results—connected like pieces of a
-              puzzle.
+              {t("footer_tagline")}
             </p>
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-cyan-300/90">
-              Explore
+              {t("footer_explore")}
             </p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {navLinks.map(({ href, label }) => (
+              {navLinks.map(({ href, key }) => (
                 <li key={href}>
                   <Link
                     href={href}
                     className="fx-link text-sm font-medium text-slate-300 hover:text-white"
                   >
-                    {label}
+                    {t(key)}
                   </Link>
                 </li>
               ))}
@@ -58,23 +65,46 @@ export function SiteFooter() {
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-cyan-300/90">
-              Start a project
+              {t("footer_start_project")}
             </p>
             <p className="mt-3 text-sm text-slate-400">
-              Tell us about your goals—we reply with next steps.
+              {t("footer_start_project_body")}
             </p>
             <Magnetic strength={11} className="mt-4">
               <Link
                 href="/contact"
                 className="fx-btn inline-flex rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-2.5 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20"
               >
-                Contact us
+                {t("footer_contact_us")}
               </Link>
             </Magnetic>
           </div>
         </div>
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+        <div className="mt-12 border-t border-white/10 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <div
+              className={cn(
+                "text-center text-xs text-slate-500",
+                isAr ? "sm:text-left" : "sm:text-right"
+              )}
+            >
+              {t("footer_all_rights", {
+                year: new Date().getFullYear(),
+                site: SITE_NAME,
+              })}
+            </div>
+          </div>
+
+          <div
+            className={[
+              "mt-6 text-xs leading-relaxed text-slate-400",
+              isAr ? "text-right" : "text-center",
+            ].join(" ")}
+          >
+            <p className="font-semibold text-slate-300">{t("footer_rights")}</p>
+            <p className="mt-2">{t("footer_warning")}</p>
+            <p className="mt-3 font-semibold text-slate-300">{t("footer_credit")}</p>
+          </div>
         </div>
       </div>
     </footer>

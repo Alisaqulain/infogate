@@ -1,0 +1,10 @@
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+
+export default createMiddleware(routing);
+
+export const config = {
+  // Exclude admin + health-check routes from locale prefixing
+  matcher: ["/((?!api|_next|.*\\..*|admin|check).*)"],
+};
+

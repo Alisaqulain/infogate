@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
@@ -11,49 +12,50 @@ export const metadata: Metadata = {
   description: `SEO, websites, and content services from ${SITE_NAME}.`,
 };
 
-const services = [
-  {
-    name: "SEO audits and roadmap",
-    desc: "Crawl issues, indexation, Core Web Vitals, and a prioritized fix list with business impact in mind.",
-    visual: stock.services.audit,
-  },
-  {
-    name: "On-page and topical SEO",
-    desc: "Titles, schema, internal linking, and entity-rich content plans aligned to how your customers search.",
-    visual: stock.services.onPage,
-  },
-  {
-    name: "Local and maps SEO",
-    desc: "Profiles, reviews strategy, localized landing pages, and consistency across directories.",
-    visual: stock.services.local,
-  },
-  {
-    name: "Website design and dev",
-    desc: "Marketing sites with strong UX, performance, and forms that send leads to your email pipeline.",
-    visual: stock.services.webDev,
-  },
-  {
-    name: "Analytics and tracking",
-    desc: "GA4, Search Console, conversion events, so you know which pages earn revenue, not just clicks.",
-    visual: stock.services.analytics,
-  },
-  {
-    name: "Ongoing retainers",
-    desc: "Monthly execution: content, links where appropriate, tests, and executive summaries.",
-    visual: stock.services.retainer,
-  },
-];
+export default async function ServicesPage() {
+  const t = await getTranslations();
 
-export default function ServicesPage() {
+  const services = [
+    {
+      name: t("services_item1_name"),
+      desc: t("services_item1_desc"),
+      visual: stock.services.audit,
+    },
+    {
+      name: t("services_item2_name"),
+      desc: t("services_item2_desc"),
+      visual: stock.services.onPage,
+    },
+    {
+      name: t("services_item3_name"),
+      desc: t("services_item3_desc"),
+      visual: stock.services.local,
+    },
+    {
+      name: t("services_item4_name"),
+      desc: t("services_item4_desc"),
+      visual: stock.services.webDev,
+    },
+    {
+      name: t("services_item5_name"),
+      desc: t("services_item5_desc"),
+      visual: stock.services.analytics,
+    },
+    {
+      name: t("services_item6_name"),
+      desc: t("services_item6_desc"),
+      visual: stock.services.retainer,
+    },
+  ] as const;
+
   return (
     <>
       <Section innerClassName="pt-24 pb-16 md:pt-28 md:pb-22">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-          Services
+          {t("nav_services")}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600">
-          Everything we offer ladders up to one outcome: your brand is easy to
-          find, easy to trust, and easy to buy from. Mix and match what you need.
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+          {t("services_intro")}
         </p>
       </Section>
 
@@ -80,19 +82,18 @@ export default function ServicesPage() {
         </div>
         <div className="mt-12 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50 p-8 text-center shadow-inner">
           <p className="text-lg font-bold text-slate-900">
-            Not sure which service fits?
+            {t("services_cta_title")}
           </p>
-          <p className="mt-2 text-slate-600">
-            Tell us your site and goals. We will recommend a starting package.
-          </p>
+          <p className="mt-2 text-slate-600">{t("services_cta_body")}</p>
           <Link
             href="/contact"
             className="fx-btn mt-6 inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25"
           >
-            Talk to {SITE_NAME}
+            {t("services_cta_button", { site: SITE_NAME })}
           </Link>
         </div>
       </Section>
     </>
   );
 }
+

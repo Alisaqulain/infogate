@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
@@ -10,43 +11,41 @@ export const metadata: Metadata = {
   description: "SEO tips, website notes, and updates from INFO GATE.",
 };
 
-const posts = [
-  {
-    title: "Why site speed still matters for SEO in 2026",
-    excerpt:
-      "Core Web Vitals, UX, and how fast Next.js-style stacks help you win both rankings and trust.",
-    date: "Apr 2026",
-    iso: "2026-04-01",
-    cover: stock.blog.speed,
-  },
-  {
-    title: "Local SEO checklist for multi-location brands",
-    excerpt:
-      "From Google Business Profile to landing page patterns that avoid cannibalization.",
-    date: "Mar 2026",
-    iso: "2026-03-15",
-    cover: stock.blog.local,
-  },
-  {
-    title: "Forms that actually convert: lead capture without friction",
-    excerpt:
-      "Short fields, clear expectations, and email delivery your team will actually see.",
-    date: "Mar 2026",
-    iso: "2026-03-01",
-    cover: stock.blog.forms,
-  },
-];
+export default async function BlogPage() {
+  const t = await getTranslations();
 
-export default function BlogPage() {
+  const posts = [
+    {
+      title: t("blog_post1_title"),
+      excerpt: t("blog_post1_excerpt"),
+      date: t("blog_post1_date"),
+      iso: "2026-04-01",
+      cover: stock.blog.speed,
+    },
+    {
+      title: t("blog_post2_title"),
+      excerpt: t("blog_post2_excerpt"),
+      date: t("blog_post2_date"),
+      iso: "2026-03-15",
+      cover: stock.blog.local,
+    },
+    {
+      title: t("blog_post3_title"),
+      excerpt: t("blog_post3_excerpt"),
+      date: t("blog_post3_date"),
+      iso: "2026-03-01",
+      cover: stock.blog.forms,
+    },
+  ] as const;
+
   return (
     <>
       <Section innerClassName="pt-24 pb-16 md:pt-28 md:pb-22">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-          Blog
+          {t("nav_blog")}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600">
-          Practical notes on search, websites, and measurement—written for
-          founders and marketing teams, not algorithms.
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+          {t("blog_intro")}
         </p>
       </Section>
 
@@ -73,11 +72,11 @@ export default function BlogPage() {
                   <h2 className="mt-3 text-lg font-bold text-slate-900">
                     {p.title}
                   </h2>
-                  <p className="mt-2 flex-1 text-sm text-slate-600">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
                     {p.excerpt}
                   </p>
                   <span className="mt-4 text-sm font-bold text-blue-700 opacity-80">
-                    Full articles — coming soon
+                    {t("blog_coming_soon")}
                   </span>
                 </div>
               </article>
@@ -85,9 +84,12 @@ export default function BlogPage() {
           ))}
         </div>
         <p className="mt-10 text-center text-slate-600">
-          Want a topic covered?{" "}
-          <Link href="/contact" className="fx-link font-bold text-blue-700 underline">
-            Suggest it via Contact
+          {t("blog_suggest_pre")}{" "}
+          <Link
+            href="/contact"
+            className="fx-link font-bold text-blue-700 underline"
+          >
+            {t("blog_suggest_link")}
           </Link>
           .
         </p>
@@ -95,3 +97,4 @@ export default function BlogPage() {
     </>
   );
 }
+

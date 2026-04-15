@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { dbConnect } from "@/lib/db";
+import { FormSubmission } from "@/models/FormSubmission";
+import { sendAdminNotification } from "@/lib/mailer";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -42,17 +45,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-  if (!accessKey) {
-    return NextResponse.json(
-      {
-        error:
-          "Email delivery is not configured yet. Add WEB3FORMS_ACCESS_KEY to your environment (see .env.example).",
-      },
-      { status: 503 },
-    );
-  }
-
   const composed = [
     `Service: ${service}`,
     phone ? `Phone: ${phone}` : null,
@@ -64,37 +56,47 @@ export async function POST(request: Request) {
     .filter(Boolean)
     .join("\n");
 
-  const res = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+  await dbConnect();
+
+  const submission = await FormSubmission.create({
+    type: "contact",
+    name,
+    email,
+    phone: phone || undefined,
+    message,
+    meta: {
+      service,
+      company: company || undefined,
+      website: website || undefined,
+      composed,
     },
-    body: JSON.stringify({
-      access_key: accessKey,
-      subject: `New SEO lead — ${name}`,
-      from_name: name,
-      email,
-      message: composed,
-    }),
   });
 
-  let data: { success?: boolean; message?: string } = {};
+  let emailSent = false;
   try {
-    data = (await res.json()) as { success?: boolean; message?: string };
+    const res = await sendAdminNotification({
+      subject: `New lead — ${name}`,
+      text: [
+        `New form submission`,
+        `Type: contact`,
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        company ? `Company: ${company}` : null,
+        website ? `Website: ${website}` : null,
+        `Service: ${service}`,
+        "",
+        message,
+        "",
+        `MongoID: ${submission._id.toString()}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    });
+    emailSent = res.ok;
   } catch {
-    return NextResponse.json(
-      { error: "Email service returned an invalid response." },
-      { status: 502 },
-    );
+    emailSent = false;
   }
 
-  if (!data.success) {
-    return NextResponse.json(
-      { error: data.message ?? "Could not send email. Try again later." },
-      { status: 502 },
-    );
-  }
-
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, emailSent });
 }

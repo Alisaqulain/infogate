@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { LeadForm } from "@/components/lead-form";
 import { Magnetic } from "@/components/magnetic";
 import { Section } from "@/components/section";
@@ -7,8 +7,11 @@ import { Hero3DBackdrop } from "@/components/hero-3d-backdrop";
 import { HeroFxOverlay } from "@/components/hero-fx-overlay";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
+import { getTranslations } from "next-intl/server";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const t = await getTranslations();
+
   return (
     <>
       <Section innerClassName="pt-24 pb-20 md:pt-28 md:pb-28">
@@ -17,19 +20,17 @@ export default function HomePage() {
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-              SEO • Websites • Growth
+              {t("home_kicker")}
             </p>
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-              Open the gate to{" "}
+              {t("home_h1_pre")}{" "}
               <span className="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
-                traffic & leads
+                {t("home_h1_highlight")}
               </span>{" "}
-              that actually convert.
+              {t("home_h1_post")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              We plan and execute SEO, build fast modern sites, and connect every
-              piece—like the INFO GATE puzzle—so search engines and customers
-              understand you instantly.
+              {t("home_intro")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Magnetic strength={12}>
@@ -38,7 +39,7 @@ export default function HomePage() {
                   data-fx-reveal="off"
                   className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
                 >
-                  Get a free SEO check
+                  {t("home_cta_free_check")}
                 </Link>
               </Magnetic>
               <Magnetic strength={10}>
@@ -46,36 +47,10 @@ export default function HomePage() {
                   href="/services"
                   className="fx-btn inline-flex rounded-full border-2 border-blue-200 bg-white px-7 py-3.5 text-sm font-bold text-blue-900 shadow-sm transition hover:border-blue-400 hover:bg-blue-50/80"
                 >
-                  View services
+                  {t("home_cta_view_services")}
                 </Link>
               </Magnetic>
             </div>
-            {/* <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-blue-100/80 pt-8 text-center sm:max-w-md sm:text-left">
-              <div>
-                <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Focus
-                </dt>
-                <dd className="mt-1 text-lg font-extrabold text-slate-900">
-                  SEO-first
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Delivery
-                </dt>
-                <dd className="mt-1 text-lg font-extrabold text-slate-900">
-                  Clear plans
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Fit
-                </dt>
-                <dd className="mt-1 text-lg font-extrabold text-slate-900">
-                  SMB & brands
-                </dd>
-              </div>
-            </dl> */}
           </div>
           <div className="relative flex justify-center lg:justify-end">
             <TiltCard className="relative w-full max-w-xl lg:max-w-[34rem]">
@@ -95,41 +70,31 @@ export default function HomePage() {
                 <dl className="relative z-10 mt-6 grid grid-cols-3 gap-4 text-center">
                   <div>
                     <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      Focus
+                      {t("home_stat_focus")}
                     </dt>
                     <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      SEO-first
+                      {t("home_stat_focus_value")}
                     </dd>
                   </div>
                   <div>
                     <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      Delivery
+                      {t("home_stat_delivery")}
                     </dt>
                     <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      Clear plans
+                      {t("home_stat_delivery_value")}
                     </dd>
                   </div>
                   <div>
                     <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      Fit
+                      {t("home_stat_fit")}
                     </dt>
                     <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      SMB & brands
+                      {t("home_stat_fit_value")}
                     </dd>
                   </div>
                 </dl>
               </div>
             </TiltCard>
-            {/* <div className="relative mt-6 w-full max-w-md overflow-hidden rounded-2xl border border-blue-100 shadow-lg shadow-blue-500/15">
-              <Image
-                src={stock.heroSide.src}
-                alt={stock.heroSide.alt}
-                width={1200}
-                height={750}
-                className="h-52 w-full object-cover sm:h-60"
-                sizes="(max-width: 1024px) 100vw, 420px"
-              />
-            </div> */}
           </div>
         </div>
       </Section>
@@ -137,28 +102,27 @@ export default function HomePage() {
       <Section tone="deep" innerClassName="py-16 md:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Built for businesses that want real visibility
+            {t("home_deep_title")}
           </h2>
           <p className="mt-4 text-lg text-slate-300">
-            Technical SEO, content, and design that work together—not random
-            tactics. We align your site with how people actually search.
+            {t("home_deep_body")}
           </p>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {[
             {
-              title: "Discover",
-              text: "Audit keywords, competitors, and your current site health.",
+              title: t("home_steps_discover_title"),
+              text: t("home_steps_discover_body"),
               visual: stock.discover,
             },
             {
-              title: "Connect",
-              text: "Wire structure, speed, and messaging so Google and users trust you.",
+              title: t("home_steps_connect_title"),
+              text: t("home_steps_connect_body"),
               visual: stock.connect,
             },
             {
-              title: "Grow",
-              text: "Measure rankings and leads; refine month on month.",
+              title: t("home_steps_grow_title"),
+              text: t("home_steps_grow_body"),
               visual: stock.grow,
             },
           ].map((item) => (
@@ -189,33 +153,32 @@ export default function HomePage() {
       <Section>
         <div className="text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            What we can do for you
+            {t("home_offer_title")}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-            Pick a lane—or combine services. Every engagement starts with a
-            short discovery call.
+            {t("home_offer_body")}
           </p>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {[
             {
-              title: "SEO strategy & execution",
-              body: "Keyword maps, on-page optimization, internal links, and reporting you can read without a dictionary.",
+              title: t("home_offer_card1_title"),
+              body: t("home_offer_card1_body"),
               visual: stock.services.audit,
             },
             {
-              title: "Websites that sell",
-              body: "Fast Next.js/React builds (like this one), clear CTAs, and forms that feed your inbox.",
+              title: t("home_offer_card2_title"),
+              body: t("home_offer_card2_body"),
               visual: stock.services.webDev,
             },
             {
-              title: "Local & maps presence",
-              body: "Google Business Profile, citations, and location pages for multi-city brands.",
+              title: t("home_offer_card3_title"),
+              body: t("home_offer_card3_body"),
               visual: stock.services.local,
             },
             {
-              title: "Content that ranks",
-              body: "Briefs, blogs, and landing pages aligned to search intent—not filler.",
+              title: t("home_offer_card4_title"),
+              body: t("home_offer_card4_body"),
               visual: stock.services.onPage,
             },
           ].map((card) => (
@@ -252,7 +215,7 @@ export default function HomePage() {
             href="/pricing"
             className="fx-link inline-flex font-bold text-blue-700 underline-offset-4 hover:underline"
           >
-            See pricing →
+            {t("home_offer_link_pricing")}
           </Link>
         </div>
       </Section>
@@ -261,34 +224,33 @@ export default function HomePage() {
         <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
           <div>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Tell us what you need
+              {t("home_lead_title")}
             </h2>
             <p className="mt-3 text-slate-600">
-              One short form is enough. We route leads straight to email so you
-              can reply from your normal inbox—ideal if you sell SEO or websites
-              to clients too.
+              {t("home_lead_body")}
             </p>
             <ul className="mt-6 space-y-3 text-sm font-medium text-slate-700">
               <li className="flex gap-2">
                 <span className="text-cyan-500">✓</span>
-                No spam—only real project details
+                {t("home_lead_bullet1")}
               </li>
               <li className="flex gap-2">
                 <span className="text-cyan-500">✓</span>
-                Works after a 1-minute Web3Forms setup
+                {t("home_lead_bullet2")}
               </li>
               <li className="flex gap-2">
                 <span className="text-cyan-500">✓</span>
-                Same form on Contact page for deep dives
+                {t("home_lead_bullet3")}
               </li>
             </ul>
           </div>
           <LeadForm
-            heading="Quick lead form"
-            subheading="We usually respond within one business day."
+            heading={t("home_leadform_heading")}
+            subheading={t("home_leadform_subheading")}
           />
         </div>
       </Section>
     </>
   );
 }
+
