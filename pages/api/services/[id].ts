@@ -18,7 +18,7 @@ const UpdateSchema = z.object({
 function runMiddleware(
   req: NextApiRequest,
   res: NextApiResponse,
-  fn: (req: NextApiRequest, res: NextApiResponse, cb: (result?: unknown) => void) => void
+  fn: (req: any, res: any, cb: (result?: unknown) => void) => void
 ) {
   return new Promise<void>((resolve, reject) => {
     fn(req, res, (result: unknown) => {
