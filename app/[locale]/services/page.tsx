@@ -9,7 +9,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: `SEO, websites, and content services from ${SITE_NAME}.`,
+  description: `Discover ${SITE_NAME} solutions including Oman Survey, Smart Registration, Digital Business Cards, Social Media Marketing, QPA, and E-Invoicing.`,
 };
 
 export default async function ServicesPage() {

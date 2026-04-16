@@ -1,79 +1,70 @@
-/**
- * Curated Unsplash URLs (royalty-free). Tune or replace IDs anytime.
- * https://unsplash.com/license
- */
-function unsplash(path: string, w: number) {
-  return `https://images.unsplash.com/${path}?auto=format&fit=crop&w=${w}&q=80`;
-}
-
 export const stock = {
   heroSide: {
-    src: unsplash("photo-1460925895917-afdab827c52f", 1200),
-    alt: "Analytics dashboard and growth charts on a laptop",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.27.jpeg",
+    alt: "InfoGate growth journey illustration from startup to scale-up",
   },
   discover: {
-    src: unsplash("photo-1553877522-43269d4ea984", 800),
-    alt: "Team reviewing data and strategy on a whiteboard",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.24.jpeg",
+    alt: "InfoGate analytics and data intelligence illustration",
   },
   connect: {
-    src: unsplash("photo-1522071820081-009f0129c71c", 800),
-    alt: "Collaboration and teamwork in a modern office",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.26.jpeg",
+    alt: "InfoGate team collaboration and digital solutions illustration",
   },
   grow: {
-    src: unsplash("photo-1551288049-bebda4e38f71", 800),
-    alt: "Business metrics trending upward on screen",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.26 (2).jpeg",
+    alt: "InfoGate unified dashboard and digital transformation illustration",
   },
   aboutTeam: {
-    src: unsplash("photo-1552664730-d307ca884978", 1200),
-    alt: "Marketing team planning campaigns together",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.26.jpeg",
+    alt: "InfoGate team planning and collaboration illustration",
   },
   pricingHeader: {
-    src: unsplash("photo-1454165804606-c3d57bc86b40", 1400),
-    alt: "Desk with notebook, coffee, and planning notes",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.28.jpeg",
+    alt: "Electronic accounting and digital performance overview illustration",
   },
   contactSide: {
-    src: unsplash("photo-1512941937669-90a1b58e7e9c", 900),
-    alt: "Phone and messaging for quick client contact",
+    src: "/WhatsApp Image 2026-04-16 at 13.39.27 (1).jpeg",
+    alt: "InfoGate consultation and support illustration",
   },
   services: {
     audit: {
-      src: unsplash("photo-1551434678-e076c223a692", 800),
-      alt: "Developer reviewing website performance",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.24.jpeg",
+      alt: "Oman Survey and analytics illustration",
     },
     onPage: {
-      // Replaced: old ID started returning 404 upstream from Unsplash.
-      src: unsplash("photo-1553877522-43269d4ea984", 800),
-      alt: "Laptop showing search and browsing",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.24 (1).jpeg",
+      alt: "Smart Registration illustration",
     },
     local: {
-      src: unsplash("photo-1486406146926-c627a92ad1ab", 800),
-      alt: "Urban skyline representing local business reach",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.25 (2).jpeg",
+      alt: "Digital business cards illustration",
     },
     webDev: {
-      src: unsplash("photo-1498050108023-c5249f4df085", 800),
-      alt: "Code on screen for web development",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.25 (1).jpeg",
+      alt: "Social media marketing illustration",
     },
     analytics: {
-      src: unsplash("photo-1551288049-bebda4e38f71", 800),
-      alt: "Analytics dashboard with charts",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.25.jpeg",
+      alt: "Quick process automation illustration",
     },
     retainer: {
-      src: unsplash("photo-1600880292203-757bb62b4baf", 800),
-      alt: "Business meeting for ongoing partnership",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.28.jpeg",
+      alt: "Electronic accounting and e-invoicing illustration",
     },
   },
   blog: {
     speed: {
-      src: unsplash("photo-1451187580459-43490279c0fa", 900),
-      alt: "Technology network representing fast digital experiences",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.26 (2).jpeg",
+      alt: "Stop juggling start expanding illustration",
     },
     local: {
-      src: unsplash("photo-1449824913935-59a10b8d2000", 900),
-      alt: "City map and navigation concept",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.26 (1).jpeg",
+      alt: "InfoGate vision and mission illustration",
     },
     forms: {
-      src: unsplash("photo-1516321318423-f06f85e504b3", 900),
-      alt: "Laptop with email and messaging interface",
+      src: "/WhatsApp Image 2026-04-16 at 13.39.26.jpeg",
+      alt: "InfoGate business collaboration illustration",
     },
   },
 } as const;

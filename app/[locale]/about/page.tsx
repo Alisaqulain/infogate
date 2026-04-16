@@ -8,7 +8,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Learn about ${SITE_NAME}: SEO, websites, and long-term growth.`,
+  description: `Learn how ${SITE_NAME} helps organizations adopt smarter digital tools for data, automation, onboarding, marketing, and sustainable growth.`,
 };
 
 export default async function AboutPage() {
@@ -76,8 +76,8 @@ export default async function AboutPage() {
       <Section tone="deep" innerClassName="py-16 md:py-20">
         <div className="relative mx-auto mb-10 aspect-[2/1] max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
           <Image
-            src={stock.services.analytics.src}
-            alt={stock.services.analytics.alt}
+            src="/WhatsApp Image 2026-04-16 at 13.39.27 (2).jpeg"
+            alt="InfoGate workflow automation illustration"
             fill
             className="object-cover opacity-90"
             sizes="(max-width: 768px) 100vw, 768px"

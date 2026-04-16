@@ -8,7 +8,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${SITE_NAME} for SEO and website projects. Submit the form and we’ll reply by email.`,
+  description: `Contact ${SITE_NAME} to discuss analytics, onboarding, automation, marketing, or accounting solutions for your organization.`,
 };
 
 export default async function ContactPage() {

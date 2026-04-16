@@ -8,7 +8,7 @@ import { stock } from "@/lib/remote-images";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "SEO tips, website notes, and updates from INFO GATE.",
+  description: "Digital transformation insights, product stories, and practical innovation notes from InfoGate.",
 };
 
 export default async function BlogPage() {

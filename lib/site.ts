@@ -1,4 +1,4 @@
-export const SITE_NAME = "INFO GATE";
+export const SITE_NAME = "InfoGate";
 export const LOGO_SRC = "/info-gate-logo-removebg-preview.png";
 
 export const navLinks = [

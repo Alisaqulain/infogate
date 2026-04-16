@@ -22,12 +22,35 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://infogate.vercel.app"),
   title: {
-    default: `${SITE_NAME} — SEO & growth websites`,
+    default: `${SITE_NAME} | Data & Technology Ecosystem`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "SEO strategy, local and organic growth, and websites built to convert. INFO GATE connects your brand to the right audience.",
+    "InfoGate is a unified data and technology ecosystem helping organizations scale with smart registration, analytics, automation, digital business cards, social media marketing, and e-invoicing solutions.",
+  openGraph: {
+    title: `${SITE_NAME} | Data & Technology Ecosystem`,
+    description:
+      "Unified digital solutions for analytics, onboarding, automation, marketing, and financial operations.",
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: "/WhatsApp Image 2026-04-16 at 13.39.27.jpeg",
+        width: 1024,
+        height: 768,
+        alt: "InfoGate growth ecosystem illustration",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Data & Technology Ecosystem`,
+    description:
+      "Unified digital solutions for analytics, onboarding, automation, marketing, and financial operations.",
+    images: ["/WhatsApp Image 2026-04-16 at 13.39.27.jpeg"],
+  },
 };
 
 export function generateStaticParams() {

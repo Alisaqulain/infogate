@@ -9,7 +9,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: `SEO and website packages — flexible tiers from ${SITE_NAME}.`,
+  description: `Explore flexible ${SITE_NAME} plans for digital transformation, onboarding, automation, analytics, and integrated business growth.`,
 };
 
 export default async function PricingPage() {
