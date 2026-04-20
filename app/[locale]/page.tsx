@@ -1,36 +1,33 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { LeadForm } from "@/components/lead-form";
 import { Magnetic } from "@/components/magnetic";
 import { Section } from "@/components/section";
 import { Hero3DBackdrop } from "@/components/hero-3d-backdrop";
 import { HeroFxOverlay } from "@/components/hero-fx-overlay";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
-import { getTranslations } from "next-intl/server";
+import { WhyInfoGateTabs } from "@/components/why-infogate-tabs";
 
 export default async function HomePage() {
-  const t = await getTranslations();
-
   return (
     <>
-      <Section innerClassName="pt-24 pb-20 md:pt-28 md:pb-28">
+      <Section
+        id="top"
+        tone="deep"
+        innerClassName="pt-24 pb-16 md:pt-28 md:pb-24"
+        className="bg-slate-950"
+      >
         <Hero3DBackdrop className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-70 [mask-image:radial-gradient(78%_70%_at_82%_46%,black_35%,transparent_78%)]" />
         <HeroFxOverlay className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-80" />
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-              {t("home_kicker")}
-            </p>
-            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-              {t("home_h1_pre")}{" "}
-              <span className="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
-                {t("home_h1_highlight")}
-              </span>{" "}
-              {t("home_h1_post")}
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+              From Startup to Scale-Up — We Power Your Growth
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              {t("home_intro")}
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200">
+              Wherever you are in your journey, InfoGate keeps you compliant,
+              secure, and ready to expand. Our unified AI-powered platform makes
+              business processes simple, swift, and seamless.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Magnetic strength={12}>
@@ -39,22 +36,22 @@ export default async function HomePage() {
                   data-fx-reveal="off"
                   className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
                 >
-                  {t("home_cta_free_check")}
+                  Get Started for Free
                 </Link>
               </Magnetic>
               <Magnetic strength={10}>
                 <Link
                   href="/services"
-                  className="fx-btn inline-flex rounded-full border-2 border-blue-200 bg-white px-7 py-3.5 text-sm font-bold text-blue-900 shadow-sm transition hover:border-blue-400 hover:bg-blue-50/80"
+                  className="fx-btn inline-flex rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15"
                 >
-                  {t("home_cta_view_services")}
+                  Explore Our Solutions
                 </Link>
               </Magnetic>
             </div>
           </div>
           <div className="relative flex justify-center lg:justify-end">
             <TiltCard className="relative w-full max-w-xl lg:max-w-[34rem]">
-              <div className="relative w-full rounded-3xl border border-blue-100 bg-white/90 p-8 shadow-2xl shadow-blue-500/15 backdrop-blur-sm">
+              <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-8">
                 <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/30 blur-2xl" />
                 <div className="pointer-events-none absolute -bottom-10 -right-10 h-44 w-44 rounded-full bg-blue-600/25 blur-2xl" />
                 <Image
@@ -62,192 +59,283 @@ export default async function HomePage() {
                   alt={stock.heroSide.alt}
                   width={1200}
                   height={750}
-                  className="h-64 w-full object-cover sm:h-72"
+                  className="w-full h-auto object-cover"
                   sizes="(max-width: 1024px) 100vw, 544px"
                   priority
                   loading="eager"
                 />
-                <dl className="relative z-10 mt-6 grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      {t("home_stat_focus")}
-                    </dt>
-                    <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      {t("home_stat_focus_value")}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      {t("home_stat_delivery")}
-                    </dt>
-                    <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      {t("home_stat_delivery_value")}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      {t("home_stat_fit")}
-                    </dt>
-                    <dd className="mt-1 text-sm font-extrabold text-slate-900">
-                      {t("home_stat_fit_value")}
-                    </dd>
-                  </div>
-                </dl>
               </div>
             </TiltCard>
           </div>
         </div>
       </Section>
 
-      <Section tone="deep" innerClassName="py-16 md:py-20">
+      <Section id="philosophy">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            {t("home_deep_title")}
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Stop Juggling. Start Expanding.
           </h2>
-          <p className="mt-4 text-lg text-slate-300">
-            {t("home_deep_body")}
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            In a world overflowing with fragmented tools, InfoGate provides the
+            unified digital environment your business deserves. We are more than
+            a platform; we are an innovative data and IT ecosystem that empowers
+            you to identify, assess, and implement the right digital solutions
+            for your unique operational needs.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+      </Section>
+
+      <Section id="why" tone="deep">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Why InfoGate
+          </h2>
+          <p className="mt-4 text-lg text-slate-300">
+            A unified, AI-powered platform built to help you move faster with
+            confidence.
+          </p>
+        </div>
+        <WhyInfoGateTabs />
+      </Section>
+
+      <Section id="ecosystem">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Our Core Ecosystem
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            A complete modular toolkit designed to help your business stay
+            compliant, connected, and ready to scale—without the chaos of
+            fragmented systems.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              title: t("home_steps_discover_title"),
-              text: t("home_steps_discover_body"),
-              visual: stock.discover,
+              title: "Oman Survey",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M4 6h16M4 12h10M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ),
+              bullets: ["Strategic Insights", "Brand Integration", "Effortless Sharing"],
             },
             {
-              title: t("home_steps_connect_title"),
-              text: t("home_steps_connect_body"),
-              visual: stock.connect,
+              title: "Smart Registration",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M7 7h10v10H7z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M7 12h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ),
+              bullets: ["Efficiency", "Accessibility", "Scalability"],
             },
             {
-              title: t("home_steps_grow_title"),
-              text: t("home_steps_grow_body"),
-              visual: stock.grow,
+              title: "Digital Business Cards",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M4 7h16v10H4z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M7 10h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M7 13h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ),
+              bullets: ["Instant Sharing", "Dynamic Content", "Environmentally Conscious", "Lead Capture"],
             },
-          ].map((item) => (
-            <TiltCard key={item.title} maxTiltDeg={10}>
-              <div className="fx-hoverlift group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg shadow-black/20 backdrop-blur-sm transition hover:-translate-y-1 hover:border-cyan-200/35 hover:bg-white/7 hover:shadow-[0_28px_90px_-22px_rgba(34,211,238,0.55)] hover:shadow-cyan-500/40">
-                <Image
-                  src={item.visual.src}
-                  alt={item.visual.alt}
-                  width={800}
-                  height={480}
-                  className="h-36 w-full object-cover opacity-95 transition duration-300 group-hover:opacity-100"
-                  sizes="(max-width:640px) 100vw, 33vw"
-                />
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-cyan-200">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                    {item.text}
-                  </p>
+            {
+              title: "Social Media Marketing",
+              eyebrow: "Turn Conversations into Conversions",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M6 16l4-4 3 3 5-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M4 20h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ),
+              bullets: ["Strategic Growth", "Content Management", "Targeted Advertising", "Performance Analytics"],
+            },
+            {
+              title: "Quick Process Automation (QPA)",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M8 7h8M8 12h8M8 17h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M5 4h14v16H5z" stroke="currentColor" strokeWidth="2" />
+                </svg>
+              ),
+              bullets: ["Workflow Optimization", "Seamless Integration", "Error Reduction", "Rapid Deployment"],
+            },
+            {
+              title: "Electronic Accounting & E-Invoicing",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path d="M7 3h10v18H7z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M9 8h6M9 12h6M9 16h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ),
+              bullets: ["Automated Bookkeeping", "Compliance", "Real-time Visibility"],
+            },
+          ].map((m) => (
+            <TiltCard key={m.title} className="h-full" maxTiltDeg={9}>
+              <article className="group relative h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10 transition duration-200 hover:-translate-y-1 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.35)] hover:shadow-cyan-500/20">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 text-white shadow-md shadow-blue-500/20">
+                    {m.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-extrabold text-slate-900">
+                      {m.title}
+                    </h3>
+                    {"eyebrow" in m && m.eyebrow ? (
+                      <p className="mt-1 text-sm font-semibold text-blue-700">
+                        {m.eyebrow}
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
-              </div>
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                  {m.bullets.map((b) => (
+                    <li key={b} className="flex gap-2">
+                      <span className="mt-0.5 text-cyan-600">✓</span>
+                      <span className="leading-relaxed">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
             </TiltCard>
           ))}
         </div>
       </Section>
 
-      <Section>
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            {t("home_offer_title")}
+      <Section id="evolution" tone="deep">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Why Choose InfoGate for Your Digital Evolution?
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-            {t("home_offer_body")}
+          <p className="mt-4 text-lg text-slate-300">
+            • Unified Interface
+            <br />
+            • Scalable Solutions
+            <br />
+            • Data-Driven DNA
+          </p>
+          <div className="mt-8">
+            <Magnetic strength={12}>
+              <Link
+                href="/contact"
+                className="fx-btn inline-flex rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3.5 text-sm font-extrabold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:brightness-110"
+              >
+                Transform Your Operations Today
+              </Link>
+            </Magnetic>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="blog">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Blog
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            Digital transformation insights, product stories, and practical
+            innovation notes from InfoGate.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              title: t("home_offer_card1_title"),
-              body: t("home_offer_card1_body"),
-              visual: stock.services.audit,
+              slug: "accelerate-with-unified-platforms",
+              title: "Accelerate Growth with Unified Platforms",
+              description:
+                "When your tools are fragmented, progress slows down. Learn how a unified ecosystem helps teams collaborate, stay compliant, and scale operations without adding complexity or overhead.",
+              cover: stock.blog.speed,
+              date: "Apr 1, 2026",
+              iso: "2026-04-01",
             },
             {
-              title: t("home_offer_card2_title"),
-              body: t("home_offer_card2_body"),
-              visual: stock.services.webDev,
+              slug: "compliance-ready-from-day-one",
+              title: "Compliance-Ready from Day One",
+              description:
+                "Startups often postpone compliance—until it becomes urgent and expensive. Here’s how to build secure, auditable processes early so your business can expand confidently.",
+              cover: stock.blog.local,
+              date: "Mar 15, 2026",
+              iso: "2026-03-15",
             },
             {
-              title: t("home_offer_card3_title"),
-              body: t("home_offer_card3_body"),
-              visual: stock.services.local,
+              slug: "digitize-forms-and-workflows",
+              title: "Digitize Forms and Workflows the Smart Way",
+              description:
+                "Manual forms create delays and errors. Discover how quick process automation, smart registration, and real-time visibility can streamline operations and improve customer experience.",
+              cover: stock.blog.forms,
+              date: "Mar 1, 2026",
+              iso: "2026-03-01",
             },
-            {
-              title: t("home_offer_card4_title"),
-              body: t("home_offer_card4_body"),
-              visual: stock.services.onPage,
-            },
-          ].map((card) => (
-            <TiltCard key={card.title} className="h-full">
-              <article className="group relative h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-lg shadow-blue-500/10 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.45)] hover:shadow-cyan-500/20 hover:ring-1 hover:ring-cyan-400/25">
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
-                  aria-hidden
-                >
-                  <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
-                  <div className="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-blue-600/20 blur-3xl" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-cyan-200/10" />
-                </div>
-                <Image
-                  src={card.visual.src}
-                  alt={card.visual.alt}
-                  width={800}
-                  height={420}
-                  className="h-44 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-                  sizes="(max-width:768px) 100vw, 50vw"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    {card.title}
+          ].map((p) => (
+            <TiltCard key={p.slug} className="h-full" maxTiltDeg={9}>
+              <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-md shadow-blue-500/10 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/15">
+                <Link href={`/blog/${p.slug}`} className="block overflow-hidden">
+                  <Image
+                    src={p.cover.src}
+                    alt={p.cover.alt}
+                    width={900}
+                    height={520}
+                    className="w-full h-auto object-cover transition duration-300 group-hover:scale-[1.02]"
+                    sizes="(max-width:1024px) 100vw, 33vw"
+                    loading="lazy"
+                  />
+                </Link>
+                <div className="flex flex-1 flex-col p-6">
+                  <time
+                    className="text-xs font-bold uppercase tracking-wider text-blue-600"
+                    dateTime={p.iso}
+                  >
+                    {p.date}
+                  </time>
+                  <h3 className="mt-3 text-lg font-extrabold text-slate-900">
+                    <Link
+                      href={`/blog/${p.slug}`}
+                      className="rounded-md outline-offset-4 transition hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+                    >
+                      {p.title}
+                    </Link>
                   </h3>
-                  <p className="mt-2 text-slate-600">{card.body}</p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
+                    {p.description}
+                  </p>
+                  <div className="mt-5">
+                    <Link
+                      href={`/blog/${p.slug}`}
+                      className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition hover:brightness-110"
+                    >
+                      Read More
+                    </Link>
+                  </div>
                 </div>
               </article>
             </TiltCard>
           ))}
         </div>
-        <div className="mt-10 text-center">
-          <Link
-            href="/pricing"
-            className="fx-link inline-flex font-bold text-blue-700 underline-offset-4 hover:underline"
-          >
-            {t("home_offer_link_pricing")}
-          </Link>
-        </div>
       </Section>
 
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-          <div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              {t("home_lead_title")}
-            </h2>
-            <p className="mt-3 text-slate-600">
-              {t("home_lead_body")}
-            </p>
-            <ul className="mt-6 space-y-3 text-sm font-medium text-slate-700">
-              <li className="flex gap-2">
-                <span className="text-cyan-500">✓</span>
-                {t("home_lead_bullet1")}
-              </li>
-              <li className="flex gap-2">
-                <span className="text-cyan-500">✓</span>
-                {t("home_lead_bullet2")}
-              </li>
-              <li className="flex gap-2">
-                <span className="text-cyan-500">✓</span>
-                {t("home_lead_bullet3")}
-              </li>
-            </ul>
+      <Section id="final-cta" tone="deep">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Ready to Step Through the Gate?
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-300">
+            Join the community of forward-thinking businesses using InfoGate to
+            simplify their operations and amplify their results.
+          </p>
+          <div className="mt-8">
+            <Magnetic strength={12}>
+              <Link
+                href="/contact"
+                className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 px-8 py-3.5 text-sm font-extrabold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
+              >
+                Consult Our Experts Today
+              </Link>
+            </Magnetic>
           </div>
-          <LeadForm
-            heading={t("home_leadform_heading")}
-            subheading={t("home_leadform_subheading")}
-          />
         </div>
       </Section>
     </>

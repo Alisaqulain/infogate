@@ -101,7 +101,6 @@ export function SiteFooter() {
               isAr ? "text-right" : "text-center",
             ].join(" ")}
           >
-            <p className="font-semibold text-slate-300">{t("footer_rights")}</p>
             <p className="mt-2">{t("footer_warning")}</p>
             <p className="mt-3 font-semibold text-slate-300">{t("footer_credit")}</p>
           </div>

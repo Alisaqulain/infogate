@@ -219,9 +219,7 @@ export function SiteHeader() {
             type="button"
             className={cn(
               "inline-flex touch-manipulation rounded-lg p-2 md:hidden",
-              solid
-                ? "border border-white/15 bg-white/10 text-white"
-                : "border border-slate-200/90 bg-white/95 text-slate-900 shadow-md shadow-slate-900/10 ring-1 ring-slate-900/10"
+              "border border-white/15 bg-slate-950/60 text-white shadow-md shadow-black/20 backdrop-blur-md hover:bg-slate-950/75"
             )}
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
