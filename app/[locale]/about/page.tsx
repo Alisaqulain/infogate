@@ -33,12 +33,13 @@ export default async function AboutPage() {
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
           {t("about_intro", { site: SITE_NAME })}
         </p>
-        <div className="relative mt-10 aspect-[21/9] max-w-4xl overflow-hidden rounded-2xl border border-blue-100 shadow-xl shadow-blue-500/10">
+        <div className="relative mt-10 max-w-4xl overflow-hidden rounded-2xl border border-blue-100 shadow-xl shadow-blue-500/10">
           <Image
             src={stock.aboutTeam.src}
             alt={stock.aboutTeam.alt}
-            fill
-            className="object-cover object-center"
+            width={1280}
+            height={720}
+            className="w-full h-auto object-cover object-center"
             sizes="(max-width: 896px) 100vw, 896px"
             priority
           />

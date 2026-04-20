@@ -33,8 +33,9 @@ export default async function ContactPage() {
               alt={stock.contactSide.alt}
               width={900}
               height={1100}
-              className="h-72 w-full object-cover object-center sm:h-80 lg:h-[min(520px,70vh)]"
+              className="w-full h-auto object-cover object-center"
               sizes="(max-width:1024px) 100vw, 45vw"
+              loading="lazy"
             />
             <div className="border-t border-blue-100 bg-white/95 px-5 py-4 text-sm text-slate-600 backdrop-blur-sm">
               {t("contact_email_hint")}

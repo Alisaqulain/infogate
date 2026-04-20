@@ -69,8 +69,9 @@ export default async function ServicesPage() {
                   alt={s.visual.alt}
                   width={800}
                   height={400}
-                  className="h-48 w-full object-cover object-center md:h-52"
+                  className="w-full h-auto object-cover object-center"
                   sizes="(max-width:768px) 100vw, 50vw"
+                  loading="lazy"
                 />
                 <div className="p-6">
                   <h2 className="text-xl font-bold text-slate-900">{s.name}</h2>
