@@ -7,6 +7,7 @@ import { HeroFxOverlay } from "@/components/hero-fx-overlay";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
 import { WhyInfoGateTabs } from "@/components/why-infogate-tabs";
+import { PhilosophySlider } from "@/components/philosophy-slider";
 
 export default async function HomePage() {
   return (
@@ -71,18 +72,7 @@ export default async function HomePage() {
       </Section>
 
       <Section id="philosophy">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            Stop Juggling. Start Expanding.
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            In a world overflowing with fragmented tools, InfoGate provides the
-            unified digital environment your business deserves. We are more than
-            a platform; we are an innovative data and IT ecosystem that empowers
-            you to identify, assess, and implement the right digital solutions
-            for your unique operational needs.
-          </p>
-        </div>
+        <PhilosophySlider />
       </Section>
 
       <Section id="why" tone="deep">
@@ -175,7 +165,10 @@ export default async function HomePage() {
             },
           ].map((m) => (
             <TiltCard key={m.title} className="h-full" maxTiltDeg={9}>
-              <article className="group relative h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10 transition duration-200 hover:-translate-y-1 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.35)] hover:shadow-cyan-500/20">
+              <Link
+                href="/services"
+                className="group relative block h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10 transition duration-200 hover:-translate-y-1 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.35)] hover:shadow-cyan-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+              >
                 <div className="flex items-start gap-3">
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 text-white shadow-md shadow-blue-500/20">
                     {m.icon}
@@ -199,9 +192,17 @@ export default async function HomePage() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </Link>
             </TiltCard>
           ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link
+            href="/services"
+            className="inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition hover:brightness-110"
+          >
+            View All Services
+          </Link>
         </div>
       </Section>
 
