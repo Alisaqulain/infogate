@@ -99,11 +99,11 @@ export function SiteHeader() {
           <Image
             src={LOGO_SRC}
             alt={`${SITE_NAME} logo`}
-            width={160}
-            height={64}
-            className="h-8 w-auto max-h-8 max-w-full object-contain sm:h-9 sm:max-h-9 md:h-10 md:max-h-10"
+            width={200}
+            height={80}
+            className="h-10 w-auto max-h-10 max-w-full object-contain sm:h-11 sm:max-h-11 md:h-12 md:max-h-12"
             priority
-            sizes="(max-width: 640px) 120px, 160px"
+            sizes="(max-width: 640px) 150px, 200px"
           />
         </Link>
 

@@ -59,7 +59,7 @@ export default async function HomePage() {
                   alt={stock.heroSide.alt}
                   width={1200}
                   height={750}
-                  className="w-full h-auto object-cover"
+                  className="h-64 w-full object-cover object-center sm:h-72 lg:h-[22rem]"
                   sizes="(max-width: 1024px) 100vw, 544px"
                   priority
                   loading="eager"
@@ -279,7 +279,7 @@ export default async function HomePage() {
                     alt={p.cover.alt}
                     width={900}
                     height={520}
-                    className="w-full h-auto object-cover transition duration-300 group-hover:scale-[1.02]"
+                    className="h-52 w-full object-cover object-center transition duration-300 group-hover:scale-[1.02]"
                     sizes="(max-width:1024px) 100vw, 33vw"
                     loading="lazy"
                   />

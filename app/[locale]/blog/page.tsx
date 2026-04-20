@@ -63,7 +63,7 @@ export default async function BlogPage() {
                     alt={p.cover.alt}
                     width={900}
                     height={520}
-                    className="w-full h-auto object-cover transition duration-300 hover:scale-[1.02]"
+                    className="h-52 w-full object-cover object-center transition duration-300 hover:scale-[1.02]"
                     sizes="(max-width:1024px) 100vw, 33vw"
                     loading="lazy"
                   />

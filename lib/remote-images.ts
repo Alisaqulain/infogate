@@ -1,7 +1,7 @@
 export const stock = {
   heroSide: {
-    src: "/WhatsApp Image 2026-04-16 at 13.39.27.jpeg",
-    alt: "InfoGate growth journey illustration from startup to scale-up",
+    src: "/hero-right.png",
+    alt: "InfoGate hero illustration showing business growth journey",
   },
   discover: {
     src: "/WhatsApp Image 2026-04-16 at 13.39.24.jpeg",
@@ -33,11 +33,11 @@ export const stock = {
       alt: "Oman Survey and analytics illustration",
     },
     onPage: {
-      src: "/WhatsApp Image 2026-04-16 at 13.39.24 (1).jpeg",
+      src: "/WhatsApp Image 2026-04-20 at 3.53.49 PM.jpeg",
       alt: "Smart Registration illustration",
     },
     local: {
-      src: "/WhatsApp Image 2026-04-16 at 13.39.25 (2).jpeg",
+      src: "/WhatsApp Image 2026-04-20 at 3.53.48 PM.jpeg",
       alt: "Digital business cards illustration",
     },
     webDev: {

@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
               alt={post.cover.alt}
               width={1200}
               height={720}
-              className="w-full h-auto object-cover"
+              className="h-72 w-full object-cover object-center md:h-96"
               sizes="(max-width: 768px) 100vw, 768px"
               loading="lazy"
             />

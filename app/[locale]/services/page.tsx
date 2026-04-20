@@ -69,7 +69,7 @@ export default async function ServicesPage() {
                   alt={s.visual.alt}
                   width={800}
                   height={400}
-                  className="h-40 w-full object-cover"
+                  className="h-48 w-full object-cover object-center md:h-52"
                   sizes="(max-width:768px) 100vw, 50vw"
                 />
                 <div className="p-6">

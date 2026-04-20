@@ -38,7 +38,7 @@ export default async function AboutPage() {
             src={stock.aboutTeam.src}
             alt={stock.aboutTeam.alt}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             sizes="(max-width: 896px) 100vw, 896px"
             priority
           />
@@ -79,10 +79,10 @@ export default async function AboutPage() {
             src="/WhatsApp Image 2026-04-16 at 13.39.27 (2).jpeg"
             alt="InfoGate workflow automation illustration"
             fill
-            className="object-cover opacity-90"
+            className="object-center  opacity-90"
             sizes="(max-width: 768px) 100vw, 768px"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" /> */}
         </div>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-extrabold text-white sm:text-3xl">

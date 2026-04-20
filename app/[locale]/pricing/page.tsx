@@ -66,7 +66,7 @@ export default async function PricingPage() {
             src={stock.pricingHeader.src}
             alt={stock.pricingHeader.alt}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             sizes="(max-width: 896px) 100vw, 896px"
           />
         </div>
