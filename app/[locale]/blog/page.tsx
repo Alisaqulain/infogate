@@ -57,13 +57,13 @@ export default async function BlogPage() {
           {posts.map((p) => (
             <TiltCard key={p.title} maxTiltDeg={9} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-md shadow-blue-500/10 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/15">
-                <Link href={`/blog/${p.slug}`} className="block overflow-hidden">
+                <Link href={`/blog/${p.slug}`} className="block overflow-hidden px-3 pt-3 sm:px-4 sm:pt-4">
                   <Image
                     src={p.cover.src}
                     alt={p.cover.alt}
                     width={900}
                     height={520}
-                    className="h-60 w-full bg-slate-100 object-contain object-center transition duration-300 hover:scale-[1.01] sm:h-64"
+                    className="h-60 w-full rounded-xl bg-slate-100 object-contain object-center transition duration-300 hover:scale-[1.01] sm:h-64"
                     sizes="(max-width:1024px) 100vw, 33vw"
                     loading="lazy"
                   />

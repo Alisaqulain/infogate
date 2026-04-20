@@ -55,16 +55,18 @@ export default async function HomePage() {
               <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-8">
                 <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/30 blur-2xl" />
                 <div className="pointer-events-none absolute -bottom-10 -right-10 h-44 w-44 rounded-full bg-blue-600/25 blur-2xl" />
-                <Image
-                  src={stock.heroSide.src}
-                  alt={stock.heroSide.alt}
-                  width={1200}
-                  height={750}
-                  className="h-72 w-full rounded-2xl bg-slate-100 object-contain object-center sm:h-80 lg:h-[24rem]"
-                  sizes="(max-width: 1024px) 100vw, 544px"
-                  priority
-                  loading="eager"
-                />
+                <div className="px-3 sm:px-4">
+                  <Image
+                    src={stock.heroSide.src}
+                    alt={stock.heroSide.alt}
+                    width={1200}
+                    height={750}
+                    className="h-72 w-full rounded-2xl bg-slate-100 object-contain object-center sm:h-80 lg:h-[24rem]"
+                    sizes="(max-width: 1024px) 100vw, 544px"
+                    priority
+                    loading="eager"
+                  />
+                </div>
               </div>
             </TiltCard>
           </div>
@@ -274,13 +276,13 @@ export default async function HomePage() {
           ].map((p) => (
             <TiltCard key={p.slug} className="h-full" maxTiltDeg={9}>
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-md shadow-blue-500/10 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/15">
-                <Link href={`/blog/${p.slug}`} className="block overflow-hidden">
+                <Link href={`/blog/${p.slug}`} className="block overflow-hidden px-3 pt-3 sm:px-4 sm:pt-4">
                   <Image
                     src={p.cover.src}
                     alt={p.cover.alt}
                     width={900}
                     height={520}
-                    className="h-60 w-full bg-slate-100 object-contain object-center transition duration-300 group-hover:scale-[1.01] sm:h-64"
+                    className="h-60 w-full rounded-xl bg-slate-100 object-contain object-center transition duration-300 group-hover:scale-[1.01] sm:h-64"
                     sizes="(max-width:1024px) 100vw, 33vw"
                     loading="lazy"
                   />

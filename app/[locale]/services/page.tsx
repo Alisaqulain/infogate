@@ -64,15 +64,17 @@ export default async function ServicesPage() {
           {services.map((s) => (
             <TiltCard key={s.name} maxTiltDeg={9} className="h-full">
               <article className="h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-md shadow-blue-500/10 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/15">
-                <Image
-                  src={s.visual.src}
-                  alt={s.visual.alt}
-                  width={800}
-                  height={400}
-                  className="w-full h-auto object-cover object-center"
-                  sizes="(max-width:768px) 100vw, 50vw"
-                  loading="lazy"
-                />
+                <div className="px-3 pt-3 sm:px-4 sm:pt-4">
+                  <Image
+                    src={s.visual.src}
+                    alt={s.visual.alt}
+                    width={800}
+                    height={400}
+                    className="h-56 w-full rounded-xl bg-slate-100 object-contain object-center sm:h-64"
+                    sizes="(max-width:768px) 100vw, 50vw"
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6">
                   <h2 className="text-xl font-bold text-slate-900">{s.name}</h2>
                   <p className="mt-2 text-slate-600">{s.desc}</p>

@@ -34,15 +34,17 @@ export default async function AboutPage() {
           {t("about_intro", { site: SITE_NAME })}
         </p>
         <div className="relative mt-10 max-w-4xl overflow-hidden rounded-2xl border border-blue-100 shadow-xl shadow-blue-500/10">
-          <Image
-            src={stock.aboutTeam.src}
-            alt={stock.aboutTeam.alt}
-            width={1280}
-            height={720}
-            className="w-full h-auto object-cover object-center"
-            sizes="(max-width: 896px) 100vw, 896px"
-            priority
-          />
+          <div className="px-3 py-3 sm:px-4 sm:py-4">
+            <Image
+              src={stock.aboutTeam.src}
+              alt={stock.aboutTeam.alt}
+              width={1280}
+              height={720}
+              className="h-64 w-full rounded-xl bg-slate-100 object-contain object-center sm:h-72 md:h-80"
+              sizes="(max-width: 896px) 100vw, 896px"
+              priority
+            />
+          </div>
         </div>
       </Section>
 
@@ -75,7 +77,9 @@ export default async function AboutPage() {
       </Section>
 
       <Section tone="deep" innerClassName="py-16 md:py-20">
-        <div className="relative mx-auto mb-10 aspect-[2/1] max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
+        <div className="relative mx-auto mb-10 max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
+          <div className="relative px-3 py-3 sm:px-4 sm:py-4">
+            <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-slate-100">
           <Image
             src="/WhatsApp Image 2026-04-16 at 13.39.27 (2).jpeg"
             alt="InfoGate workflow automation illustration"
@@ -83,6 +87,8 @@ export default async function AboutPage() {
             className="bg-slate-100 object-contain object-center opacity-90"
             sizes="(max-width: 768px) 100vw, 768px"
           />
+            </div>
+          </div>
           {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" /> */}
         </div>
         <div className="mx-auto max-w-2xl text-center">

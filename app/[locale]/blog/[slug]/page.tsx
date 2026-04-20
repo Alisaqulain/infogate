@@ -70,15 +70,17 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       <Section>
         <div className="mx-auto max-w-3xl">
           <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-lg shadow-blue-500/10">
-            <Image
-              src={post.cover.src}
-              alt={post.cover.alt}
-              width={1200}
-              height={720}
-              className="h-72 w-full bg-slate-100 object-contain object-center md:h-96"
-              sizes="(max-width: 768px) 100vw, 768px"
-              loading="lazy"
-            />
+            <div className="px-3 py-3 sm:px-4 sm:py-4">
+              <Image
+                src={post.cover.src}
+                alt={post.cover.alt}
+                width={1200}
+                height={720}
+                className="h-72 w-full rounded-xl bg-slate-100 object-contain object-center md:h-96"
+                sizes="(max-width: 768px) 100vw, 768px"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           <div className="prose prose-slate mt-8 max-w-none">
