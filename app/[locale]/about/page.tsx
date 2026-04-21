@@ -81,8 +81,8 @@ export default async function AboutPage() {
           <div className="relative px-3 py-3 sm:px-4 sm:py-4">
             <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src="/WhatsApp Image 2026-04-16 at 13.39.27 (2).jpeg"
-            alt="InfoGate workflow automation illustration"
+            src={stock.heroSide.src}
+            alt={stock.heroSide.alt}
             fill
             className="bg-slate-100 object-contain object-center opacity-90"
             sizes="(max-width: 768px) 100vw, 768px"

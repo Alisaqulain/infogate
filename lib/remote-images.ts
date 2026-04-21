@@ -1,6 +1,6 @@
 export const stock = {
   heroSide: {
-    src: "/Cover page first image.jpeg",
+    src: "/image1.jpeg",
     alt: "InfoGate cover illustration",
   },
   discover: {
@@ -16,7 +16,7 @@ export const stock = {
     alt: "InfoGate accounting automation illustration",
   },
   aboutTeam: {
-    src: "/For about us.jpeg",
+    src: "/these are for about us page2.jpeg",
     alt: "InfoGate about us illustration",
   },
   pricingHeader: {
@@ -29,7 +29,7 @@ export const stock = {
   },
   services: {
     audit: {
-      src: "/WhatsApp Image 2026-04-16 at 13.39.24.jpeg",
+      src: "/Oman Survey.jpeg",
       alt: "Oman Survey and analytics illustration",
     },
     onPage: {
@@ -45,11 +45,11 @@ export const stock = {
       alt: "Social media marketing illustration",
     },
     analytics: {
-      src: "/WhatsApp Image 2026-04-16 at 13.39.25.jpeg",
+      src: "/Quick Process Automation.jpeg",
       alt: "Quick process automation illustration",
     },
     retainer: {
-      src: "/for accounting automation.jpeg",
+      src: "/Accounts Process Automation.jpeg",
       alt: "Electronic accounting and e-invoicing illustration",
     },
   },
