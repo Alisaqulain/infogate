@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useLocale } from "next-intl";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Magnetic } from "@/components/magnetic";
 import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
@@ -19,8 +19,8 @@ export function SiteHeader() {
   const last = useRef({ scrolled: false });
   const langMenuRef = useRef<HTMLDivElement | null>(null);
   const locale = useLocale();
-  const router = useRouter();
   const { t } = useTranslation();
+  const pathForLocale = pathname || "/";
   const isAr = locale === "ar";
 
   // 👇 Scroll listener
@@ -77,10 +77,6 @@ export function SiteHeader() {
 
   const solid = scrolled || !isHome || open;
 
-  const setLocale = (nextLocale: "en" | "ar") => {
-    router.replace(pathname, { locale: nextLocale });
-  };
-
   return (
     <header
       className={cn(
@@ -101,7 +97,7 @@ export function SiteHeader() {
             alt={`${SITE_NAME} logo`}
             width={200}
             height={80}
-            className="h-10 w-auto max-h-10 max-w-full object-contain sm:h-11 sm:max-h-11 md:h-12 md:max-h-12"
+            className="h-10 w-auto max-h-10 max-w-[min(200px,42vw)] object-contain object-center sm:h-11 sm:max-h-11 md:h-12 md:max-h-12"
             priority
             sizes="(max-width: 640px) 150px, 200px"
           />
@@ -166,42 +162,40 @@ export function SiteHeader() {
             {langOpen && (
               <div
                 role="menu"
-                className="absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border border-white/10 bg-slate-950/90 p-1 text-sm shadow-2xl shadow-black/30 backdrop-blur"
+                className="absolute end-0 mt-2 w-40 overflow-hidden rounded-xl border border-white/10 bg-slate-950/90 p-1 text-sm shadow-2xl shadow-black/30 backdrop-blur"
               >
-                <button
-                  type="button"
+                <Link
+                  href={pathForLocale}
+                  locale="en"
+                  scroll={false}
                   role="menuitem"
-                  onClick={() => {
-                    setLocale("en");
-                    setLangOpen(false);
-                  }}
+                  onClick={() => setLangOpen(false)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left font-semibold transition",
+                    "flex w-full items-center justify-between rounded-lg px-3 py-2 text-start font-semibold transition",
                     !isAr
                       ? "bg-white/10 text-white"
-                      : "text-slate-200 hover:bg-white/10"
+                      : "text-slate-200 hover:bg-white/10",
                   )}
                 >
                   English
                   {!isAr && <span className="text-xs opacity-70">✓</span>}
-                </button>
-                <button
-                  type="button"
+                </Link>
+                <Link
+                  href={pathForLocale}
+                  locale="ar"
+                  scroll={false}
                   role="menuitem"
-                  onClick={() => {
-                    setLocale("ar");
-                    setLangOpen(false);
-                  }}
+                  onClick={() => setLangOpen(false)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left font-semibold transition",
+                    "flex w-full items-center justify-between rounded-lg px-3 py-2 text-start font-semibold transition",
                     isAr
                       ? "bg-white/10 text-white"
-                      : "text-slate-200 hover:bg-white/10"
+                      : "text-slate-200 hover:bg-white/10",
                   )}
                 >
                   العربية
                   {isAr && <span className="text-xs opacity-70">✓</span>}
-                </button>
+                </Link>
               </div>
             )}
           </div>
@@ -264,28 +258,32 @@ export function SiteHeader() {
                 {t("nav_language")}
               </span>
               <div className="inline-flex overflow-hidden rounded-full border border-white/10 bg-white/5">
-                <button
-                  type="button"
-                  onClick={() => setLocale("en")}
+                <Link
+                  href={pathForLocale}
+                  locale="en"
+                  scroll={false}
+                  onClick={() => setOpen(false)}
                   className={cn(
                     "px-3 py-1.5 text-xs font-bold transition",
-                    !isAr ? "bg-white/10 text-white" : "text-slate-300"
+                    !isAr ? "bg-white/10 text-white" : "text-slate-300",
                   )}
-                  aria-pressed={!isAr}
+                  aria-current={!isAr ? "true" : undefined}
                 >
                   EN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLocale("ar")}
+                </Link>
+                <Link
+                  href={pathForLocale}
+                  locale="ar"
+                  scroll={false}
+                  onClick={() => setOpen(false)}
                   className={cn(
                     "px-3 py-1.5 text-xs font-bold transition",
-                    isAr ? "bg-white/10 text-white" : "text-slate-300"
+                    isAr ? "bg-white/10 text-white" : "text-slate-300",
                   )}
-                  aria-pressed={isAr}
+                  aria-current={isAr ? "true" : undefined}
                 >
                   AR
-                </button>
+                </Link>
               </div>
             </div>
 

@@ -40,7 +40,7 @@ export function SiteFooter() {
               alt={`${SITE_NAME} logo`}
               width={160}
               height={64}
-              className="h-auto w-[160px] object-contain brightness-110"
+              className="h-auto w-[160px] max-w-full object-contain object-center brightness-110"
             />
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
               {t("footer_tagline")}
@@ -50,7 +50,7 @@ export function SiteFooter() {
             <p className="text-xs font-bold uppercase tracking-widest text-cyan-300/90">
               {t("footer_explore")}
             </p>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            <ul className="mt-3 flex flex-col gap-y-4 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-4">
               {navLinks.map(({ href, key }) => (
                 <li key={href}>
                   <Link
@@ -81,28 +81,36 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-12 border-t border-white/10 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div
-              className={cn(
-                "text-center text-xs text-slate-500",
-                isAr ? "sm:text-left" : "sm:text-right"
-              )}
-            >
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-center text-xs text-slate-500">
               {t("footer_all_rights", {
                 year: new Date().getFullYear(),
                 site: SITE_NAME,
               })}
-            </div>
+            </p>
           </div>
 
           <div
-            className={[
+            className={cn(
               "mt-6 text-xs leading-relaxed text-slate-400",
               isAr ? "text-right" : "text-center",
-            ].join(" ")}
+            )}
           >
             <p className="mt-2">{t("footer_warning")}</p>
-            <p className="mt-3 font-semibold text-slate-300">{t("footer_credit")}</p>
+            <p className="mt-3 font-semibold text-slate-300">
+              {t.rich("footer_credit", {
+                fable: (chunks) => (
+                  <a
+                    href="https://www.scalefable.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-200 underline underline-offset-2 hover:text-white"
+                  >
+                    {chunks}
+                  </a>
+                ),
+              })}
+            </p>
           </div>
         </div>
       </div>

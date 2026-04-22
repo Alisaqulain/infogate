@@ -1,44 +1,49 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslation } from "@/i18n/useTranslation";
 import { cn } from "@/lib/utils";
 
 type TabKey = "core" | "growth";
 
 export function WhyInfoGateTabs() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<TabKey>("core");
 
   const items = useMemo(() => {
     if (tab === "core") {
       return [
         {
-          title: "Unified Visibility",
-          body: "Gain a 360-degree view of your business tools and data in one secure place.",
+          title: t("home_steps_discover_title"),
+          body: t("home_steps_discover_body"),
         },
         {
-          title: "Smart Decisions",
-          body: "Move from guesswork to data-driven strategy with AI-powered insights.",
+          title: t("home_steps_connect_title"),
+          body: t("home_steps_connect_body"),
         },
         {
-          title: "Seamless Adoption",
-          body: "Streamline technology integration and enhance process efficiency.",
+          title: t("home_steps_grow_title"),
+          body: t("home_steps_grow_body"),
         },
       ] as const;
     }
     return [
       {
-        title: "Digital Transformation",
-        body: "We make the transition to digital faster, easier, and more effective.",
+        title: t("home_why_growth_title"),
+        body: t("home_why_growth_body"),
       },
     ] as const;
-  }, [tab]);
+  }, [tab, t]);
+
+  const panelLabel =
+    tab === "core" ? t("home_why_tab_core") : t("home_why_tab_growth");
 
   return (
     <div className="mt-8">
       <div
         className="inline-flex w-full flex-wrap gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur-sm sm:w-auto"
         role="tablist"
-        aria-label="Why InfoGate tabs"
+        aria-label={t("home_why_title")}
       >
         <button
           type="button"
@@ -48,11 +53,11 @@ export function WhyInfoGateTabs() {
             "rounded-xl px-4 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300",
             tab === "core"
               ? "bg-white text-slate-950 shadow-sm"
-              : "text-slate-200 hover:bg-white/10 hover:text-white"
+              : "text-slate-200 hover:bg-white/10 hover:text-white",
           )}
           onClick={() => setTab("core")}
         >
-          Core Benefits
+          {t("home_why_tab_core")}
         </button>
         <button
           type="button"
@@ -62,18 +67,18 @@ export function WhyInfoGateTabs() {
             "rounded-xl px-4 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300",
             tab === "growth"
               ? "bg-white text-slate-950 shadow-sm"
-              : "text-slate-200 hover:bg-white/10 hover:text-white"
+              : "text-slate-200 hover:bg-white/10 hover:text-white",
           )}
           onClick={() => setTab("growth")}
         >
-          Growth &amp; Transformation
+          {t("home_why_tab_growth")}
         </button>
       </div>
 
       <div
         className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         role="tabpanel"
-        aria-label={tab === "core" ? "Core Benefits" : "Growth & Transformation"}
+        aria-label={panelLabel}
       >
         {items.map((it) => (
           <div
@@ -90,4 +95,3 @@ export function WhyInfoGateTabs() {
     </div>
   );
 }
-

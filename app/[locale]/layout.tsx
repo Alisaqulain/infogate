@@ -69,10 +69,11 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const fontVars = `${inter.variable} ${cairo.variable}`;
+  const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <div className={`${fontVars} h-full antialiased`}>
-      <NextIntlClientProvider messages={messages}>
+    <div className={`${fontVars} h-full antialiased`} dir={dir}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <LocaleHtml />
         <FxScrollReveal />
         <SiteShell>{children}</SiteShell>

@@ -1,5 +1,5 @@
 export const SITE_NAME = "InfoGate";
-export const LOGO_SRC = "/info-gate-logo-removebg-preview.png";
+export const LOGO_SRC = "/updatelogo.jpeg";
 
 export const navLinks = [
   { href: "/", key: "nav_home" },

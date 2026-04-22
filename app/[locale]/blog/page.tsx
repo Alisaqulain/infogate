@@ -4,42 +4,54 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
-import { stock } from "@/lib/remote-images";
+import { DEMO_BLOG_LIST } from "@/lib/demo-blog";
+import { SHOW_BLOG } from "@/lib/features";
+import type { Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Digital transformation insights, product stories, and practical innovation notes from InfoGate.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale as Locale });
+  if (!SHOW_BLOG) {
+    return {
+      title: t("blog_hidden_title"),
+      description: t("blog_hidden_body"),
+    };
+  }
+  return {
+    title: t("nav_blog"),
+    description: t("blog_intro"),
+  };
+}
 
 export default async function BlogPage() {
   const t = await getTranslations();
 
-  const posts = [
-    {
-      title: t("blog_post1_title"),
-      excerpt: `${t("blog_post1_excerpt")} Learn how unified systems remove friction, improve visibility, and help teams scale with confidence.`,
-      date: t("blog_post1_date"),
-      iso: "2026-04-01",
-      cover: stock.blog.speed,
-      slug: "accelerate-with-unified-platforms",
-    },
-    {
-      title: t("blog_post2_title"),
-      excerpt: `${t("blog_post2_excerpt")} Build secure, compliant processes early so growth never forces rushed decisions later.`,
-      date: t("blog_post2_date"),
-      iso: "2026-03-15",
-      cover: stock.blog.local,
-      slug: "compliance-ready-from-day-one",
-    },
-    {
-      title: t("blog_post3_title"),
-      excerpt: `${t("blog_post3_excerpt")} See how automation reduces delays, eliminates errors, and improves customer experience end-to-end.`,
-      date: t("blog_post3_date"),
-      iso: "2026-03-01",
-      cover: stock.blog.forms,
-      slug: "digitize-forms-and-workflows",
-    },
-  ] as const;
+  if (!SHOW_BLOG) {
+    return (
+      <>
+        <Section innerClassName="pt-24 pb-16 md:pt-28 md:pb-22">
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+            {t("blog_hidden_title")}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+            {t("blog_hidden_body")}
+          </p>
+          <div className="mt-8">
+            <Link
+              href="/"
+              className="inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition hover:brightness-110"
+            >
+              {t("blog_back_home")}
+            </Link>
+          </div>
+        </Section>
+      </>
+    );
+  }
 
   return (
     <>
@@ -54,10 +66,13 @@ export default async function BlogPage() {
 
       <Section>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((p) => (
-            <TiltCard key={p.title} maxTiltDeg={9} className="h-full">
+          {DEMO_BLOG_LIST.map((p) => (
+            <TiltCard key={p.slug} maxTiltDeg={9} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white/90 shadow-md shadow-blue-500/10 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/15">
-                <Link href={`/blog/${p.slug}`} className="block overflow-hidden px-3 pt-3 sm:px-4 sm:pt-4">
+                <Link
+                  href={`/blog/${p.slug}`}
+                  className="block overflow-hidden px-3 pt-3 sm:px-4 sm:pt-4"
+                >
                   <Image
                     src={p.cover.src}
                     alt={p.cover.alt}
@@ -73,25 +88,25 @@ export default async function BlogPage() {
                     className="text-xs font-bold uppercase tracking-wider text-blue-600"
                     dateTime={p.iso}
                   >
-                    {p.date}
+                    {t(p.dateKey)}
                   </time>
                   <h2 className="mt-3 text-lg font-bold text-slate-900">
                     <Link
                       href={`/blog/${p.slug}`}
                       className="rounded-md outline-offset-4 transition hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
                     >
-                      {p.title}
+                      {t(p.titleKey)}
                     </Link>
                   </h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-                    {p.excerpt}
+                    {t(p.excerptKey)}
                   </p>
                   <div className="mt-5">
                     <Link
                       href={`/blog/${p.slug}`}
                       className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition hover:brightness-110"
                     >
-                      Read More
+                      {t("blog_read_more")}
                     </Link>
                   </div>
                 </div>
@@ -113,4 +128,3 @@ export default async function BlogPage() {
     </>
   );
 }
-

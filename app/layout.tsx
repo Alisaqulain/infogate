@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/WhatsApp Image 2026-04-13 at 6.30.02 PM.jpeg", type: "image/jpeg" },
-      { url: "/info-gate-logo-removebg-preview.png", type: "image/png" },
+      { url: "/updatelogo.jpeg", type: "image/jpeg" },
     ],
-    shortcut: ["/WhatsApp Image 2026-04-13 at 6.30.02 PM.jpeg"],
-    apple: ["/WhatsApp Image 2026-04-13 at 6.30.02 PM.jpeg"],
+    shortcut: ["/updatelogo.jpeg"],
+    apple: ["/updatelogo.jpeg"],
   },
   manifest: "/site.webmanifest",
 };
