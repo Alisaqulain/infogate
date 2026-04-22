@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import { useTranslation } from "@/i18n/useTranslation";
 import { cn } from "@/lib/utils";
 
@@ -10,14 +11,18 @@ export function LeadForm({
   className,
   heading,
   subheading,
+  rtl = false,
 }: {
   className?: string;
   heading?: string;
   subheading?: string;
+  rtl?: boolean;
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
+  const locale = useLocale();
+  const isRtl = rtl || locale === "ar";
 
   const services = [
     t("form_service_1"),
@@ -66,8 +71,9 @@ export function LeadForm({
 
   return (
     <div
+      dir={isRtl ? "rtl" : "ltr"}
       className={cn(
-        "rounded-2xl border border-blue-100/80 bg-white/90 p-6 shadow-xl shadow-blue-500/10 backdrop-blur-sm sm:p-8",
+        "rounded-2xl border border-blue-100/80 bg-white/90 p-6 text-start shadow-xl shadow-blue-500/10 backdrop-blur-sm sm:p-8",
         className,
       )}
     >
@@ -180,7 +186,7 @@ export function LeadForm({
           <button
             type="submit"
             disabled={status === "loading"}
-            className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-[200px] sm:px-8"
+            className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 sm:ms-auto sm:w-auto sm:min-w-[200px] sm:px-8"
           >
             {status === "loading" ? t("form_sending") : t("form_submit")}
           </button>

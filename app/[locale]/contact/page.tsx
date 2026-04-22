@@ -43,6 +43,7 @@ export default async function ContactPage() {
           </div>
           <div className="order-1 lg:order-2">
             <LeadForm
+              rtl
               heading={t("contact_form_heading", { site: SITE_NAME })}
               subheading={t("contact_form_subheading")}
             />
