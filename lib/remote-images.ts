@@ -53,6 +53,10 @@ export const stock = {
       src: "/Accounts Process Automation.jpeg",
       alt: "Electronic accounting and e-invoicing illustration",
     },
+    eTicket: {
+      src: "/for digital marketing.jpeg",
+      alt: "E-Ticket platform and digital events illustration",
+    },
   },
   blog: {
     speed: {

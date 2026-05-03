@@ -5,7 +5,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://infogate.vercel.app";
 
 /** Logo path used in header, favicon, and social previews. */
-export const LOGO_SRC = "/logowithoutbginfo.png";
+export const LOGO_SRC = "/logo-removebg-preview.png";
 
 export const OG_IMAGE = LOGO_SRC;
 

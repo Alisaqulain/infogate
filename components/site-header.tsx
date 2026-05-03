@@ -137,7 +137,6 @@ export function SiteHeader() {
             width={200}
             height={80}
             className="h-10 w-auto max-h-10 max-w-[min(200px,42vw)] object-contain object-center sm:h-11 sm:max-h-11 md:h-12 md:max-h-12"
-            priority
             sizes="(max-width: 640px) 150px, 200px"
           />
         </Link>

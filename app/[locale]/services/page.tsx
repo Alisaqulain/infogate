@@ -16,13 +16,19 @@ export async function generateMetadata({
   const { locale } = await params;
   return {
     title: "Services",
-    description: `Discover ${SITE_NAME} solutions including Oman Survey, Smart Registration, Digital Business Cards, Social Media Marketing, QPA, and E-Invoicing.`,
+    description: `${SITE_NAME} — technology evaluation, data management, digital transformation consulting, Oman Survey, registration, e-tickets, and electronic accounting.`,
     alternates: await buildHreflangAlternates(locale, "/services"),
   };
 }
 
 export default async function ServicesPage() {
   const t = await getTranslations();
+
+  const highLevel = [
+    t("services_high_1"),
+    t("services_high_2"),
+    t("services_high_3"),
+  ] as const;
 
   const services = [
     {
@@ -38,21 +44,11 @@ export default async function ServicesPage() {
     {
       name: t("services_item3_name"),
       desc: t("services_item3_desc"),
-      visual: stock.services.local,
+      visual: stock.services.eTicket,
     },
     {
       name: t("services_item4_name"),
       desc: t("services_item4_desc"),
-      visual: stock.services.webDev,
-    },
-    {
-      name: t("services_item5_name"),
-      desc: t("services_item5_desc"),
-      visual: stock.services.analytics,
-    },
-    {
-      name: t("services_item6_name"),
-      desc: t("services_item6_desc"),
       visual: stock.services.retainer,
     },
   ] as const;
@@ -63,9 +59,17 @@ export default async function ServicesPage() {
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
           {t("nav_services")}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
           {t("services_intro")}
         </p>
+        <ul className="mt-6 max-w-3xl space-y-2 text-slate-800">
+          {highLevel.map((line) => (
+            <li key={line} className="flex gap-2 font-medium">
+              <span className="text-cyan-600">●</span>
+              {line}
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <Section>
@@ -108,4 +112,3 @@ export default async function ServicesPage() {
     </>
   );
 }
-

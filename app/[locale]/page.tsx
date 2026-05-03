@@ -10,8 +10,10 @@ import { Hero3DLazy } from "@/components/hero-3d-lazy";
 import { HeroFxOverlay } from "@/components/hero-fx-overlay";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
-import { WhyInfoGateTabs } from "@/components/why-infogate-tabs";
-import { PhilosophySlider } from "@/components/philosophy-slider";
+import {
+  DeferredPhilosophySlider,
+  DeferredWhyInfoGateTabs,
+} from "@/components/home-deferred";
 import { SHOW_BLOG } from "@/lib/features";
 import { DEMO_BLOG_LIST } from "@/lib/demo-blog";
 
@@ -64,17 +66,11 @@ export default async function HomePage() {
     },
     {
       title: t("home_eco_3_title"),
+      eyebrow: t("home_eco_3_eyebrow"),
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
-          <path d="M4 7h16v10H4z" stroke="currentColor" strokeWidth="2" />
           <path
-            d="M7 10h5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M7 13h9"
+            d="M4 6h16v12H4zM8 10h8M8 14h5"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
@@ -90,53 +86,6 @@ export default async function HomePage() {
     },
     {
       title: t("home_eco_4_title"),
-      eyebrow: t("home_eco_4_eyebrow"),
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
-          <path
-            d="M6 16l4-4 3 3 5-7"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M4 20h16"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      ),
-      bullets: [
-        t("home_eco_4_b1"),
-        t("home_eco_4_b2"),
-        t("home_eco_4_b3"),
-        t("home_eco_4_b4"),
-      ],
-    },
-    {
-      title: t("home_eco_5_title"),
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
-          <path
-            d="M8 7h8M8 12h8M8 17h8"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path d="M5 4h14v16H5z" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      ),
-      bullets: [
-        t("home_eco_5_b1"),
-        t("home_eco_5_b2"),
-        t("home_eco_5_b3"),
-        t("home_eco_5_b4"),
-      ],
-    },
-    {
-      title: t("home_eco_6_title"),
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
           <path d="M7 3h10v18H7z" stroke="currentColor" strokeWidth="2" />
@@ -148,7 +97,15 @@ export default async function HomePage() {
           />
         </svg>
       ),
-      bullets: [t("home_eco_6_b1"), t("home_eco_6_b2"), t("home_eco_6_b3")],
+      bullets: [
+        t("home_eco_4_b1"),
+        t("home_eco_4_b2"),
+        t("home_eco_4_b3"),
+        t("home_eco_4_b4"),
+        t("home_eco_4_b5"),
+        t("home_eco_4_b6"),
+        t("home_eco_4_b7"),
+      ],
     },
   ];
 
@@ -163,7 +120,7 @@ export default async function HomePage() {
         <Hero3DLazy />
         <HeroFxOverlay className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-80" />
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
-          <div>
+          <div className="order-2 lg:order-1">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
               {t("home_kicker")}
             </p>
@@ -179,27 +136,24 @@ export default async function HomePage() {
               {t("home_intro")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Magnetic strength={12}>
-                <Link
-                  href="/contact"
-                  data-fx-reveal="off"
-                  className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
-                >
-                  {t("home_cta_free_check")}
-                </Link>
-              </Magnetic>
-              <Magnetic strength={10}>
-                <Link
-                  href="/services"
-                  className="fx-btn inline-flex rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15"
-                >
-                  {t("home_cta_view_services")}
-                </Link>
-              </Magnetic>
+              <Link
+                href="/contact"
+                data-fx-reveal="off"
+                className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
+              >
+                {t("home_cta_free_check")}
+              </Link>
+              <Link
+                href="/services"
+                data-fx-reveal="off"
+                className="fx-btn inline-flex rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15"
+              >
+                {t("home_cta_view_services")}
+              </Link>
             </div>
           </div>
-          <div className="relative flex justify-center lg:justify-end">
-            <TiltCard className="relative w-full max-w-xl lg:max-w-[34rem]">
+          <div className="relative order-1 flex justify-center lg:order-2 lg:justify-end">
+            <div className="relative w-full max-w-xl lg:max-w-[34rem]">
               <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-8">
                 <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/30 blur-2xl" />
                 <div className="pointer-events-none absolute -bottom-10 -right-10 h-44 w-44 rounded-full bg-blue-600/25 blur-2xl" />
@@ -207,22 +161,24 @@ export default async function HomePage() {
                   <Image
                     src={stock.heroSide.src}
                     alt={stock.heroSide.alt}
-                    width={960}
-                    height={600}
-                    quality={75}
+                    width={720}
+                    height={450}
+                    quality={60}
                     className="h-72 w-full rounded-2xl bg-slate-100 object-contain object-center sm:h-80 lg:h-[24rem]"
-                    sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 544px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 85vw, 480px"
                     priority
+                    fetchPriority="high"
+                    data-fx-reveal="off"
                   />
                 </div>
               </div>
-            </TiltCard>
+            </div>
           </div>
         </div>
       </Section>
 
       <Section id="philosophy">
-        <PhilosophySlider />
+        <DeferredPhilosophySlider />
       </Section>
 
       <Section id="why" tone="deep">
@@ -232,7 +188,7 @@ export default async function HomePage() {
           </h2>
           <p className="mt-4 text-lg text-slate-300">{t("home_why_desc")}</p>
         </div>
-        <WhyInfoGateTabs />
+        <DeferredWhyInfoGateTabs />
       </Section>
 
       <Section id="ecosystem">
@@ -248,9 +204,9 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
           {ecosystemCards.map((m) => (
-            <TiltCard key={m.title} className="h-full" maxTiltDeg={9}>
+            <div key={m.title} className="h-full">
               <Link
                 href="/services"
                 className="group relative block h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10 transition duration-200 hover:-translate-y-1 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.35)] hover:shadow-cyan-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
@@ -279,7 +235,7 @@ export default async function HomePage() {
                   ))}
                 </ul>
               </Link>
-            </TiltCard>
+            </div>
           ))}
         </div>
         <div className="mt-10 text-center">

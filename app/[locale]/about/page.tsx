@@ -15,7 +15,7 @@ export async function generateMetadata({
   const { locale } = await params;
   return {
     title: "About",
-    description: `Learn how ${SITE_NAME} helps organizations adopt smarter digital tools for data, automation, onboarding, marketing, and sustainable growth.`,
+    description: `About ${SITE_NAME} — data and IT platform for discovering, evaluating, and adopting digital solutions.`,
     alternates: await buildHreflangAlternates(locale, "/about"),
   };
 }
@@ -27,7 +27,6 @@ export default async function AboutPage() {
     t("about_bullet1"),
     t("about_bullet2"),
     t("about_bullet3"),
-    t("about_bullet4"),
   ] as const;
 
   return (
@@ -58,7 +57,7 @@ export default async function AboutPage() {
       </Section>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">
               {t("about_how_title")}
@@ -85,20 +84,41 @@ export default async function AboutPage() {
         </div>
       </Section>
 
+      <Section>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
+            {t("home_vision_mission_title")}
+          </h2>
+          <div className="mt-8 space-y-6 text-start text-lg leading-relaxed text-slate-700 sm:text-center">
+            <p>
+              <span className="font-extrabold text-slate-900">
+                {t("home_stat_focus")}:
+              </span>{" "}
+              {t("home_stat_focus_value")}
+            </p>
+            <p>
+              <span className="font-extrabold text-slate-900">
+                {t("home_stat_delivery")}:
+              </span>{" "}
+              {t("home_stat_delivery_value")}
+            </p>
+          </div>
+        </div>
+      </Section>
+
       <Section tone="deep" innerClassName="py-16 md:py-20">
         <div className="relative mx-auto mb-10 max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
           <div className="relative px-3 py-3 sm:px-4 sm:py-4">
             <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-slate-100">
-          <Image
-            src={stock.heroSide.src}
-            alt={stock.heroSide.alt}
-            fill
-            className="bg-slate-100 object-contain object-center opacity-90"
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
+              <Image
+                src={stock.heroSide.src}
+                alt={stock.heroSide.alt}
+                fill
+                className="bg-slate-100 object-contain object-center opacity-90"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
             </div>
           </div>
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" /> */}
         </div>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
@@ -116,4 +136,3 @@ export default async function AboutPage() {
     </>
   );
 }
-

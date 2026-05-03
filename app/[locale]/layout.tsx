@@ -15,12 +15,16 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 const cairo = Cairo({
   variable: "--font-arabic",
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 export async function generateMetadata({
@@ -89,7 +93,10 @@ export default async function LocaleLayout({
   if (!locales.includes(locale as Locale)) notFound();
 
   const messages = await getMessages();
-  const fontVars = `${inter.variable} ${cairo.variable}`;
+  const fontVars =
+    locale === "ar"
+      ? `${inter.variable} ${cairo.variable}`
+      : inter.variable;
   const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (

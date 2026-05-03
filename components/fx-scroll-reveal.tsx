@@ -34,20 +34,12 @@ export function FxScrollReveal() {
             "a.fx-btn",
             "button.fx-btn",
             "a.fx-link",
-            "main img",
             "main article",
           ].join(","),
         ),
       );
 
-      const tiltCards = Array.from(
-        root.querySelectorAll<HTMLElement>(
-          '[class*="tilt-card"], .tilt-card, [data-tilt-card]',
-        ),
-      );
-
-      const uniq = new Set<HTMLElement>([...candidates, ...tiltCards]);
-      const elements = Array.from(uniq).filter(Boolean);
+      const elements = candidates.filter(Boolean);
 
       const filtered = elements.filter((el) => {
         if (el.getAttribute("data-fx-reveal") === "off") return false;
@@ -77,8 +69,8 @@ export function FxScrollReveal() {
 
     const useIdle = typeof requestIdleCallback !== "undefined";
     const scheduleId = useIdle
-      ? requestIdleCallback(setup, { timeout: 1800 })
-      : window.setTimeout(setup, 120);
+      ? requestIdleCallback(setup, { timeout: 4000 })
+      : window.setTimeout(setup, 400);
 
     return () => {
       cancelled = true;
