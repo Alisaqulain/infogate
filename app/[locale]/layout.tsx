@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cairo } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { LocaleHtml } from "@/components/locale-html";
 import { FxScrollReveal } from "@/components/fx-scroll-reveal";
 import { SiteShell } from "@/components/site-shell";
@@ -91,6 +91,8 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!locales.includes(locale as Locale)) notFound();
+
+  setRequestLocale(locale);
 
   const messages = await getMessages();
   const fontVars =

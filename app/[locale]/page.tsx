@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { Link } from "@/i18n/navigation";
 import { Magnetic } from "@/components/magnetic";
@@ -26,7 +26,13 @@ export async function generateMetadata({
   return { alternates: await buildHreflangAlternates(locale, "") };
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations();
 
   const ecosystemCards: {

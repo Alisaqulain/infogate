@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { LeadForm } from "@/components/lead-form";
 import { Section } from "@/components/section";
 import { stock } from "@/lib/remote-images";
@@ -20,7 +20,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations();
 
   return (
@@ -52,7 +58,6 @@ export default async function ContactPage() {
           </div>
           <div className="order-1 lg:order-2">
             <LeadForm
-              rtl
               heading={t("contact_form_heading", { site: SITE_NAME })}
               subheading={t("contact_form_subheading")}
             />
