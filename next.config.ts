@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizePackageImports: ["@react-three/drei", "@react-three/fiber", "three"],
   },
 };
 

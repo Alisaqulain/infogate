@@ -16,7 +16,7 @@ export function PhilosophySlider() {
         {
           key: "unified-visibility",
           title: t("home_steps_discover_title"),
-          image: stock.discover,
+          image: stock.heroSide,
         },
         {
           key: "smart-decisions",
@@ -49,7 +49,17 @@ export function PhilosophySlider() {
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      <h2 className="sr-only">{t("home_deep_title")}</h2>
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          {t("home_philosophy_kicker")}
+        </p>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          {t("home_deep_title")}
+        </h2>
+        <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          {t("home_deep_body")}
+        </p>
+      </div>
       <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-xl shadow-blue-500/10">
         <div className="relative min-h-[24rem] w-full sm:min-h-[26rem]">
           {slides.map((slide, index) => (

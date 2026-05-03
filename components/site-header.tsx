@@ -18,6 +18,7 @@ export function SiteHeader() {
   const rafId = useRef<number | null>(null);
   const last = useRef({ scrolled: false });
   const langMenuRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const locale = useLocale();
   const { t } = useTranslation();
   const pathForLocale = pathname || "/";
@@ -75,6 +76,44 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const panel = document.getElementById("mobile-nav");
+    if (!panel) return;
+
+    const focusable = panel.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    const list = [...focusable].filter(
+      (el) => !el.hasAttribute("disabled") && el.tabIndex !== -1
+    );
+    const first = list[0];
+    const last = list[list.length - 1];
+    first?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab" || list.length === 0) return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   const solid = scrolled || !isHome || open;
 
   return (
@@ -114,7 +153,7 @@ export function SiteHeader() {
                 key={href}
                 href={href}
                 className={cn(
-                  "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
+                  "inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-semibold transition-colors",
                   active
                     ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/25"
                     : solid
@@ -134,7 +173,7 @@ export function SiteHeader() {
               type="button"
               onClick={() => setLangOpen((v) => !v)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition",
+                "inline-flex min-h-11 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition",
                 solid
                   ? "border border-white/15 bg-white/10 text-white hover:bg-white/15"
                   : "border border-white/25 bg-white/10 text-white hover:bg-white/15"
@@ -203,16 +242,17 @@ export function SiteHeader() {
           <Magnetic className="inline-block shrink-0">
             <Link
               href="/contact"
-              className="inline-flex max-w-[9.5rem] truncate rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-2.5 py-1.5 text-[11px] font-bold leading-tight text-white shadow-lg shadow-blue-600/30 transition hover:brightness-110 sm:max-w-none sm:px-4 sm:py-2 sm:text-sm"
+              className="inline-flex min-h-11 max-w-[9.5rem] items-center justify-center truncate rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-2.5 py-1.5 text-[11px] font-bold leading-tight text-white shadow-lg shadow-blue-600/30 transition hover:brightness-110 sm:max-w-none sm:px-4 sm:py-2 sm:text-sm"
             >
               {t("nav_get_quote")}
             </Link>
           </Magnetic>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className={cn(
-              "inline-flex touch-manipulation rounded-lg p-2 md:hidden",
+              "inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg p-2 md:hidden",
               "border border-white/15 bg-slate-950/60 text-white shadow-md shadow-black/20 backdrop-blur-md hover:bg-slate-950/75"
             )}
             onClick={() => setOpen((v) => !v)}
@@ -291,7 +331,7 @@ export function SiteHeader() {
               <Link
                 key={href}
                 href={href}
-                className="rounded-lg px-3 py-2 text-base font-semibold text-slate-100 hover:bg-white/10"
+                className="min-h-11 rounded-lg px-3 py-3 text-base font-semibold leading-snug text-slate-100 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 {t(key)}

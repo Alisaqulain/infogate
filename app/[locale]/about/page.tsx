@@ -4,12 +4,21 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { stock } from "@/lib/remote-images";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: `Learn how ${SITE_NAME} helps organizations adopt smarter digital tools for data, automation, onboarding, marketing, and sustainable growth.`,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "About",
+    description: `Learn how ${SITE_NAME} helps organizations adopt smarter digital tools for data, automation, onboarding, marketing, and sustainable growth.`,
+    alternates: await buildHreflangAlternates(locale, "/about"),
+  };
+}
 
 export default async function AboutPage() {
   const t = await getTranslations();

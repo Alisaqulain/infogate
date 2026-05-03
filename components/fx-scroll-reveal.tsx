@@ -21,57 +21,71 @@ export function FxScrollReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const root = document;
-    const candidates = Array.from(
-      root.querySelectorAll<HTMLElement>(
-        [
-          // cards
-          "[data-fx-card]",
-          // buttons + links
-          "a.fx-btn",
-          "button.fx-btn",
-          "a.fx-link",
-          // common media
-          "main img",
-          "main article",
-        ].join(","),
-      ),
-    );
+    let cancelled = false;
+    let io: IntersectionObserver | null = null;
 
-    // Mark TiltCard wrappers too (best coverage for “cards”)
-    const tiltCards = Array.from(
-      root.querySelectorAll<HTMLElement>('[class*="tilt-card"], .tilt-card, [data-tilt-card]'),
-    );
+    const setup = () => {
+      if (cancelled) return;
+      const root = document;
+      const candidates = Array.from(
+        root.querySelectorAll<HTMLElement>(
+          [
+            "[data-fx-card]",
+            "a.fx-btn",
+            "button.fx-btn",
+            "a.fx-link",
+            "main img",
+            "main article",
+          ].join(","),
+        ),
+      );
 
-    const uniq = new Set<HTMLElement>([...candidates, ...tiltCards]);
-    const elements = Array.from(uniq).filter(Boolean);
+      const tiltCards = Array.from(
+        root.querySelectorAll<HTMLElement>(
+          '[class*="tilt-card"], .tilt-card, [data-tilt-card]',
+        ),
+      );
 
-    // Skip header/footer nav links unless they’re fx-btn
-    const filtered = elements.filter((el) => {
-      if (el.getAttribute("data-fx-reveal") === "off") return false;
-      if (el.closest("header") && !el.classList.contains("fx-btn")) return false;
-      return true;
-    });
+      const uniq = new Set<HTMLElement>([...candidates, ...tiltCards]);
+      const elements = Array.from(uniq).filter(Boolean);
 
-    filtered.forEach((el, idx) => applyReveal(el, pickFrom(idx)));
+      const filtered = elements.filter((el) => {
+        if (el.getAttribute("data-fx-reveal") === "off") return false;
+        if (el.closest("header") && !el.classList.contains("fx-btn"))
+          return false;
+        return true;
+      });
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const el = entry.target as HTMLElement;
-          if (el.getAttribute("data-fx-reveal-init") !== "1") continue;
-          if (entry.isIntersecting) {
-            el.setAttribute("data-fx-reveal-in", "1");
-            io.unobserve(el);
+      filtered.forEach((el, idx) => applyReveal(el, pickFrom(idx)));
+
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const el = entry.target as HTMLElement;
+            if (el.getAttribute("data-fx-reveal-init") !== "1") continue;
+            if (entry.isIntersecting) {
+              el.setAttribute("data-fx-reveal-in", "1");
+              io?.unobserve(el);
+            }
           }
-        }
-      },
-      { root: null, threshold: 0.14, rootMargin: "0px 0px -10% 0px" },
-    );
+        },
+        { root: null, threshold: 0.14, rootMargin: "0px 0px -10% 0px" },
+      );
 
-    for (const el of filtered) io.observe(el);
+      for (const el of filtered) io.observe(el);
+    };
 
-    return () => io.disconnect();
+    const useIdle = typeof requestIdleCallback !== "undefined";
+    const scheduleId = useIdle
+      ? requestIdleCallback(setup, { timeout: 1800 })
+      : window.setTimeout(setup, 120);
+
+    return () => {
+      cancelled = true;
+      io?.disconnect();
+      if (useIdle) cancelIdleCallback(scheduleId);
+      else window.clearTimeout(scheduleId);
+    };
   }, [pathname]);
 
   return null;

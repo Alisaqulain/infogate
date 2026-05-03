@@ -25,12 +25,24 @@ export function WhyInfoGateTabs() {
           title: t("home_steps_grow_title"),
           body: t("home_steps_grow_body"),
         },
+        {
+          title: t("home_why_core_4_title"),
+          body: t("home_why_core_4_body"),
+        },
       ] as const;
     }
     return [
       {
-        title: t("home_why_growth_title"),
-        body: t("home_why_growth_body"),
+        title: t("home_why_growth_1_title"),
+        body: t("home_why_growth_1_body"),
+      },
+      {
+        title: t("home_why_growth_2_title"),
+        body: t("home_why_growth_2_body"),
+      },
+      {
+        title: t("home_why_growth_3_title"),
+        body: t("home_why_growth_3_body"),
       },
     ] as const;
   }, [tab, t]);
@@ -76,7 +88,10 @@ export function WhyInfoGateTabs() {
       </div>
 
       <div
-        className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        className={cn(
+          "mt-6 grid gap-4 sm:grid-cols-2",
+          tab === "core" ? "lg:grid-cols-2" : "lg:grid-cols-3",
+        )}
         role="tabpanel"
         aria-label={panelLabel}
       >

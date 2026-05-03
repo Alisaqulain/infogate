@@ -7,7 +7,9 @@ import { LocaleHtml } from "@/components/locale-html";
 import { FxScrollReveal } from "@/components/fx-scroll-reveal";
 import { SiteShell } from "@/components/site-shell";
 import { locales, type Locale } from "@/i18n/config";
-import { SITE_NAME } from "@/lib/site";
+import { SeoJsonLd } from "@/components/seo-json-ld";
+import { getRequestSiteUrl } from "@/lib/request-site";
+import { OG_IMAGE, SITE_KEYWORDS, SITE_NAME } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,37 +23,56 @@ const cairo = Cairo({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://infogate.vercel.app"),
-  title: {
-    default: `${SITE_NAME} | Data & Technology Ecosystem`,
-    template: `%s | ${SITE_NAME}`,
-  },
-  description:
-    "InfoGate is a unified data and technology ecosystem helping organizations scale with smart registration, analytics, automation, digital business cards, social media marketing, and e-invoicing solutions.",
-  openGraph: {
-    title: `${SITE_NAME} | Data & Technology Ecosystem`,
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = await getRequestSiteUrl();
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: `${SITE_NAME}: The Gateway to Data & Technology`,
+      template: `%s | ${SITE_NAME}`,
+    },
     description:
-      "Unified digital solutions for analytics, onboarding, automation, marketing, and financial operations.",
-    siteName: SITE_NAME,
-    images: [
-      {
-        url: "/WhatsApp Image 2026-04-16 at 13.39.27.jpeg",
-        width: 1024,
-        height: 768,
-        alt: "InfoGate growth ecosystem illustration",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE_NAME} | Data & Technology Ecosystem`,
-    description:
-      "Unified digital solutions for analytics, onboarding, automation, marketing, and financial operations.",
-    images: ["/WhatsApp Image 2026-04-16 at 13.39.27.jpeg"],
-  },
-};
+      "InfoGate is the gateway to data and technology — a unified AI-powered platform for registration, analytics, automation, digital business cards, social media marketing, and e-invoicing.",
+    keywords: [...SITE_KEYWORDS],
+    authors: [{ name: SITE_NAME, url: baseUrl }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
+    formatDetection: { email: false, address: false, telephone: false },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
+    openGraph: {
+      title: `${SITE_NAME}: The Gateway to Data & Technology`,
+      description:
+        "Build your business with passion. Run it smarter with InfoGate — unified visibility, smart decisions, and seamless digital transformation.",
+      siteName: SITE_NAME,
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+      alternateLocale: locale === "ar" ? ["en_US"] : ["ar_SA"],
+      images: [
+        {
+          url: OG_IMAGE,
+          alt: `${SITE_NAME} — data and technology ecosystem`,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${SITE_NAME}: The Gateway to Data & Technology`,
+      description:
+        "Build your business with passion. Run it smarter with InfoGate — unified visibility, smart decisions, and seamless digital transformation.",
+      images: [OG_IMAGE],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -73,6 +94,7 @@ export default async function LocaleLayout({
 
   return (
     <div className={`${fontVars} h-full antialiased`} dir={dir}>
+      <SeoJsonLd locale={locale} />
       <NextIntlClientProvider locale={locale} messages={messages}>
         <LocaleHtml />
         <FxScrollReveal />

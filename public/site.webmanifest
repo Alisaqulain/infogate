@@ -7,14 +7,16 @@
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "/WhatsApp Image 2026-04-13 at 6.30.02 PM.jpeg",
+      "src": "/logowithoutbginfo.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/updatelogo.jpeg",
+      "src": "/logowithoutbginfo.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

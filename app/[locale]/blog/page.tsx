@@ -7,6 +7,7 @@ import { TiltCard } from "@/components/tilt-card";
 import { DEMO_BLOG_LIST } from "@/lib/demo-blog";
 import { SHOW_BLOG } from "@/lib/features";
 import type { Locale } from "@/i18n/config";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 
 export async function generateMetadata({
   params,
@@ -15,15 +16,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale });
+  const alternates = await buildHreflangAlternates(locale, "/blog");
   if (!SHOW_BLOG) {
     return {
       title: t("blog_hidden_title"),
       description: t("blog_hidden_body"),
+      alternates,
     };
   }
   return {
     title: t("nav_blog"),
     description: t("blog_intro"),
+    alternates,
   };
 }
 

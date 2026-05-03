@@ -191,9 +191,9 @@ export function Hero3DBackdrop({ className }: { className?: string }) {
   return (
     <div className={className} aria-hidden>
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 5.2], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       >
         <ambientLight intensity={0.35} />
         <directionalLight position={[5, 4, 4]} intensity={0.9} />

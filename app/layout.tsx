@@ -1,15 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { LOGO_SRC, SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  applicationName: "InfoGate",
+  applicationName: SITE_NAME,
   icons: {
-    icon: [
-      { url: "/WhatsApp Image 2026-04-13 at 6.30.02 PM.jpeg", type: "image/jpeg" },
-      { url: "/updatelogo.jpeg", type: "image/jpeg" },
-    ],
-    shortcut: ["/updatelogo.jpeg"],
-    apple: ["/updatelogo.jpeg"],
+    icon: [{ url: LOGO_SRC, type: "image/png", sizes: "any" }],
+    shortcut: LOGO_SRC,
+    apple: [{ url: LOGO_SRC, type: "image/png" }],
   },
   manifest: "/site.webmanifest",
 };

@@ -4,12 +4,21 @@ import { getTranslations } from "next-intl/server";
 import { LeadForm } from "@/components/lead-form";
 import { Section } from "@/components/section";
 import { stock } from "@/lib/remote-images";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: `Contact ${SITE_NAME} to discuss analytics, onboarding, automation, marketing, or accounting solutions for your organization.`,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Contact",
+    description: `Contact ${SITE_NAME} to discuss analytics, onboarding, automation, marketing, or accounting solutions for your organization.`,
+    alternates: await buildHreflangAlternates(locale, "/contact"),
+  };
+}
 
 export default async function ContactPage() {
   const t = await getTranslations();

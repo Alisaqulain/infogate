@@ -11,6 +11,7 @@ import {
 } from "@/lib/demo-blog";
 import { SHOW_BLOG } from "@/lib/features";
 import type { Locale } from "@/i18n/config";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 
 type Params = { locale: string; slug: string };
 
@@ -26,21 +27,29 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const t = await getTranslations({ locale: locale as Locale });
 
+  const path = `/blog/${slug}`;
+  const alternates = await buildHreflangAlternates(locale, path);
+
   if (!SHOW_BLOG) {
     return {
       title: t("blog_hidden_title"),
       description: t("blog_hidden_body"),
+      alternates,
     };
   }
 
   const post = DEMO_BLOG_DETAIL_BY_SLUG[slug as DemoBlogSlug];
   if (!post) {
-    return { title: t("nav_blog") };
+    return {
+      title: t("nav_blog"),
+      alternates,
+    };
   }
 
   return {
     title: t(post.titleKey),
     description: t(post.bodyKeys[0]),
+    alternates,
   };
 }
 

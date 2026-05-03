@@ -1,8 +1,8 @@
 /** Swap `heroSide.src` when you drop a new hero asset into `/public`. */
 export const stock = {
   heroSide: {
-    src: "/WhatsApp Image 2026-04-16 at 13.39.27.jpeg",
-    alt: "InfoGate growth ecosystem illustration",
+    src: "/homeiamge.jpeg",
+    alt: "InfoGate hero illustration — business growth, digital ecosystem, and smart operations",
   },
   discover: {
     src: "/for unified visibility.jpeg",

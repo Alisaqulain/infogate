@@ -1,10 +1,12 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { Link } from "@/i18n/navigation";
 import { Magnetic } from "@/components/magnetic";
 import { Section } from "@/components/section";
-import { Hero3DBackdrop } from "@/components/hero-3d-backdrop";
+import { Hero3DLazy } from "@/components/hero-3d-lazy";
 import { HeroFxOverlay } from "@/components/hero-fx-overlay";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
@@ -12,6 +14,15 @@ import { WhyInfoGateTabs } from "@/components/why-infogate-tabs";
 import { PhilosophySlider } from "@/components/philosophy-slider";
 import { SHOW_BLOG } from "@/lib/features";
 import { DEMO_BLOG_LIST } from "@/lib/demo-blog";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: await buildHreflangAlternates(locale, "") };
+}
 
 export default async function HomePage() {
   const t = await getTranslations();
@@ -149,11 +160,17 @@ export default async function HomePage() {
         innerClassName="pt-24 pb-16 md:pt-28 md:pb-24"
         className="bg-slate-950"
       >
-        <Hero3DBackdrop className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-70 [mask-image:radial-gradient(78%_70%_at_82%_46%,black_35%,transparent_78%)]" />
+        <Hero3DLazy />
         <HeroFxOverlay className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-80" />
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
+              {t("home_kicker")}
+            </p>
+            <p className="mt-2 max-w-xl text-base font-medium leading-snug text-slate-200 sm:text-lg">
+              {t("home_hero_tagline")}
+            </p>
+            <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
               {t("home_h1_pre")}{" "}
               <span className="text-cyan-300">{t("home_h1_highlight")}</span>
               {t("home_h1_post") ? ` ${t("home_h1_post")}` : ""}
@@ -190,12 +207,12 @@ export default async function HomePage() {
                   <Image
                     src={stock.heroSide.src}
                     alt={stock.heroSide.alt}
-                    width={1200}
-                    height={750}
+                    width={960}
+                    height={600}
+                    quality={75}
                     className="h-72 w-full rounded-2xl bg-slate-100 object-contain object-center sm:h-80 lg:h-[24rem]"
-                    sizes="(max-width: 1024px) 100vw, 544px"
+                    sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 544px"
                     priority
-                    loading="eager"
                   />
                 </div>
               </div>
@@ -220,7 +237,10 @@ export default async function HomePage() {
 
       <Section id="ecosystem">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
+            {t("home_ecosystem_tagline")}
+          </p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             {t("home_ecosystem_title")}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
@@ -272,15 +292,38 @@ export default async function HomePage() {
         </div>
       </Section>
 
+      <Section id="vision-mission">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            {t("home_vision_mission_title")}
+          </h2>
+          <div className="mt-8 space-y-5 text-start text-lg leading-relaxed text-slate-700 sm:text-center">
+            <p>
+              <span className="font-extrabold text-slate-900">
+                {t("home_stat_focus")}:
+              </span>{" "}
+              {t("home_stat_focus_value")}
+            </p>
+            <p>
+              <span className="font-extrabold text-slate-900">
+                {t("home_stat_delivery")}:
+              </span>{" "}
+              {t("home_stat_delivery_value")}
+            </p>
+          </div>
+        </div>
+      </Section>
+
       <Section id="evolution" tone="deep">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             {t("home_evolution_title")}
           </h2>
-          <p className="mt-4 text-lg text-slate-300">
+          <p className="mt-4 text-start text-lg text-slate-300 sm:text-center">
             • {t("home_evolution_b1")}
             <br />
-            • {t("home_evolution_b2")}
+            <br />• {t("home_evolution_b2")}
+            <br />
             <br />• {t("home_evolution_b3")}
           </p>
           <div className="mt-8">

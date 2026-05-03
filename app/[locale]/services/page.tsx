@@ -5,12 +5,21 @@ import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description: `Discover ${SITE_NAME} solutions including Oman Survey, Smart Registration, Digital Business Cards, Social Media Marketing, QPA, and E-Invoicing.`,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Services",
+    description: `Discover ${SITE_NAME} solutions including Oman Survey, Smart Registration, Digital Business Cards, Social Media Marketing, QPA, and E-Invoicing.`,
+    alternates: await buildHreflangAlternates(locale, "/services"),
+  };
+}
 
 export default async function ServicesPage() {
   const t = await getTranslations();

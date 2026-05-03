@@ -5,12 +5,21 @@ import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
+import { buildHreflangAlternates } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description: `Explore flexible ${SITE_NAME} plans for digital transformation, onboarding, automation, analytics, and integrated business growth.`,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Pricing",
+    description: `Explore flexible ${SITE_NAME} plans for digital transformation, onboarding, automation, analytics, and integrated business growth.`,
+    alternates: await buildHreflangAlternates(locale, "/pricing"),
+  };
+}
 
 export default async function PricingPage() {
   const t = await getTranslations();
