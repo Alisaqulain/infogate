@@ -45,7 +45,7 @@ export default async function AboutPage({
           {t("about_title")}
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
-          {t("about_intro", { site: SITE_NAME })}
+          {t("about_intro")}
         </p>
         <div className="relative mt-10 max-w-4xl overflow-hidden rounded-2xl border border-blue-100 shadow-xl shadow-blue-500/10">
           <div className="px-3 py-3 sm:px-4 sm:py-4">
@@ -63,14 +63,7 @@ export default async function AboutPage({
       </Section>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900">
-              {t("about_how_title")}
-            </h2>
-            <p className="mt-4 text-slate-600">{t("about_how_p1")}</p>
-            <p className="mt-4 text-slate-600">{t("about_how_p2")}</p>
-          </div>
+        <div className="mx-auto max-w-3xl">
           <ul className="space-y-4 rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10">
             {bullets.map((line) => (
               <li
@@ -87,6 +80,9 @@ export default async function AboutPage({
               </li>
             ))}
           </ul>
+          <p className="mt-8 text-lg leading-relaxed text-slate-600">
+            {t("about_integration")}
+          </p>
         </div>
       </Section>
 
