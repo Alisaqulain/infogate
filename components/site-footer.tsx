@@ -1,17 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useTranslation } from "@/i18n/useTranslation";
 import { Magnetic } from "@/components/magnetic";
 import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
-import { cn } from "@/lib/utils";
 
 export function SiteFooter() {
-  const locale = useLocale();
   const { t } = useTranslation();
-  const isAr = locale === "ar";
 
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-slate-200">
@@ -90,12 +86,7 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div
-            className={cn(
-              "mt-6 text-xs leading-relaxed text-slate-400",
-              isAr ? "text-right" : "text-center",
-            )}
-          >
+          <div className="mt-6 text-center text-xs leading-relaxed text-slate-400">
             <p className="mt-2">{t("footer_warning")}</p>
             <p className="mt-3 font-semibold text-slate-300">
               {t.rich("footer_credit", {

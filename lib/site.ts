@@ -1,4 +1,4 @@
-import { SHOW_BLOG } from "@/lib/features";
+import { SHOW_BLOG, SHOW_PRICING } from "@/lib/features";
 
 export const SITE_NAME = "InfoGate";
 
@@ -35,7 +35,12 @@ const allNavLinks = [
 
 export type NavLink = (typeof allNavLinks)[number];
 
-/** Blog link included only when `SHOW_BLOG` is true in `@/lib/features`. */
-export const navLinks: readonly NavLink[] = SHOW_BLOG
-  ? allNavLinks
-  : allNavLinks.filter((link) => link.href !== "/blog");
+/**
+ * Blog and pricing links are included only when the corresponding feature flags
+ * in `@/lib/features` are `true`.
+ */
+export const navLinks: readonly NavLink[] = allNavLinks.filter((link) => {
+  if (link.href === "/blog" && !SHOW_BLOG) return false;
+  if (link.href === "/pricing" && !SHOW_PRICING) return false;
+  return true;
+});

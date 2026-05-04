@@ -14,9 +14,12 @@ export async function GET() {
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json(
-      { ok: false, readyState: mongoose.connection.readyState ?? 0, error: message },
-      { status: 500 }
+      {
+        ok: false,
+        readyState: mongoose.connection.readyState ?? 0,
+        error: message,
+      },
+      { status: 500 },
     );
   }
 }
-
