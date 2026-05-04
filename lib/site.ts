@@ -1,3 +1,5 @@
+import { SHOW_BLOG } from "@/lib/features";
+
 export const SITE_NAME = "InfoGate";
 
 /** Public site URL for canonical tags, Open Graph, and JSON-LD. */
@@ -22,7 +24,7 @@ export const SITE_KEYWORDS = [
   "digital business card",
 ] as const;
 
-export const navLinks = [
+const allNavLinks = [
   { href: "/", key: "nav_home" },
   { href: "/about", key: "nav_about" },
   { href: "/services", key: "nav_services" },
@@ -30,3 +32,10 @@ export const navLinks = [
   { href: "/blog", key: "nav_blog" },
   { href: "/contact", key: "nav_contact" },
 ] as const;
+
+export type NavLink = (typeof allNavLinks)[number];
+
+/** Blog link included only when `SHOW_BLOG` is true in `@/lib/features`. */
+export const navLinks: readonly NavLink[] = SHOW_BLOG
+  ? allNavLinks
+  : allNavLinks.filter((link) => link.href !== "/blog");

@@ -11,7 +11,7 @@ const staticPaths = [
   "/about",
   "/services",
   "/pricing",
-  "/blog",
+  ...(SHOW_BLOG ? ["/blog"] : []),
   "/contact",
 ] as const;
 

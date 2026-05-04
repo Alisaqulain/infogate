@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -14,16 +15,10 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  if (!SHOW_BLOG) notFound();
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale });
   const alternates = await buildHreflangAlternates(locale, "/blog");
-  if (!SHOW_BLOG) {
-    return {
-      title: t("blog_hidden_title"),
-      description: t("blog_hidden_body"),
-      alternates,
-    };
-  }
   return {
     title: t("nav_blog"),
     description: t("blog_intro"),
@@ -36,32 +31,10 @@ export default async function BlogPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  if (!SHOW_BLOG) notFound();
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-
-  if (!SHOW_BLOG) {
-    return (
-      <>
-        <Section innerClassName="pt-24 pb-16 md:pt-28 md:pb-22">
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            {t("blog_hidden_title")}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-            {t("blog_hidden_body")}
-          </p>
-          <div className="mt-8">
-            <Link
-              href="/"
-              className="inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition hover:brightness-110"
-            >
-              {t("blog_back_home")}
-            </Link>
-          </div>
-        </Section>
-      </>
-    );
-  }
 
   return (
     <>
