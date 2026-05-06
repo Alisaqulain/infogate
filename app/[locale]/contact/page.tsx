@@ -13,9 +13,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale });
   return {
-    title: "Contact",
-    description: `Contact ${SITE_NAME} to discuss analytics, onboarding, automation, marketing, or accounting solutions for your organization.`,
+    title: t("nav_contact"),
+    description: t("contact_intro"),
     alternates: await buildHreflangAlternates(locale, "/contact"),
   };
 }

@@ -14,9 +14,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale });
   return {
-    title: "Pricing",
-    description: `Oman Survey and Registration packages in OMR. ${SITE_NAME} — surveys, onboarding, e-tickets, and electronic accounting.`,
+    title: t("nav_pricing"),
+    description: t("pricing_intro"),
     alternates: await buildHreflangAlternates(locale, "/pricing"),
   };
 }

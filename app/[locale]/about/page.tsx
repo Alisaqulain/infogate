@@ -13,9 +13,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale });
   return {
-    title: "About Us",
-    description: `About ${SITE_NAME} — data and IT platform for discovering, evaluating, and adopting digital solutions.`,
+    title: t("nav_about"),
+    description: t("about_intro"),
     alternates: await buildHreflangAlternates(locale, "/about"),
   };
 }

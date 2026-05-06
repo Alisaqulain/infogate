@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cairo } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { LocaleHtml } from "@/components/locale-html";
 import { FxScrollReveal } from "@/components/fx-scroll-reveal";
 import { SiteShell } from "@/components/site-shell";
@@ -34,15 +34,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const baseUrl = await getRequestSiteUrl();
+  const t = await getTranslations({ locale });
+  const siteTitle = t("home_kicker");
+  const siteDescription = t("home_intro");
 
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: `${SITE_NAME}: The Gateway to Data & Technology`,
+      default: siteTitle,
       template: `%s | ${SITE_NAME}`,
     },
-    description:
-      "InfoGate is the gateway to data and technology — a unified AI-powered platform for registration, analytics, automation, digital business cards, social media marketing, and e-invoicing.",
+    description: siteDescription,
     keywords: [...SITE_KEYWORDS],
     authors: [{ name: SITE_NAME, url: baseUrl }],
     creator: SITE_NAME,
@@ -54,9 +56,8 @@ export async function generateMetadata({
       googleBot: { index: true, follow: true },
     },
     openGraph: {
-      title: `${SITE_NAME}: The Gateway to Data & Technology`,
-      description:
-        "Build your business with passion. Run it smarter with InfoGate — unified visibility, smart decisions, and seamless digital transformation.",
+      title: siteTitle,
+      description: t("home_hero_tagline"),
       siteName: SITE_NAME,
       locale: locale === "ar" ? "ar_SA" : "en_US",
       alternateLocale: locale === "ar" ? ["en_US"] : ["ar_SA"],
@@ -70,9 +71,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${SITE_NAME}: The Gateway to Data & Technology`,
-      description:
-        "Build your business with passion. Run it smarter with InfoGate — unified visibility, smart decisions, and seamless digital transformation.",
+      title: siteTitle,
+      description: t("home_hero_tagline"),
       images: [OG_IMAGE],
     },
   };

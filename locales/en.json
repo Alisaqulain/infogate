@@ -74,7 +74,7 @@
   "home_eco_2_b2": "Streamlines onboarding, enhances data accuracy, reduces manual effort, and provides quick access to services.",
   "home_eco_2_b3": "Supports customized branding and a seamless experience — register anytime, anywhere, without physical forms.",
   "home_eco_3_title": "E-Ticket Platform",
-  "home_eco_3_eyebrow": "Events & attendance",
+  "home_eco_3_eyebrow": "Events & Attendance",
   "home_eco_3_b1": "Online ticket booking and instant confirmation.",
   "home_eco_3_b2": "Secure digital tickets (QR code / barcode).",
   "home_eco_3_b3": "Multiple payment options.",
@@ -136,7 +136,7 @@
   "form_service_1": "Oman Survey",
   "form_service_2": "Electronic Registration",
   "form_service_3": "E-Ticket Platform",
-  "form_service_4": "Accounting automation",
+  "form_service_4": "Accounting Automation",
   "form_service_5": "Technology evaluation",
   "form_service_6": "Digital transformation consulting",
 
@@ -149,14 +149,12 @@
 
   "footer_rights": "© 2026 InfoGate. All Rights Reserved.",
   "footer_warning": "Unauthorized use, reproduction, or distribution of any content from this website is strictly prohibited without prior written consent from InfoGate.",
-  "footer_credit": "Designed, developed, and maintained by <fable>Fable</fable>."
-  ,
+  "footer_credit": "Designed, developed, and maintained by <fable>Fable</fable>.",
   "contact_intro": "Use this form to discuss digital transformation, analytics, onboarding, automation, marketing, or accounting solutions with InfoGate.",
   "contact_email_hint": "Share your project goals and our team will reply with the best solution path for your business.",
   "contact_form_heading": "Message {site}",
-  "contact_form_subheading": "Fields marked * are required. We never share your details."
-
-  ,  "about_kicker": "About Us",
+  "contact_form_subheading": "Fields marked * are required. We never share your details.",
+  "about_kicker": "About Us",
   "about_title": "InfoGate – The Gateway to Data & Technology",
   "about_intro": "InfoGate is a data and information technology platform that enables organizations to:",
   "about_integration": "By integrating business data into a unified digital environment, InfoGate provides a comprehensive view of systems, tools, and information that supports efficient operations and data-driven decision-making.",
