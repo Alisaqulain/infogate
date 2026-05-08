@@ -68,6 +68,14 @@ export default async function AboutPage({
           </div>
 
           <div className="order-1 flex flex-col lg:order-2">
+            <div className="mb-6 rounded-2xl border border-blue-100 bg-white/95 p-6 shadow-lg shadow-blue-500/10 backdrop-blur-sm">
+              <h2 className="text-xl font-extrabold text-slate-900">
+                {t("about_story_title")}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                {t("about_story_body")}
+              </p>
+            </div>
             <ul className="space-y-4 rounded-2xl border border-blue-100 bg-white/95 p-6 shadow-lg shadow-blue-500/10 backdrop-blur-sm">
               {bullets.map((line) => (
                 <li
@@ -87,6 +95,64 @@ export default async function AboutPage({
             <p className="mt-8 text-lg leading-relaxed text-slate-600">
               {t("about_integration")}
             </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="bg-gradient-to-b from-white to-blue-50/40">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div>
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+              {t("about_timeline_title")}
+            </h2>
+            <div className="mt-6 space-y-4">
+              {[
+                { title: t("about_timeline_1_title"), body: t("about_timeline_1_body") },
+                { title: t("about_timeline_2_title"), body: t("about_timeline_2_body") },
+                { title: t("about_timeline_3_title"), body: t("about_timeline_3_body") },
+                { title: t("about_timeline_4_title"), body: t("about_timeline_4_body") },
+              ].map((it, idx) => (
+                <div
+                  key={it.title}
+                  className="rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-sm backdrop-blur-sm"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">
+                    {String(idx + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-2 text-lg font-extrabold text-slate-900">
+                    {it.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {it.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+              {t("about_stats_title")}
+            </h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {[
+                { label: t("about_stat_1_label"), value: t("about_stat_1_value") },
+                { label: t("about_stat_2_label"), value: t("about_stat_2_value") },
+                { label: t("about_stat_3_label"), value: t("about_stat_3_value") },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-sky-50/60 p-6 shadow-sm"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">
+                    {s.label}
+                  </p>
+                  <p className="mt-2 text-2xl font-extrabold text-slate-900">
+                    {s.value}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Section>

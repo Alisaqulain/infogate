@@ -8,6 +8,7 @@ import { FxScrollReveal } from "@/components/fx-scroll-reveal";
 import { SiteShell } from "@/components/site-shell";
 import { locales, type Locale } from "@/i18n/config";
 import { SeoJsonLd } from "@/components/seo-json-ld";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { getRequestSiteUrl } from "@/lib/request-site";
 import { OG_IMAGE, SITE_KEYWORDS, SITE_NAME } from "@/lib/site";
 
@@ -104,11 +105,13 @@ export default async function LocaleLayout({
   return (
     <div className={`${fontVars} h-full antialiased`} dir={dir}>
       <SeoJsonLd locale={locale} />
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <LocaleHtml />
-        <FxScrollReveal />
-        <SiteShell>{children}</SiteShell>
-      </NextIntlClientProvider>
+      <ThemeProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <LocaleHtml />
+          <FxScrollReveal />
+          <SiteShell>{children}</SiteShell>
+        </NextIntlClientProvider>
+      </ThemeProvider>
     </div>
   );
 }

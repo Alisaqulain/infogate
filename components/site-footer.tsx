@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { useTranslation } from "@/i18n/useTranslation";
 import { Magnetic } from "@/components/magnetic";
 import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
+import { GitBranch, Globe, X } from "lucide-react";
 
 export function SiteFooter() {
   const { t } = useTranslation();
@@ -78,6 +79,22 @@ export function SiteFooter() {
         </div>
         <div className="mt-12 border-t border-white/10 pt-8">
           <div className="flex flex-col items-center gap-4">
+            <div className="flex items-center gap-2">
+              {[
+                { label: "LinkedIn", Icon: Globe, href: "#" },
+                { label: "X", Icon: X, href: "#" },
+                { label: "GitHub", Icon: GitBranch, href: "#" },
+              ].map(({ label, Icon, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+                >
+                  <Icon className="h-4 w-4" aria-hidden />
+                </a>
+              ))}
+            </div>
             <p className="text-center text-xs text-slate-500">
               {t("footer_all_rights", {
                 year: new Date().getFullYear(),

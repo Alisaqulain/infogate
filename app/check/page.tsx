@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import mongoose from "mongoose";
 import { dbConnect } from "@/lib/db";
 import { SITE_NAME } from "@/lib/site";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -102,12 +103,12 @@ export default async function CheckPage() {
 
         <p className="mt-8 text-center text-xs text-slate-500">
           JSON:{" "}
-          <a
+          <Link
             href="/api/check"
             className="font-mono text-cyan-300 underline decoration-cyan-500/40 underline-offset-2 hover:text-cyan-200"
           >
             /api/check
-          </a>
+          </Link>
         </p>
       </div>
     </main>

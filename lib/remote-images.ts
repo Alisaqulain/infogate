@@ -1,7 +1,7 @@
 /** Swap `heroSide.src` when you drop a new hero asset into `/public`. */
 export const stock = {
   heroSide: {
-    src: "/homeiamge.jpeg",
+    src: "/homemain.jpeg",
     alt: "InfoGate hero illustration — business growth, digital ecosystem, and smart operations",
   },
   discover: {
@@ -17,7 +17,7 @@ export const stock = {
     alt: "InfoGate accounting automation illustration",
   },
   aboutTeam: {
-    src: "/these are for about us page2.jpeg",
+    src: "/aboutusnewimage.jpeg",
     alt: "InfoGate about us illustration",
   },
   pricingHeader: {
@@ -34,8 +34,8 @@ export const stock = {
       alt: "Oman Survey and analytics illustration",
     },
     onPage: {
-      src: "/smart Registration k liye.jpeg",
-      alt: "Smart Registration illustration",
+      src: "/elcronicregi.jpeg",
+      alt: "Electronic registration illustration",
     },
     local: {
       src: "/Digital Business Cards.jpeg",

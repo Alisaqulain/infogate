@@ -16,6 +16,14 @@ import {
 } from "@/components/home-deferred";
 import { SHOW_BLOG } from "@/lib/features";
 import { DEMO_BLOG_LIST } from "@/lib/demo-blog";
+import {
+  BarChart3,
+  Database,
+  Globe,
+  Layers,
+  Rocket,
+  ShieldCheck,
+} from "lucide-react";
 
 export async function generateMetadata({
   params,
@@ -157,6 +165,39 @@ export default async function HomePage({
                 {t("home_cta_view_services")}
               </Link>
             </div>
+
+            <div className="mt-10 grid max-w-xl gap-3 sm:grid-cols-3">
+              {[
+                {
+                  label: t("home_stat_focus"),
+                  value: t("home_stat_focus_value"),
+                  Icon: Rocket,
+                },
+                {
+                  label: t("home_stat_delivery"),
+                  value: t("home_stat_delivery_value"),
+                  Icon: ShieldCheck,
+                },
+                {
+                  label: t("home_stat_fit"),
+                  value: t("home_stat_fit_value"),
+                  Icon: BarChart3,
+                },
+              ].map(({ label, value, Icon }) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/20 backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-200/90">
+                    <Icon className="h-4 w-4 text-cyan-300" aria-hidden />
+                    {label}
+                  </div>
+                  <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="relative order-1 flex justify-center lg:order-2 lg:justify-end">
             <div className="relative w-full max-w-xl lg:max-w-[34rem]">
@@ -195,6 +236,55 @@ export default async function HomePage({
           <p className="mt-4 text-lg text-slate-300">{t("home_why_desc")}</p>
         </div>
         <DeferredWhyInfoGateTabs />
+      </Section>
+
+      <Section id="digital-solutions">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
+            {t("home_offer_title")}
+          </p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            {t("home_evolution_title")}
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            {t("home_why_desc")}
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: t("home_why_growth_1_title"),
+              body: t("home_why_growth_1_body"),
+              Icon: Layers,
+            },
+            {
+              title: t("home_why_growth_2_title"),
+              body: t("home_why_growth_2_body"),
+              Icon: Globe,
+            },
+            {
+              title: t("home_why_growth_3_title"),
+              body: t("home_why_growth_3_body"),
+              Icon: Database,
+            },
+          ].map(({ title, body, Icon }) => (
+            <TiltCard key={title} maxTiltDeg={8} className="h-full">
+              <div className="group relative h-full overflow-hidden rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-lg shadow-blue-500/10 transition hover:-translate-y-0.5 hover:border-cyan-300/60 hover:shadow-[0_26px_70px_-24px_rgba(59,130,246,0.35)] hover:shadow-cyan-500/20">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-cyan-400/20 blur-3xl" />
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 text-white shadow-md shadow-blue-500/20">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </div>
+                <h3 className="mt-4 text-lg font-extrabold text-slate-900">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  {body}
+                </p>
+              </div>
+            </TiltCard>
+          ))}
+        </div>
       </Section>
 
       <Section id="ecosystem">

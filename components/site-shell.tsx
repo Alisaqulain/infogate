@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { cn } from "@/lib/utils";
+import { PageTransition } from "@/components/page-transition";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   usePathname();
@@ -27,7 +28,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         tabIndex={-1}
         className={cn("flex-1 pt-0 outline-none")}
       >
-        {children}
+        <PageTransition>{children}</PageTransition>
       </main>
       <SiteFooter />
     </>

@@ -5,6 +5,12 @@
   --foreground: #0f172a;
 }
 
+/* Dark mode (class-based via next-themes) */
+.dark {
+  --background: #020617;
+  --foreground: #e2e8f0;
+}
+
 html:focus-within {
   scroll-behavior: smooth;
 }

@@ -4,8 +4,19 @@ import { useState } from "react";
 import { useLocale } from "next-intl";
 import { useTranslation } from "@/i18n/useTranslation";
 import { cn } from "@/lib/utils";
+import { z } from "zod";
 
 type Status = "idle" | "loading" | "success" | "error";
+
+const LeadSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  company: z.string().optional(),
+  website: z.string().optional(),
+  service: z.string().min(1),
+  message: z.string().min(10),
+});
 
 export function LeadForm({
   className,
@@ -50,10 +61,17 @@ export function LeadForm({
     };
 
     try {
+      const parsed = LeadSchema.safeParse(payload);
+      if (!parsed.success) {
+        setError(t("form_error_generic"));
+        setStatus("error");
+        return;
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(parsed.data),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
