@@ -8,16 +8,12 @@ import { Magnetic } from "@/components/magnetic";
 import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/i18n/useTranslation";
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const isHome = pathname === "/";
   const rafId = useRef<number | null>(null);
   const last = useRef({ scrolled: false });
@@ -27,9 +23,6 @@ export function SiteHeader() {
   const { t } = useTranslation();
   const pathForLocale = pathname || "/";
   const isAr = locale === "ar";
-  const { resolvedTheme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
 
   // 👇 Scroll listener
   useEffect(() => {
@@ -174,26 +167,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <Button
-            type="button"
-            variant="secondary"
-            size="icon"
-            className={cn(
-              "hidden md:inline-flex border-white/15 bg-white/10 text-white hover:bg-white/15",
-              solid ? "shadow-md shadow-black/10" : "shadow-none",
-            )}
-            onClick={() =>
-              setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")
-            }
-            aria-label="Toggle theme"
-          >
-            {mounted && (resolvedTheme ?? "light") === "dark" ? (
-              <Sun className="h-5 w-5 opacity-90" />
-            ) : (
-              <Moon className="h-5 w-5 opacity-90" />
-            )}
-          </Button>
-
           <div className="relative hidden md:block" ref={langMenuRef}>
             <button
               type="button"
@@ -319,32 +292,6 @@ export function SiteHeader() {
           className="max-h-[min(70vh,calc(100dvh-4rem))] overflow-y-auto overscroll-contain border-t border-white/10 bg-slate-950/95 px-4 py-4 text-slate-100 shadow-inner backdrop-blur-md md:hidden"
         >
           <div className="flex flex-col gap-1">
-            <div className="mb-2 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <span className="text-sm font-semibold text-slate-100">
-                Theme
-              </span>
-              <button
-                type="button"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-white hover:bg-white/10"
-                onClick={() =>
-                  setTheme(
-                    (resolvedTheme ?? "light") === "dark" ? "light" : "dark"
-                  )
-                }
-                aria-label="Toggle theme"
-              >
-                {mounted && (resolvedTheme ?? "light") === "dark" ? (
-                  <>
-                    <Sun className="h-4 w-4" /> Light
-                  </>
-                ) : (
-                  <>
-                    <Moon className="h-4 w-4" /> Dark
-                  </>
-                )}
-              </button>
-            </div>
-
             <div className="mb-2 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-2">
               <span className="text-sm font-semibold text-slate-100">
                 {t("nav_language")}
