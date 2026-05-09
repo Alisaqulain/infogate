@@ -149,18 +149,18 @@ export default async function HomePage({
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200">
               {t("home_intro")}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/contact"
                 data-fx-reveal="off"
-                className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110"
+                className="fx-btn inline-flex w-full justify-center rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110 sm:w-auto"
               >
                 {t("home_cta_free_check")}
               </Link>
               <Link
                 href="/services"
                 data-fx-reveal="off"
-                className="fx-btn inline-flex rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15"
+                className="fx-btn inline-flex w-full justify-center rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15 sm:w-auto"
               >
                 {t("home_cta_view_services")}
               </Link>
