@@ -50,7 +50,7 @@ export default async function ContactPage({
               alt={stock.contactSide.alt}
               width={900}
               height={1100}
-              className="w-full h-auto object-cover object-center"
+              className="h-auto w-full object-cover object-center"
               sizes="(max-width:1024px) 100vw, 45vw"
               loading="lazy"
             />

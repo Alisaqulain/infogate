@@ -17,16 +17,16 @@ export const stock = {
     alt: "InfoGate accounting automation illustration",
   },
   aboutTeam: {
-    src: "/aboutusnewimage.jpeg",
-    alt: "InfoGate about us illustration",
+    src: "/image1.jpeg",
+    alt: "InfoGate about us illustration — Oman skyline, growth, and digital ecosystem",
   },
   pricingHeader: {
     src: "/WhatsApp Image 2026-04-16 at 13.39.28.jpeg",
     alt: "Electronic accounting and digital performance overview illustration",
   },
   contactSide: {
-    src: "/For contact us.jpeg",
-    alt: "InfoGate contact us illustration",
+    src: "/contactus.jpeg",
+    alt: "InfoGate contact us illustration — message form and support",
   },
   services: {
     audit: {

@@ -241,13 +241,13 @@ export default async function HomePage({
       <Section id="digital-solutions">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
-            {t("home_offer_title")}
+            {t("home_digital_kicker")}
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            {t("home_evolution_title")}
+            {t("home_digital_title")}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            {t("home_why_desc")}
+            {t("home_digital_desc")}
           </p>
         </div>
 
