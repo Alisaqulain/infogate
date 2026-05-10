@@ -31,7 +31,7 @@ export default async function ServicesPage({
   setRequestLocale(locale);
   const t = await getTranslations();
 
-  /** Live modules only — technology evaluation & transformation consulting are not offered on the public site yet. */
+  /** Live product modules only (technology evaluation & transformation consulting omitted from this page). */
   const highLevel = [
     t("home_eco_1_title"),
     t("home_eco_2_title"),
@@ -59,16 +59,6 @@ export default async function ServicesPage({
       name: t("services_item4_name"),
       desc: t("services_item4_desc"),
       visual: stock.services.retainer,
-    },
-    {
-      name: t("services_item5_name"),
-      desc: t("services_item5_desc"),
-      visual: stock.services.analytics,
-    },
-    {
-      name: t("services_item6_name"),
-      desc: t("services_item6_desc"),
-      visual: stock.services.local,
     },
   ] as const;
 

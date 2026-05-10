@@ -128,12 +128,12 @@ export default async function HomePage({
       <Section
         id="top"
         tone="deep"
-        innerClassName="pt-24 pb-16 md:pt-28 md:pb-24"
+        innerClassName="pt-32 pb-16 md:pt-28 md:pb-24"
         className="bg-slate-950"
       >
         <Hero3DLazy />
         <HeroFxOverlay className="pointer-events-none absolute bottom-0 top-0 left-1/2 z-0 w-screen -translate-x-1/2 opacity-80" />
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-12">
           <div className="order-2 lg:order-1">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
               {t("home_kicker")}
@@ -149,22 +149,6 @@ export default async function HomePage({
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200">
               {t("home_intro")}
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link
-                href="/contact"
-                data-fx-reveal="off"
-                className="fx-btn inline-flex w-full justify-center rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110 sm:w-auto"
-              >
-                {t("home_cta_free_check")}
-              </Link>
-              <Link
-                href="/services"
-                data-fx-reveal="off"
-                className="fx-btn inline-flex w-full justify-center rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15 sm:w-auto"
-              >
-                {t("home_cta_view_services")}
-              </Link>
-            </div>
 
             <div className="mt-10 grid max-w-xl gap-3 sm:grid-cols-3">
               {[
@@ -199,7 +183,7 @@ export default async function HomePage({
               ))}
             </div>
           </div>
-          <div className="relative order-1 flex justify-center lg:order-2 lg:justify-end">
+          <div className="relative order-1 mt-4 flex w-full flex-col gap-5 self-start md:gap-6 lg:order-2 lg:mt-8 lg:items-end">
             <div className="relative w-full max-w-xl lg:max-w-[34rem]">
               <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-8">
                 <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/30 blur-2xl" />
@@ -219,6 +203,22 @@ export default async function HomePage({
                   />
                 </div>
               </div>
+            </div>
+            <div className="grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:max-w-[34rem]">
+              <Link
+                href="/contact"
+                data-fx-reveal="off"
+                className="fx-btn inline-flex min-w-0 w-full justify-center rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-5 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-600/25 transition hover:brightness-110 sm:px-6"
+              >
+                {t("home_cta_free_check")}
+              </Link>
+              <Link
+                href="/services"
+                data-fx-reveal="off"
+                className="fx-btn inline-flex min-w-0 w-full justify-center rounded-full border border-white/25 bg-white/10 px-5 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/15 sm:px-6"
+              >
+                {t("home_cta_view_services")}
+              </Link>
             </div>
           </div>
         </div>

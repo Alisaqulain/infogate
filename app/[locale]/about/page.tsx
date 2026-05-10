@@ -93,42 +93,47 @@ export default async function AboutPage({
 
       <Section
         className="bg-gradient-to-b from-blue-50/40 to-white"
-        innerClassName="py-16 md:py-20"
+        innerClassName="pt-10 pb-16 md:pt-12 md:pb-20"
       >
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
-              {t("home_vision_mission_title")}
-            </h2>
-            <div className="mt-8 space-y-4">
-              <div className="rounded-2xl border border-blue-200/80 bg-gradient-to-br from-white to-sky-50/60 p-5 shadow-sm">
-                <p className="text-lg leading-relaxed text-slate-700">
-                  <span className="font-extrabold text-slate-900">
-                    {t("home_stat_focus")}:
-                  </span>{" "}
-                  {t("home_stat_focus_value")}
-                </p>
+        <div className="grid gap-10 lg:gap-14">
+          <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
+            {t("home_vision_mission_title")}
+          </h2>
+          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-blue-200/80 bg-gradient-to-br from-white to-sky-50/60 p-5 shadow-sm">
+                  <p className="text-lg leading-relaxed text-slate-700">
+                    <span className="font-extrabold text-slate-900">
+                      {t("home_stat_focus")}:
+                    </span>{" "}
+                    {t("home_stat_focus_value")}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-blue-200/80 bg-gradient-to-br from-white to-sky-50/60 p-5 shadow-sm">
+                  <p className="text-lg leading-relaxed text-slate-700">
+                    <span className="font-extrabold text-slate-900">
+                      {t("home_stat_delivery")}:
+                    </span>{" "}
+                    {t("home_stat_delivery_value")}
+                  </p>
+                </div>
               </div>
-              <div className="rounded-2xl border border-blue-200/80 bg-gradient-to-br from-white to-sky-50/60 p-5 shadow-sm">
-                <p className="text-lg leading-relaxed text-slate-700">
-                  <span className="font-extrabold text-slate-900">
-                    {t("home_stat_delivery")}:
-                  </span>{" "}
-                  {t("home_stat_delivery_value")}
-                </p>
-              </div>
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                {t("home_oman_vision_body")}
+              </p>
             </div>
-          </div>
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-xl shadow-blue-500/10">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src={stock.heroSide.src}
-                  alt={stock.heroSide.alt}
-                  fill
-                  className="object-contain object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+            <div className="relative lg:self-start">
+              <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-xl shadow-blue-500/10">
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={stock.heroSide.src}
+                    alt={stock.heroSide.alt}
+                    fill
+                    className="object-contain object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
               </div>
             </div>
           </div>
