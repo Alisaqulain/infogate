@@ -363,6 +363,9 @@ export default async function HomePage({
               {t("home_stat_delivery_value")}
             </p>
           </div>
+          <p className="mx-auto mt-10 max-w-3xl text-start text-base leading-relaxed text-slate-600 sm:text-center sm:text-lg">
+            {t("home_oman_vision_body")}
+          </p>
         </div>
       </Section>
 

@@ -31,10 +31,12 @@ export default async function ServicesPage({
   setRequestLocale(locale);
   const t = await getTranslations();
 
+  /** Live modules only — technology evaluation & transformation consulting are not offered on the public site yet. */
   const highLevel = [
-    t("services_high_1"),
-    t("services_high_2"),
-    t("services_high_3"),
+    t("home_eco_1_title"),
+    t("home_eco_2_title"),
+    t("home_eco_3_title"),
+    t("home_eco_4_title"),
   ] as const;
 
   const services = [

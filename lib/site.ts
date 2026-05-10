@@ -11,6 +11,12 @@ export const LOGO_SRC = "/logo-removebg-preview.png";
 
 export const OG_IMAGE = LOGO_SRC;
 
+/** Official social profiles (footer, etc.). */
+export const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/infogate_oman",
+  linkedin: "https://www.linkedin.com/company/infogate-om",
+} as const;
+
 export const SITE_KEYWORDS = [
   "InfoGate",
   "data platform",

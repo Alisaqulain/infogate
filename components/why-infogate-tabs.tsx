@@ -53,43 +53,8 @@ export function WhyInfoGateTabs() {
   return (
     <div className="mt-8">
       <div
-        className="inline-flex w-full flex-wrap gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur-sm sm:w-auto"
-        role="tablist"
-        aria-label={t("home_why_title")}
-      >
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "core"}
-          className={cn(
-            "rounded-xl px-4 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300",
-            tab === "core"
-              ? "bg-white text-slate-950 shadow-sm"
-              : "text-slate-200 hover:bg-white/10 hover:text-white",
-          )}
-          onClick={() => setTab("core")}
-        >
-          {t("home_why_tab_core")}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "growth"}
-          className={cn(
-            "rounded-xl px-4 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300",
-            tab === "growth"
-              ? "bg-white text-slate-950 shadow-sm"
-              : "text-slate-200 hover:bg-white/10 hover:text-white",
-          )}
-          onClick={() => setTab("growth")}
-        >
-          {t("home_why_tab_growth")}
-        </button>
-      </div>
-
-      <div
         className={cn(
-          "mt-6 grid gap-4 sm:grid-cols-2",
+          "grid gap-4 sm:grid-cols-2",
           tab === "core" ? "lg:grid-cols-2" : "lg:grid-cols-3",
         )}
         role="tabpanel"
@@ -106,6 +71,52 @@ export function WhyInfoGateTabs() {
             </p>
           </div>
         ))}
+      </div>
+
+      {tab === "growth" ? (
+        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center shadow-lg shadow-black/20 backdrop-blur-sm">
+          <p className="text-lg font-extrabold text-white sm:text-xl">
+            {t("home_why_growth_cta_title")}
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            {t("home_why_growth_cta_body")}
+          </p>
+        </div>
+      ) : null}
+
+      <div
+        className="mx-auto mt-8 flex w-full max-w-lg flex-col gap-2 sm:mx-0 sm:max-w-none sm:flex-row sm:justify-center"
+        role="tablist"
+        aria-label={t("home_why_title")}
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "core"}
+          className={cn(
+            "min-h-11 flex-1 rounded-xl px-5 py-3 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 sm:flex-initial sm:min-w-[12rem]",
+            tab === "core"
+              ? "bg-white text-slate-950 shadow-sm"
+              : "border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white",
+          )}
+          onClick={() => setTab("core")}
+        >
+          {t("home_why_tab_core")}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "growth"}
+          className={cn(
+            "min-h-11 flex-1 rounded-xl px-5 py-3 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 sm:flex-initial sm:min-w-[12rem]",
+            tab === "growth"
+              ? "bg-white text-slate-950 shadow-sm"
+              : "border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white",
+          )}
+          onClick={() => setTab("growth")}
+        >
+          {t("home_why_tab_growth")}
+        </button>
       </div>
     </div>
   );
