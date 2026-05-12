@@ -310,11 +310,11 @@
   "pricing_tier3_cta": "تحدث إلى الخبراء",
   "pricing_note": "يتضمن كل عرض من {site} الحلول الموصى بها ونطاق التنفيذ وخارطة طريق لقيمة قابلة للقياس.",
 
-  "reg_meta_description": "برنامج التسجيل من غرفة تجارة وصناعة عمان — تسجيل آمن وبسيط للمشاريع الصغيرة والمتوسطة.",
+  "reg_meta_description": "تسجيل غرفة تجارة و صناعة عمان — استمارة آمنة وبسيطة للمشاريع الصغيرة والمتوسطة.",
 
-  "reg_hero_program_title": "برنامج التسجيل",
-  "reg_hero_sub_prefix": "من",
-  "reg_hero_sub_brand": "غرفة تجارة وصناعة عمان",
+  "reg_hero_program_title": "غرفة تجارة و صناعة عمان",
+  "reg_hero_sub_prefix": "",
+  "reg_hero_sub_brand": "",
   "reg_hero_logo_chamber": "غرفة تجارة وصناعة عُمان",
   "reg_hero_logo_academy": "أكاديمية عُمان للمؤسسات الصغيرة والمتوسطة",
 
@@ -350,13 +350,13 @@
 
   "reg_section3_title": "ثالثا: المستندات المرفقة",
   "reg_doc_profile": "الملف التعريفي للمؤسسة",
-  "reg_doc_profile_hint": "Upload the company profile (PDF/DOC/DOCX).",
+  "reg_doc_profile_hint": "ارفع الملف التعريفي للمؤسسة (PDF أو DOC أو DOCX).",
   "reg_doc_cr": "نسخة من السجل التجاري",
-  "reg_doc_cr_hint": "Upload the commercial registration copy (PDF/PNG/JPG).",
+  "reg_doc_cr_hint": "ارفع نسخة من السجل التجاري (PDF أو PNG أو JPG).",
   "reg_doc_riyada": "نسخة من بطاقة ريادة (إن وجدت)",
-  "reg_doc_riyada_hint": "Upload the Riyada card copy (PDF/PNG/JPG).",
-  "reg_choose_file": "Choose file",
-  "reg_no_file": "No file chosen",
+  "reg_doc_riyada_hint": "ارفع نسخة من بطاقة ريادة (PDF أو PNG أو JPG).",
+  "reg_choose_file": "اختيار ملف",
+  "reg_no_file": "لم يتم اختيار ملف",
 
   "reg_clear": "مسح",
   "reg_submit": "إرسال",

@@ -343,13 +343,13 @@ export function ProgramRegistrationForm() {
             </div>
           </section>
 
-          {/* Section 2 */}
+          {/* Section 2 — same card as S1/S3: navy title, gray prompt, full-rounded pills */}
           <section
             className="rounded-xl border p-6 md:p-8"
             style={{ borderColor: BORDER }}
           >
             <h3
-              className="mb-4 text-base font-bold md:text-lg"
+              className="mb-3 text-base font-bold md:text-lg"
               style={{ color: PRIMARY }}
             >
               {t("reg_section2_title")}
@@ -357,34 +357,35 @@ export function ProgramRegistrationForm() {
             <p className="mb-6 text-sm text-slate-600 md:text-[15px]">
               {t("reg_sector_prompt")}
             </p>
-            <div className="flex flex-wrap gap-3">
-              {SECTOR_IDS.map((id, index) => (
-                <label
-                  key={id}
-                  className={cn(
-                    "inline-flex cursor-pointer items-center gap-2 rounded-full border bg-white px-4 py-2.5 text-sm font-medium transition",
-                    sector === id
-                      ? "shadow-sm"
-                      : "hover:bg-slate-50/80"
-                  )}
-                  style={{
-                    borderColor: sector === id ? PRIMARY : "#93c5fd",
-                    backgroundColor: sector === id ? HEADER_BG : undefined,
-                    color: PRIMARY,
-                  }}
-                >
-                  <input
-                    type="radio"
-                    name="sectorChoice"
-                    value={id}
-                    checked={sector === id}
-                    onChange={() => setSector(id)}
-                    className="h-4 w-4 shrink-0"
-                    style={{ accentColor: PRIMARY }}
-                  />
-                  <span>{t(REG_SECTOR_KEYS[index])}</span>
-                </label>
-              ))}
+            <div className="flex flex-wrap gap-2.5 md:gap-3">
+              {SECTOR_IDS.map((id, index) => {
+                const selected = sector === id;
+                return (
+                  <label
+                    key={id}
+                    className={cn(
+                      "inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition",
+                      selected ? "shadow-sm" : "hover:bg-slate-50/90"
+                    )}
+                    style={{
+                      borderColor: selected ? PRIMARY : "#93c5fd",
+                      backgroundColor: selected ? HEADER_BG : "#f8fafc",
+                      color: PRIMARY,
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="sectorChoice"
+                      value={id}
+                      checked={selected}
+                      onChange={() => setSector(id)}
+                      className="h-4 w-4 shrink-0"
+                      style={{ accentColor: PRIMARY }}
+                    />
+                    <span>{t(REG_SECTOR_KEYS[index])}</span>
+                  </label>
+                );
+              })}
             </div>
             {sector === "s9" && (
               <div className="mt-6 flex flex-col gap-2">
