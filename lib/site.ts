@@ -37,7 +37,6 @@ const allNavLinks = [
   { href: "/pricing", key: "nav_pricing" },
   { href: "/blog", key: "nav_blog" },
   { href: "/contact", key: "nav_contact" },
-  { href: "/registration", key: "nav_registration" },
 ] as const;
 
 export type NavLink = (typeof allNavLinks)[number];
@@ -45,6 +44,8 @@ export type NavLink = (typeof allNavLinks)[number];
 /**
  * Blog and pricing links are included only when the corresponding feature flags
  * in `@/lib/features` are `true`.
+ *
+ * Program registration is not listed here (direct URL only): `/en/registration`, `/ar/registration`.
  */
 export const navLinks: readonly NavLink[] = allNavLinks.filter((link) => {
   if (link.href === "/blog" && !SHOW_BLOG) return false;
