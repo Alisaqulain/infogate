@@ -37,6 +37,7 @@ const allNavLinks = [
   { href: "/pricing", key: "nav_pricing" },
   { href: "/blog", key: "nav_blog" },
   { href: "/contact", key: "nav_contact" },
+  { href: "/registration", key: "nav_registration" },
 ] as const;
 
 export type NavLink = (typeof allNavLinks)[number];

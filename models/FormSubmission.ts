@@ -2,11 +2,16 @@ import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 
 const FormSubmissionSchema = new Schema(
   {
-    type: { type: String, required: true, enum: ["contact", "quote"], index: true },
+    type: {
+      type: String,
+      required: true,
+      enum: ["contact", "quote", "registration"],
+      index: true,
+    },
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: false },
     phone: { type: String, required: false },
-    message: { type: String, required: true },
+    message: { type: String, required: false },
     meta: { type: Schema.Types.Mixed, required: false },
   },
   { timestamps: true }

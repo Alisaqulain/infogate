@@ -6,11 +6,11 @@ import { useAdminI18n } from "@/components/admin/admin-i18n";
 
 type FormItem = {
   id: string;
-  type: "contact" | "quote";
+  type: "contact" | "quote" | "registration";
   name: string;
-  email: string;
+  email: string | null;
   phone: string | null;
-  message: string;
+  message: string | null;
   meta: unknown;
   createdAt: string;
 };
@@ -123,16 +123,20 @@ export default function AdminFormsPage() {
                     {it.name}
                   </td>
                   <td className={["whitespace-nowrap px-3 py-3 text-slate-700", alignClass].join(" ")}>
-                    <a className="underline decoration-slate-300 underline-offset-2" href={`mailto:${it.email}`}>
-                      {it.email}
-                    </a>
+                    {it.email ? (
+                      <a className="underline decoration-slate-300 underline-offset-2" href={`mailto:${it.email}`}>
+                        {it.email}
+                      </a>
+                    ) : (
+                      "—"
+                    )}
                   </td>
                   <td className={["whitespace-nowrap px-3 py-3 text-slate-700", alignClass].join(" ")}>
                     {it.phone ?? "—"}
                   </td>
                   <td className={["px-3 py-3 text-slate-800", alignClass].join(" ")}>
                     <div className="max-w-[36rem] whitespace-pre-wrap break-words">
-                      {it.message}
+                      {it.message ?? "—"}
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-right">

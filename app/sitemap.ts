@@ -13,6 +13,7 @@ const staticPaths = [
   "/pricing",
   ...(SHOW_BLOG ? ["/blog"] : []),
   "/contact",
+  "/registration",
 ] as const;
 
 const blogPostPaths = SHOW_BLOG
