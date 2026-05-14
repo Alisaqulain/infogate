@@ -1,11 +1,23 @@
+import { randomBytes } from "crypto";
 import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/db";
 import { FormSubmission } from "@/models/FormSubmission";
 import { sendAdminNotification, type MailAttachment } from "@/lib/mailer";
+import {
+  isRegGovernorateSlug,
+  REG_GOVERNORATE_LABEL_EN,
+  REG_MAX_FILE_BYTES,
+  type RegGovernorateSlug,
+} from "@/lib/registration-constants";
+import {
+  isValidEstablishmentDate,
+  isValidOmanMobile,
+  isValidOptionalHttpUrl,
+  isValidOptionalInstagram,
+  validateRegistrationFile,
+} from "@/lib/registration-validation";
 
 export const runtime = "nodejs";
-
-const MAX_BYTES_PER_FILE = 10 * 1024 * 1024;
 
 const SECTOR_LABELS: Record<string, string> = {
   s1: "Manufacturing & Light Industry",
@@ -19,9 +31,26 @@ const SECTOR_LABELS: Record<string, string> = {
   s9: "Other (please specify)",
 };
 
+export type RegistrationFileMeta = {
+  originalName: string;
+  mimeType: string;
+  sizeBytes: number;
+  uploadedAt: string;
+  /** Unique name used for the email attachment / logical storage key */
+  storedFilename: string;
+};
+
 function str(formData: FormData, key: string): string {
   const v = formData.get(key);
   return typeof v === "string" ? v.trim() : "";
+}
+
+function safeExtFromFilename(name: string): string {
+  const ext = (name.split(".").pop() ?? "").toLowerCase();
+  if (ext === "jpeg" || ext === "jpg") return "jpg";
+  if (ext === "png") return "png";
+  if (ext === "pdf") return "pdf";
+  return "bin";
 }
 
 async function filePart(
@@ -29,16 +58,33 @@ async function filePart(
   key: string,
   attachments: MailAttachment[],
   label: string
-) {
+): Promise<RegistrationFileMeta | null> {
   const v = formData.get(key);
   if (!(v instanceof File) || v.size === 0) return null;
-  if (v.size > MAX_BYTES_PER_FILE) {
-    throw new Error(`${label}: file exceeds ${MAX_BYTES_PER_FILE / 1024 / 1024}MB`);
+
+  const violation = validateRegistrationFile(v);
+  if (violation === "size") {
+    throw new Error(
+      `${label}: file exceeds ${REG_MAX_FILE_BYTES / 1024 / 1024}MB`
+    );
   }
+  if (violation === "type") {
+    throw new Error(`${label}: only PDF, JPG, JPEG, or PNG are allowed.`);
+  }
+
   const buf = Buffer.from(await v.arrayBuffer());
-  const name = v.name || `${key}.bin`;
-  attachments.push({ filename: `${label}-${name}`, content: buf });
-  return name;
+  const originalName = v.name || `${key}.bin`;
+  const ext = safeExtFromFilename(originalName);
+  const storedFilename = `${label}-${Date.now()}-${randomBytes(8).toString("hex")}.${ext}`;
+  attachments.push({ filename: storedFilename, content: buf });
+
+  return {
+    originalName,
+    mimeType: (v.type || "application/octet-stream").toLowerCase(),
+    sizeBytes: v.size,
+    uploadedAt: new Date().toISOString(),
+    storedFilename,
+  };
 }
 
 export async function POST(request: Request) {
@@ -53,7 +99,7 @@ export async function POST(request: Request) {
   const tradeName = str(formData, "tradeName");
   const crNumber = str(formData, "crNumber");
   const establishment = str(formData, "establishment");
-  const governorate = str(formData, "governorate");
+  const governorateSlug = str(formData, "governorate");
   const mobile = str(formData, "mobile");
   const website = str(formData, "website");
   const instagram = str(formData, "instagram");
@@ -61,47 +107,106 @@ export async function POST(request: Request) {
   const sectorOther = str(formData, "sectorOther");
 
   if (companyName.length < 2) {
-    return NextResponse.json({ error: "Company name is required." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Company name is required." },
+      { status: 400 }
+    );
   }
   if (!crNumber) {
-    return NextResponse.json({ error: "Commercial registration number is required." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Commercial registration number is required." },
+      { status: 400 }
+    );
   }
   if (!establishment) {
-    return NextResponse.json({ error: "Date of establishment is required." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Date of establishment is required." },
+      { status: 400 }
+    );
   }
-  if (!governorate) {
-    return NextResponse.json({ error: "Governorate / Wilayat is required." }, { status: 400 });
+  if (!isValidEstablishmentDate(establishment)) {
+    return NextResponse.json(
+      { error: "Date of establishment must be a valid date not in the future." },
+      { status: 400 }
+    );
   }
-  if (!mobile) {
-    return NextResponse.json({ error: "Mobile number is required." }, { status: 400 });
+  if (!governorateSlug || !isRegGovernorateSlug(governorateSlug)) {
+    return NextResponse.json(
+      { error: "Governorate / Wilayat is required." },
+      { status: 400 }
+    );
+  }
+  if (!mobile || !isValidOmanMobile(mobile)) {
+    return NextResponse.json(
+      { error: "Enter a valid Oman mobile number (e.g. 9XXXXXXX or +968 9XXXXXXX)." },
+      { status: 400 }
+    );
+  }
+  if (!isValidOptionalHttpUrl(website)) {
+    return NextResponse.json(
+      { error: "Website must be a valid http(s) URL or left empty." },
+      { status: 400 }
+    );
+  }
+  if (!isValidOptionalInstagram(instagram)) {
+    return NextResponse.json(
+      { error: "Instagram must be a valid Instagram URL, @handle, or left empty." },
+      { status: 400 }
+    );
   }
   if (!sectorChoice || !SECTOR_LABELS[sectorChoice]) {
-    return NextResponse.json({ error: "Business sector is required." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Business sector is required." },
+      { status: 400 }
+    );
   }
   if (sectorChoice === "s9" && sectorOther.length < 2) {
-    return NextResponse.json({ error: "Please specify your sector." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Please specify your sector." },
+      { status: 400 }
+    );
   }
 
   const attachments: MailAttachment[] = [];
-  let fileProfile: string | null = null;
-  let fileCr: string | null = null;
-  let fileRiyada: string | null = null;
+  let fileProfile: RegistrationFileMeta | null = null;
+  let fileCr: RegistrationFileMeta | null = null;
+  let fileRiyada: RegistrationFileMeta | null = null;
 
   try {
-    fileProfile = await filePart(formData, "fileProfile", attachments, "company-profile");
-    fileCr = await filePart(formData, "fileCr", attachments, "commercial-registration");
-    fileRiyada = await filePart(formData, "fileRiyada", attachments, "riyada-card");
+    fileProfile = await filePart(
+      formData,
+      "fileProfile",
+      attachments,
+      "company-profile"
+    );
+    fileCr = await filePart(
+      formData,
+      "fileCr",
+      attachments,
+      "commercial-registration"
+    );
+    fileRiyada = await filePart(
+      formData,
+      "fileRiyada",
+      attachments,
+      "riyada-card"
+    );
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Invalid upload.";
     return NextResponse.json({ error: msg }, { status: 400 });
   }
 
   const sectorLabel = SECTOR_LABELS[sectorChoice] ?? sectorChoice;
+  const govLabel =
+    REG_GOVERNORATE_LABEL_EN[governorateSlug as RegGovernorateSlug] ??
+    governorateSlug;
+
   const meta = {
     tradeName: tradeName || undefined,
     crNumber,
     establishment,
-    governorate,
+    governorate: governorateSlug,
+    governorateLabel: govLabel,
     website: website || undefined,
     instagram: instagram || undefined,
     sector: sectorChoice,
@@ -114,23 +219,28 @@ export async function POST(request: Request) {
     },
   };
 
+  const fileLine = (m: RegistrationFileMeta | null, title: string) => {
+    if (!m) return `• ${title}: (none)`;
+    return `• ${title}: ${m.originalName} → stored as ${m.storedFilename} (${m.mimeType}, ${m.sizeBytes} bytes, ${m.uploadedAt})`;
+  };
+
   const messageBody = [
     `Program registration`,
     `Company: ${companyName}`,
     tradeName ? `Trade name: ${tradeName}` : null,
     `CR: ${crNumber}`,
     `Established: ${establishment}`,
-    `Governorate / Wilayat: ${governorate}`,
+    `Governorate / Wilayat: ${govLabel} (${governorateSlug})`,
     `Mobile: ${mobile}`,
     website ? `Website: ${website}` : null,
     instagram ? `Instagram: ${instagram}` : null,
     `Sector: ${sectorLabel}`,
     sectorChoice === "s9" ? `Other detail: ${sectorOther}` : null,
     "",
-    "Attached files (filenames):",
-    fileProfile ? `• Company profile: ${fileProfile}` : "• Company profile: (none)",
-    fileCr ? `• Commercial registration copy: ${fileCr}` : "• Commercial registration copy: (none)",
-    fileRiyada ? `• Riyada card: ${fileRiyada}` : "• Riyada card: (none)",
+    "Attached files:",
+    fileLine(fileProfile, "Company profile"),
+    fileLine(fileCr, "Commercial registration copy"),
+    fileLine(fileRiyada, "Riyada card"),
   ]
     .filter(Boolean)
     .join("\n");
