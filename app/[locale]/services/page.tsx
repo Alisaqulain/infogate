@@ -85,6 +85,7 @@ export default async function ServicesPage({
         <div className="space-y-10">
           {services.map((s, idx) => {
             const reverse = idx % 2 === 1;
+            const isSurveyCompass = idx === 0;
             return (
               <div
                 key={s.name}
@@ -100,6 +101,28 @@ export default async function ServicesPage({
                   <p className="mt-4 text-base leading-relaxed text-slate-600">
                     {s.desc}
                   </p>
+                  {isSurveyCompass ? (
+                    <ul className="mt-5 max-w-xl space-y-2.5 text-base leading-snug text-slate-800">
+                      {(
+                        [
+                          "services_item1_b1",
+                          "services_item1_b2",
+                          "services_item1_b3",
+                          "services_item1_b4",
+                        ] as const
+                      ).map((key) => (
+                        <li key={key} className="flex gap-2.5">
+                          <span
+                            className="mt-0.5 shrink-0 font-bold text-emerald-600"
+                            aria-hidden
+                          >
+                            ✓
+                          </span>
+                          <span>{t(key)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       href="/contact"

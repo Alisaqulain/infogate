@@ -45,8 +45,14 @@ export type NavLink = (typeof allNavLinks)[number];
  * Blog and pricing links are included only when the corresponding feature flags
  * in `@/lib/features` are `true`.
  *
- * Program registration is not listed here (direct URL only): `/en/registration`, `/ar/registration`.
+ * Program registration (direct URL): `/en/registration/osus`, `/ar/registration/osus`.
  */
+/** Public path (no locale prefix; next-intl adds `/en` or `/ar`). */
+export const REGISTRATION_PAGE_PATH = "/registration/osus" as const;
+
+/** Osus program mark — `public/third logo.jpeg` (encoded for URLs). */
+export const REGISTRATION_OSUS_LOGO_SRC = "/third%20logo.jpeg" as const;
+
 export const navLinks: readonly NavLink[] = allNavLinks.filter((link) => {
   if (link.href === "/blog" && !SHOW_BLOG) return false;
   if (link.href === "/pricing" && !SHOW_PRICING) return false;

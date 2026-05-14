@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { LOGO_SRC, SITE_NAME } from "@/lib/site";
+import { REGISTRATION_OSUS_LOGO_SRC } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-/** Tighter on small screens so three marks fit one row (scrolls horizontally if needed). */
+/** Chamber / academy marks — larger; row scrolls on very narrow screens. */
 const HERO_IMG_CLASS =
-  "h-11 w-auto max-h-11 max-w-[30vw] object-contain object-center sm:h-[72px] sm:max-h-[72px] sm:max-w-[min(100%,220px)] md:h-[84px] md:max-h-[84px]";
+  "h-16 w-auto max-h-16 max-w-[38vw] object-contain object-center sm:h-[96px] sm:max-h-[96px] sm:max-w-[min(100%,280px)] md:h-[112px] md:max-h-[112px] md:max-w-[min(100%,320px)]";
 const HERO_THIRD_LOGO_CLASS =
-  "h-8 w-auto max-h-8 max-w-[26vw] object-contain object-center sm:h-10 sm:max-h-10 sm:max-w-[min(200px,42vw)] md:h-12 md:max-h-12";
+  "h-14 w-auto max-h-14 max-w-[34vw] object-contain object-center sm:h-[88px] sm:max-h-[88px] sm:max-w-[min(240px,48vw)] md:h-24 md:max-h-24 md:max-w-[min(280px,40vw)]";
 
 /** Navy hero strip — aligns with header max-w-6xl content; full-width background. */
 export function RegistrationHero() {
@@ -73,37 +73,37 @@ export function RegistrationHero() {
             </div>
 
             {/* Partner logos — one horizontal row on all breakpoints (scroll on very narrow screens) */}
-            <div className="flex min-w-0 flex-1 flex-row flex-nowrap items-center justify-center gap-1.5 overflow-x-auto overscroll-x-contain py-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 md:gap-6 [&::-webkit-scrollbar]:hidden">
-              <div className="flex shrink-0 items-center justify-center rounded-lg bg-white px-1.5 py-1 shadow-sm shadow-black/10 sm:min-h-[72px] sm:px-3 sm:py-2 md:min-h-[84px]">
+            <div className="flex min-w-0 flex-1 flex-row flex-nowrap items-center justify-center gap-2 overflow-x-auto overscroll-x-contain py-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-5 md:gap-7 [&::-webkit-scrollbar]:hidden">
+              <div className="flex shrink-0 items-center justify-center rounded-lg bg-white px-2 py-1.5 shadow-sm shadow-black/10 sm:min-h-[96px] sm:px-4 sm:py-2.5 md:min-h-[112px]">
                 <Image
                   src="/firsr.png"
                   alt={t("reg_hero_logo_chamber")}
-                  width={260}
-                  height={96}
+                  width={360}
+                  height={132}
                   className={HERO_IMG_CLASS}
-                  sizes="(max-width: 640px) 30vw, 260px"
+                  sizes="(max-width: 640px) 38vw, 320px"
                 />
               </div>
-              <div className="h-10 w-px shrink-0 self-center bg-white/25 sm:h-14" aria-hidden />
-              <div className="flex shrink-0 items-center justify-center rounded-lg bg-black px-1.5 py-1 shadow-sm shadow-black/10 sm:min-h-[72px] sm:px-3 sm:py-2 md:min-h-[84px]">
+              <div className="h-12 w-px shrink-0 self-center bg-white/25 sm:h-16 md:h-20" aria-hidden />
+              <div className="flex shrink-0 items-center justify-center rounded-lg bg-black px-2 py-1.5 shadow-sm shadow-black/10 sm:min-h-[96px] sm:px-4 sm:py-2.5 md:min-h-[112px]">
                 <Image
                   src="/second.png"
                   alt={t("reg_hero_logo_academy")}
-                  width={260}
-                  height={96}
+                  width={360}
+                  height={132}
                   className={HERO_IMG_CLASS}
-                  sizes="(max-width: 640px) 30vw, 260px"
+                  sizes="(max-width: 640px) 38vw, 320px"
                 />
               </div>
-              <div className="h-10 w-px shrink-0 self-center bg-white/25 sm:h-14" aria-hidden />
-              <div className="flex shrink-0 items-center justify-center px-1 sm:min-h-[72px] sm:px-2 md:min-h-[84px]">
+              <div className="h-12 w-px shrink-0 self-center bg-white/25 sm:h-16 md:h-20" aria-hidden />
+              <div className="flex shrink-0 items-center justify-center rounded-lg bg-white px-2 py-1.5 shadow-sm shadow-black/10 sm:min-h-[96px] sm:px-4 sm:py-2.5 md:min-h-[112px]">
                 <Image
-                  src={LOGO_SRC}
-                  alt={`${SITE_NAME} logo`}
-                  width={200}
-                  height={80}
+                  src={REGISTRATION_OSUS_LOGO_SRC}
+                  alt={t("reg_hero_logo_osus")}
+                  width={280}
+                  height={112}
                   className={HERO_THIRD_LOGO_CLASS}
-                  sizes="(max-width: 640px) 26vw, 200px"
+                  sizes="(max-width: 640px) 34vw, 280px"
                 />
               </div>
             </div>

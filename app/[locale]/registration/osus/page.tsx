@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProgramRegistrationForm } from "@/components/program-registration-form";
 import { RegistrationHero } from "@/components/registration-hero";
 import { buildHreflangAlternates } from "@/lib/seo-metadata";
+import { REGISTRATION_PAGE_PATH } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -14,7 +15,7 @@ export async function generateMetadata({
   return {
     title: t("nav_registration"),
     description: t("reg_meta_description"),
-    alternates: await buildHreflangAlternates(locale, "/registration"),
+    alternates: await buildHreflangAlternates(locale, REGISTRATION_PAGE_PATH),
   };
 }
 
@@ -28,7 +29,6 @@ export default async function RegistrationPage({
 
   return (
     <div className="min-h-screen bg-[#f0f4f8]">
-      {/* Padding for fixed header lives on the navy hero only — avoids a light-gray gap under the nav */}
       <RegistrationHero />
       <ProgramRegistrationForm />
     </div>

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { DEMO_BLOG_SLUGS } from "@/lib/demo-blog";
 import { SHOW_BLOG } from "@/lib/features";
-import { SITE_URL } from "@/lib/site";
+import { REGISTRATION_PAGE_PATH, SITE_URL } from "@/lib/site";
 
 const base = SITE_URL;
 const locales = ["en", "ar"] as const;
@@ -13,7 +13,7 @@ const staticPaths = [
   "/pricing",
   ...(SHOW_BLOG ? ["/blog"] : []),
   "/contact",
-  "/registration",
+  REGISTRATION_PAGE_PATH,
 ] as const;
 
 const blogPostPaths = SHOW_BLOG
