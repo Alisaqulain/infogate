@@ -53,6 +53,10 @@ export const REGISTRATION_PAGE_PATH = "/registration/osus" as const;
 /** Osus program mark — `public/third logo.jpeg` (encoded for URLs). */
 export const REGISTRATION_OSUS_LOGO_SRC = "/third%20logo.jpeg" as const;
 
+/** Partner marks on the registration header (Chamber of Commerce layout). */
+export const REGISTRATION_ACADEMY_LOGO_SRC = "/second.png" as const;
+export const REGISTRATION_CHAMBER_LOGO_SRC = "/firsr.png" as const;
+
 export const navLinks: readonly NavLink[] = allNavLinks.filter((link) => {
   if (link.href === "/blog" && !SHOW_BLOG) return false;
   if (link.href === "/pricing" && !SHOW_PRICING) return false;

@@ -314,12 +314,14 @@
 
   "reg_meta_description": "Program registration from Chamber of Oman — secure, simple registration for SMEs.",
 
-  "reg_hero_program_title": "Program Registration",
-  "reg_hero_sub_prefix": "from",
-  "reg_hero_sub_brand": "Chamber of Oman",
+  "reg_hero_program_title": "Osus Program Registration",
+  "reg_hero_sub_prefix": "",
+  "reg_hero_sub_brand": "",
   "reg_hero_logo_chamber": "Oman Chamber of Commerce & Industry",
   "reg_hero_logo_academy": "Oman Academy for SMEs",
   "reg_hero_logo_osus": "Osus — Institutional Capacity Building Program",
+  "reg_hero_daleel_ar": "دليل للنفط ش.م.م.",
+  "reg_hero_daleel_en": "DALEEL PETROLEUM L.L.C.",
 
   "reg_title": "Registration form",
   "reg_subtitle": "Secure • Simple • Greater Value",
