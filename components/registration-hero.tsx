@@ -18,15 +18,18 @@ const OSUS_LOGO_CLASS =
 function PartnerLogoBox({
   children,
   variant,
+  className,
 }: {
   children: ReactNode;
   variant: "light" | "dark";
+  className?: string;
 }) {
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-lg px-2 py-1.5 shadow-sm shadow-black/10 sm:min-h-[96px] sm:px-4 sm:py-2.5 md:min-h-[112px]",
-        variant === "light" ? "bg-white" : "bg-black"
+        "flex items-center justify-center rounded-lg px-2 py-1.5 shadow-sm shadow-black/10 sm:min-h-[96px] sm:px-4 sm:py-2.5 md:min-h-[112px] md:shrink-0",
+        variant === "light" ? "bg-white" : "bg-black",
+        className
       )}
     >
       {children}
@@ -102,7 +105,7 @@ export function RegistrationHero() {
             />
           </div>
 
-          <div className="flex items-center justify-center px-2 py-6 sm:py-8 md:py-10">
+          <div className="hidden items-center justify-center px-2 py-6 md:flex md:py-8 lg:py-10">
             <Image
               src={REGISTRATION_OSUS_LOGO_SRC}
               alt={t("reg_hero_logo_osus")}
@@ -114,21 +117,19 @@ export function RegistrationHero() {
             />
           </div>
 
-          <div className="flex min-w-0 flex-row flex-nowrap items-center justify-center gap-2 overflow-x-auto overscroll-x-contain py-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-5 md:gap-7 [&::-webkit-scrollbar]:hidden">
-            <PartnerLogoBox variant="dark">
+          {/* Mobile: 2×2 — Osus | Chamber / Academy (black) | Daleel */}
+          <div dir="ltr" className="grid grid-cols-2 gap-2 py-1 sm:gap-3 md:hidden">
+            <PartnerLogoBox variant="light">
               <Image
-                src={REGISTRATION_ACADEMY_LOGO_SRC}
-                alt={t("reg_hero_logo_academy")}
-                width={360}
-                height={132}
-                className={PARTNER_LOGO_CLASS}
-                sizes="(max-width: 640px) 38vw, 320px"
+                src={REGISTRATION_OSUS_LOGO_SRC}
+                alt={t("reg_hero_logo_osus")}
+                width={420}
+                height={168}
+                className={OSUS_LOGO_CLASS}
+                sizes="45vw"
+                priority
               />
             </PartnerLogoBox>
-            <div
-              className="h-12 w-px shrink-0 self-center bg-white/25 sm:h-16 md:h-20"
-              aria-hidden
-            />
             <PartnerLogoBox variant="light">
               <Image
                 src={REGISTRATION_CHAMBER_LOGO_SRC}
@@ -136,11 +137,55 @@ export function RegistrationHero() {
                 width={360}
                 height={132}
                 className={PARTNER_LOGO_CLASS}
-                sizes="(max-width: 640px) 38vw, 320px"
+                sizes="42vw"
+              />
+            </PartnerLogoBox>
+            <PartnerLogoBox variant="dark">
+              <Image
+                src={REGISTRATION_ACADEMY_LOGO_SRC}
+                alt={t("reg_hero_logo_academy")}
+                width={360}
+                height={132}
+                className={PARTNER_LOGO_CLASS}
+                sizes="42vw"
+              />
+            </PartnerLogoBox>
+            <PartnerLogoBox variant="light">
+              <DaleelMark />
+            </PartnerLogoBox>
+          </div>
+
+          {/* Desktop: Chamber | Academy (black, center) | Daleel */}
+          <div
+            dir="ltr"
+            className="hidden min-w-0 flex-row flex-nowrap items-center justify-center gap-5 py-1 md:flex md:gap-7"
+          >
+            <PartnerLogoBox variant="light">
+              <Image
+                src={REGISTRATION_CHAMBER_LOGO_SRC}
+                alt={t("reg_hero_logo_chamber")}
+                width={360}
+                height={132}
+                className={PARTNER_LOGO_CLASS}
+                sizes="320px"
               />
             </PartnerLogoBox>
             <div
-              className="h-12 w-px shrink-0 self-center bg-white/25 sm:h-16 md:h-20"
+              className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
+              aria-hidden
+            />
+            <PartnerLogoBox variant="dark">
+              <Image
+                src={REGISTRATION_ACADEMY_LOGO_SRC}
+                alt={t("reg_hero_logo_academy")}
+                width={360}
+                height={132}
+                className={PARTNER_LOGO_CLASS}
+                sizes="320px"
+              />
+            </PartnerLogoBox>
+            <div
+              className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
               aria-hidden
             />
             <PartnerLogoBox variant="light">
