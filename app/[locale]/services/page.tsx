@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
 import { buildHreflangAlternates } from "@/lib/seo-metadata";
-import { SITE_NAME } from "@/lib/site";
+import { REGISTRATION_PAGE_PATH } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -125,10 +125,10 @@ export default async function ServicesPage({
                   ) : null}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
-                      href="/contact"
+                      href={REGISTRATION_PAGE_PATH}
                       className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20"
                     >
-                      {t("services_cta_button", { site: SITE_NAME })}
+                      {t("nav_get_quote")}
                     </Link>
                     <Link
                       href="/"
@@ -172,10 +172,10 @@ export default async function ServicesPage({
           </p>
           <p className="mt-2 text-slate-600">{t("services_cta_body")}</p>
           <Link
-            href="/contact"
+            href={REGISTRATION_PAGE_PATH}
             className="fx-btn mt-6 inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25"
           >
-            {t("services_cta_button", { site: SITE_NAME })}
+            {t("nav_get_quote")}
           </Link>
         </div>
       </Section>

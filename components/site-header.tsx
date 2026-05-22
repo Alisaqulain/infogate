@@ -5,7 +5,12 @@ import { useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Magnetic } from "@/components/magnetic";
-import { LOGO_SRC, navLinks, SITE_NAME } from "@/lib/site";
+import {
+  LOGO_SRC,
+  navLinks,
+  REGISTRATION_PAGE_PATH,
+  SITE_NAME,
+} from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/i18n/useTranslation";
 
@@ -240,7 +245,7 @@ export function SiteHeader() {
 
           <Magnetic className="inline-block shrink-0">
             <Link
-              href="/contact"
+              href={REGISTRATION_PAGE_PATH}
               className="inline-flex min-h-11 max-w-[9.5rem] items-center justify-center truncate rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 px-2.5 py-1.5 text-[11px] font-bold leading-tight text-white shadow-lg shadow-blue-600/30 transition hover:brightness-110 sm:max-w-none sm:px-4 sm:py-2 sm:text-sm"
             >
               {t("nav_get_quote")}
@@ -337,7 +342,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={REGISTRATION_PAGE_PATH}
               className="mt-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 py-3 text-center text-sm font-bold text-white"
               onClick={() => setOpen(false)}
             >
