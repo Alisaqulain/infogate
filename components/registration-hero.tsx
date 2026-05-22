@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import {
-  REGISTRATION_ACADEMY_LOGO_SRC,
   REGISTRATION_CHAMBER_LOGO_SRC,
   REGISTRATION_OSUS_LOGO_SRC,
 } from "@/lib/site";
@@ -117,18 +116,27 @@ export function RegistrationHero() {
             />
           </div>
 
-          {/* Mobile: 2×2 — Osus | Chamber / Academy (black) | Daleel */}
-          <div dir="ltr" className="grid grid-cols-2 gap-2 py-1 sm:gap-3 md:hidden">
-            <PartnerLogoBox variant="light">
+          {/* Mobile: Osus centered, then Daleel | Chamber */}
+          <div
+            dir="ltr"
+            className="grid grid-cols-2 gap-2 py-1 sm:gap-3 md:hidden"
+          >
+            <PartnerLogoBox
+              variant="light"
+              className="col-span-2 mx-auto w-full max-w-[min(100%,360px)] justify-self-center"
+            >
               <Image
                 src={REGISTRATION_OSUS_LOGO_SRC}
                 alt={t("reg_hero_logo_osus")}
                 width={420}
                 height={168}
                 className={OSUS_LOGO_CLASS}
-                sizes="45vw"
+                sizes="70vw"
                 priority
               />
+            </PartnerLogoBox>
+            <PartnerLogoBox variant="light">
+              <DaleelMark />
             </PartnerLogoBox>
             <PartnerLogoBox variant="light">
               <Image
@@ -140,27 +148,21 @@ export function RegistrationHero() {
                 sizes="42vw"
               />
             </PartnerLogoBox>
-            <PartnerLogoBox variant="dark">
-              <Image
-                src={REGISTRATION_ACADEMY_LOGO_SRC}
-                alt={t("reg_hero_logo_academy")}
-                width={360}
-                height={132}
-                className={PARTNER_LOGO_CLASS}
-                sizes="42vw"
-              />
-            </PartnerLogoBox>
-            <PartnerLogoBox variant="light">
-              <DaleelMark />
-            </PartnerLogoBox>
           </div>
 
-          {/* Desktop: Chamber | Academy (black, center) | Daleel */}
+          {/* Desktop: Daleel | Chamber */}
           <div
             dir="ltr"
             className="hidden min-w-0 flex-row flex-nowrap items-center justify-center gap-5 py-1 md:flex md:gap-7"
           >
             <PartnerLogoBox variant="light">
+              <DaleelMark />
+            </PartnerLogoBox>
+            <div
+              className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
+              aria-hidden
+            />
+            <PartnerLogoBox variant="light">
               <Image
                 src={REGISTRATION_CHAMBER_LOGO_SRC}
                 alt={t("reg_hero_logo_chamber")}
@@ -169,27 +171,6 @@ export function RegistrationHero() {
                 className={PARTNER_LOGO_CLASS}
                 sizes="320px"
               />
-            </PartnerLogoBox>
-            <div
-              className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
-              aria-hidden
-            />
-            <PartnerLogoBox variant="dark">
-              <Image
-                src={REGISTRATION_ACADEMY_LOGO_SRC}
-                alt={t("reg_hero_logo_academy")}
-                width={360}
-                height={132}
-                className={PARTNER_LOGO_CLASS}
-                sizes="320px"
-              />
-            </PartnerLogoBox>
-            <div
-              className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
-              aria-hidden
-            />
-            <PartnerLogoBox variant="light">
-              <DaleelMark />
             </PartnerLogoBox>
           </div>
         </div>

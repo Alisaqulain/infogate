@@ -33,7 +33,7 @@ export default async function ServicesPage({
 
   /** Live product modules only (technology evaluation & transformation consulting omitted from this page). */
   const highLevel = [
-    t("home_eco_1_title"),
+    t("services_item1_name"),
     t("home_eco_2_title"),
     t("home_eco_3_title"),
     t("home_eco_4_title"),
