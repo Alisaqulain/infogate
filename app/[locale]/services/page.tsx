@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
 import { buildHreflangAlternates } from "@/lib/seo-metadata";
-import { REGISTRATION_PAGE_PATH } from "@/lib/site";
+import { REGISTRATION_PAGE_PATH, SITE_NAME } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -86,6 +86,13 @@ export default async function ServicesPage({
           {services.map((s, idx) => {
             const reverse = idx % 2 === 1;
             const isSurveyCompass = idx === 0;
+            const isElectronicRegistration = idx === 1;
+            const ctaHref = isElectronicRegistration
+              ? REGISTRATION_PAGE_PATH
+              : "/contact";
+            const ctaLabel = isElectronicRegistration
+              ? t("services_registration_cta")
+              : t("services_cta_button", { site: SITE_NAME });
             return (
               <div
                 key={s.name}
@@ -125,10 +132,10 @@ export default async function ServicesPage({
                   ) : null}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
-                      href={REGISTRATION_PAGE_PATH}
+                      href={ctaHref}
                       className="fx-btn inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20"
                     >
-                      {t("nav_get_quote")}
+                      {ctaLabel}
                     </Link>
                     <Link
                       href="/"
@@ -172,10 +179,10 @@ export default async function ServicesPage({
           </p>
           <p className="mt-2 text-slate-600">{t("services_cta_body")}</p>
           <Link
-            href={REGISTRATION_PAGE_PATH}
+            href="/contact"
             className="fx-btn mt-6 inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25"
           >
-            {t("nav_get_quote")}
+            {t("services_cta_button", { site: SITE_NAME })}
           </Link>
         </div>
       </Section>
