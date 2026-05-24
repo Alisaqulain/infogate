@@ -9,7 +9,10 @@ export default requireAdmin(async function handler(req: NextApiRequest, res: Nex
   const limitRaw = Array.isArray(req.query.limit) ? req.query.limit[0] : req.query.limit;
   const typeRaw = Array.isArray(req.query.type) ? req.query.type[0] : req.query.type;
   const limit = Math.min(Math.max(parseInt(limitRaw || "50", 10) || 50, 1), 200);
-  const type = typeRaw === "contact" || typeRaw === "quote" ? typeRaw : undefined;
+  const type =
+    typeRaw === "contact" || typeRaw === "quote" || typeRaw === "registration"
+      ? typeRaw
+      : undefined;
 
   await dbConnect();
 

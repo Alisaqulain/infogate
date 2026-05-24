@@ -1,6 +1,8 @@
 import { randomBytes } from "crypto";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/db";
+import { saveRegistrationFile, type RegFileKey } from "@/lib/registration-storage";
 import { FormSubmission } from "@/models/FormSubmission";
 import { sendAdminNotification, type MailAttachment } from "@/lib/mailer";
 import {
@@ -55,11 +57,13 @@ function safeExtFromFilename(name: string): string {
 
 async function filePart(
   formData: FormData,
-  key: string,
+  formKey: string,
+  fileKey: RegFileKey,
+  submissionId: string,
   attachments: MailAttachment[],
   label: string
 ): Promise<RegistrationFileMeta | null> {
-  const v = formData.get(key);
+  const v = formData.get(formKey);
   if (!(v instanceof File) || v.size === 0) return null;
 
   const violation = validateRegistrationFile(v);
@@ -73,10 +77,17 @@ async function filePart(
   }
 
   const buf = Buffer.from(await v.arrayBuffer());
-  const originalName = v.name || `${key}.bin`;
+  const originalName = v.name || `${formKey}.bin`;
   const ext = safeExtFromFilename(originalName);
-  const storedFilename = `${label}-${Date.now()}-${randomBytes(8).toString("hex")}.${ext}`;
-  attachments.push({ filename: storedFilename, content: buf });
+  const emailFilename = `${label}-${Date.now()}-${randomBytes(8).toString("hex")}.${ext}`;
+  attachments.push({ filename: emailFilename, content: buf });
+
+  const storedFilename = await saveRegistrationFile(
+    submissionId,
+    fileKey,
+    buf,
+    ext
+  );
 
   return {
     originalName,
@@ -167,6 +178,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const submissionId = new mongoose.Types.ObjectId();
+  const submissionIdStr = submissionId.toString();
+
   const attachments: MailAttachment[] = [];
   let fileProfile: RegistrationFileMeta | null = null;
   let fileCr: RegistrationFileMeta | null = null;
@@ -176,18 +190,24 @@ export async function POST(request: Request) {
     fileProfile = await filePart(
       formData,
       "fileProfile",
+      "profile",
+      submissionIdStr,
       attachments,
       "company-profile"
     );
     fileCr = await filePart(
       formData,
       "fileCr",
+      "commercialReg",
+      submissionIdStr,
       attachments,
       "commercial-registration"
     );
     fileRiyada = await filePart(
       formData,
       "fileRiyada",
+      "riyada",
+      submissionIdStr,
       attachments,
       "riyada-card"
     );
@@ -248,6 +268,7 @@ export async function POST(request: Request) {
   await dbConnect();
 
   const submission = await FormSubmission.create({
+    _id: submissionId,
     type: "registration",
     name: companyName,
     email: undefined,

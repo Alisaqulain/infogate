@@ -14,6 +14,39 @@ type AdminDict = Record<
   | "pricing"
   | "blog"
   | "forms"
+  | "osusRegistrations"
+  | "osusRegistrationsDesc"
+  | "totalSubmissions"
+  | "selected"
+  | "exportAllExcel"
+  | "exportAllPdf"
+  | "exportSelectedExcel"
+  | "exportSelectedPdf"
+  | "bulkActions"
+  | "refresh"
+  | "selectAll"
+  | "submitted"
+  | "company"
+  | "mobile"
+  | "governorate"
+  | "sector"
+  | "actions"
+  | "loading"
+  | "noRegistrations"
+  | "view"
+  | "hide"
+  | "established"
+  | "sectorOther"
+  | "profileFile"
+  | "crFile"
+  | "riyadaFile"
+  | "fileNotStored"
+  | "openPdf"
+  | "delete"
+  | "deleteSelected"
+  | "confirmDeleteOne"
+  | "confirmDeleteBulk"
+  | "deleting"
   | "addEditDeleteServices"
   | "managePlans"
   | "createPosts"
@@ -40,7 +73,44 @@ const EN: AdminDict = {
   services: "Services",
   pricing: "Pricing",
   blog: "Blog",
-  forms: "Form submissions",
+  forms: "Osus registrations",
+  osusRegistrations: "Registration submissions",
+  osusRegistrationsDesc:
+    "Data from /registration/osus — export to Excel or PDF, including bulk downloads for selected rows.",
+  totalSubmissions: "Total",
+  selected: "Selected",
+  exportAllExcel: "Download all (Excel)",
+  exportAllPdf: "Download all (PDF)",
+  exportSelectedExcel: "Selected → Excel",
+  exportSelectedPdf: "Selected → PDF",
+  bulkActions: "Bulk actions",
+  refresh: "Refresh",
+  selectAll: "Select all",
+  submitted: "Submitted",
+  company: "Company",
+  mobile: "Mobile",
+  governorate: "Governorate",
+  sector: "Sector",
+  actions: "Actions",
+  loading: "Loading…",
+  noRegistrations: "No Osus registrations yet.",
+  view: "Details",
+  hide: "Hide",
+  established: "Established",
+  sectorOther: "Sector (other)",
+  profileFile: "Company profile",
+  crFile: "Commercial registration",
+  riyadaFile: "Riyada card",
+  fileNotStored:
+    "File not on server (submit a new registration to store uploads).",
+  openPdf: "Open PDF in new tab",
+  delete: "Delete",
+  deleteSelected: "Delete selected",
+  confirmDeleteOne:
+    "Delete this registration permanently? This cannot be undone.",
+  confirmDeleteBulk:
+    "Delete all selected registrations permanently? This cannot be undone.",
+  deleting: "Deleting…",
   addEditDeleteServices: "Add, edit, delete services",
   managePlans: "Manage plans and featured tier",
   createPosts: "Create posts with rich editor",
@@ -57,7 +127,42 @@ const AR: AdminDict = {
   services: "الخدمات",
   pricing: "الأسعار",
   blog: "المدونة",
-  forms: "رسائل النماذج",
+  forms: "تسجيلات أسس",
+  osusRegistrations: "طلبات التسجيل",
+  osusRegistrationsDesc:
+    "بيانات /registration/osus — تصدير Excel أو PDF، بما في ذلك التحميل الجماعي للصفوف المحددة.",
+  totalSubmissions: "الإجمالي",
+  selected: "المحدد",
+  exportAllExcel: "تحميل الكل (Excel)",
+  exportAllPdf: "تحميل الكل (PDF)",
+  exportSelectedExcel: "المحدد → Excel",
+  exportSelectedPdf: "المحدد → PDF",
+  bulkActions: "إجراءات جماعية",
+  refresh: "تحديث",
+  selectAll: "تحديد الكل",
+  submitted: "تاريخ الإرسال",
+  company: "الشركة",
+  mobile: "الجوال",
+  governorate: "المحافظة",
+  sector: "القطاع",
+  actions: "إجراءات",
+  loading: "جارٍ التحميل…",
+  noRegistrations: "لا توجد تسجيلات أسس بعد.",
+  view: "تفاصيل",
+  hide: "إخفاء",
+  established: "تاريخ التأسيس",
+  sectorOther: "قطاع (أخرى)",
+  profileFile: "ملف الشركة",
+  crFile: "السجل التجاري",
+  riyadaFile: "بطاقة ريادة",
+  fileNotStored:
+    "الملف غير موجود على الخادم (أرسل تسجيلاً جديداً لحفظ المرفقات).",
+  openPdf: "فتح PDF في تبويب جديد",
+  delete: "حذف",
+  deleteSelected: "حذف المحدد",
+  confirmDeleteOne: "حذف هذا التسجيل نهائياً؟ لا يمكن التراجع.",
+  confirmDeleteBulk: "حذف جميع التسجيلات المحددة نهائياً؟ لا يمكن التراجع.",
+  deleting: "جارٍ الحذف…",
   addEditDeleteServices: "إضافة/تعديل/حذف الخدمات",
   managePlans: "إدارة الباقات وتحديد الباقة المميزة",
   createPosts: "إنشاء مقالات بمحرر متقدم",

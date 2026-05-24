@@ -11,11 +11,18 @@ export default withAdminGuard(async function handler(req: NextApiRequest, res: N
   }
 
   await dbConnect();
-  const [services, blogs, inquiries] = await Promise.all([
+  const [services, blogs, inquiries, registrations] = await Promise.all([
     Service.countDocuments(),
     Blog.countDocuments(),
     FormSubmission.countDocuments(),
+    FormSubmission.countDocuments({ type: "registration" }),
   ]);
 
-  return res.status(200).json({ ok: true, services, blogs, inquiries });
+  return res.status(200).json({
+    ok: true,
+    services,
+    blogs,
+    inquiries,
+    registrations,
+  });
 });

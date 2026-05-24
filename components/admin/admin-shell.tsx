@@ -11,15 +11,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   const items = [
     { href: "/admin", label: t("dashboard") },
-    { href: "/admin/services", label: t("services") },
-    { href: "/admin/pricing", label: t("pricing") },
-    { href: "/admin/blog", label: t("blog") },
+    // { href: "/admin/services", label: t("services") },
+    // { href: "/admin/pricing", label: t("pricing") },
+    // { href: "/admin/blog", label: t("blog") },
     { href: "/admin/forms", label: t("forms") },
   ] as const;
 
   return (
     <div dir={dir} className={cn("min-h-screen bg-slate-50 text-slate-900", lang === "ar" && "font-arabic")}>
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 md:grid-cols-[260px_1fr]">
+      <div className="mx-auto grid w-full max-w-[min(100%,90rem)] gap-4 px-3 py-4 sm:gap-6 sm:px-4 sm:py-6 md:grid-cols-[220px_1fr] lg:grid-cols-[240px_1fr]">
         <aside className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <div className="text-lg font-extrabold">{t("admin")}</div>

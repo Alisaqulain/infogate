@@ -20,6 +20,9 @@
 # production
 /build
 
+# registration uploads (saved on disk for admin)
+/uploads/registrations
+
 # misc
 .DS_Store
 *.pem

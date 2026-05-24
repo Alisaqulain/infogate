@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import mongoose from "mongoose";
 import { requireAdmin } from "@/lib/adminApi";
 import { dbConnect } from "@/lib/db";
+import { deleteRegistrationFiles } from "@/lib/registration-storage";
 import { FormSubmission } from "@/models/FormSubmission";
 
 export default requireAdmin(async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,8 +14,13 @@ export default requireAdmin(async function handler(req: NextApiRequest, res: Nex
   }
 
   await dbConnect();
-  const deleted = await FormSubmission.findByIdAndDelete(idRaw).lean();
+  const deleted = await FormSubmission.findOneAndDelete({
+    _id: idRaw,
+    type: "registration",
+  }).lean();
   if (!deleted) return res.status(404).json({ error: "Not found" });
+
+  deleteRegistrationFiles(idRaw);
 
   return res.status(200).json({ ok: true });
 });

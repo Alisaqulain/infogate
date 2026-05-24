@@ -26,6 +26,8 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "jsonwebtoken": "^9.0.3",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "lucide-react": "^1.14.0",
     "mongoose": "^9.4.1",
     "multer": "^2.1.1",
@@ -39,6 +41,7 @@
     "slugify": "^1.6.9",
     "tailwind-merge": "^3.5.0",
     "three": "^0.183.2",
+    "xlsx": "^0.18.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {
