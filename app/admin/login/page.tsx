@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) throw new Error(data.error || "Login failed");
@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
       <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-xl">
         <h1 className="text-2xl font-extrabold tracking-tight">Admin login</h1>
         <p className="mt-2 text-sm text-slate-600">
-          Sign in to manage InfoGate content.
+          Sign in with your username and password.
         </p>
 
         {error ? (
@@ -46,14 +46,15 @@ export default function AdminLoginPage() {
 
         <form className="mt-6 space-y-4" onSubmit={onSubmit}>
           <label className="block text-sm font-semibold text-slate-800">
-            Email
+            Username
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
               required
+              autoComplete="username"
               className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-500/15"
-              placeholder="admin@example.com"
+              placeholder="admin"
             />
           </label>
 
@@ -64,6 +65,7 @@ export default function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               required
+              autoComplete="current-password"
               className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-500/15"
               placeholder="••••••••"
             />
@@ -81,4 +83,3 @@ export default function AdminLoginPage() {
     </div>
   );
 }
-

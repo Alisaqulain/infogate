@@ -12,7 +12,7 @@ export type JwtRole = "admin";
 export type JwtPayload = {
   sub: string; // admin id
   role: JwtRole;
-  email: string;
+  username: string;
 };
 
 export function signAccessToken(payload: JwtPayload) {

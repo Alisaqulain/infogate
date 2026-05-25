@@ -16,6 +16,6 @@ export default requireAdmin(async function handler(req: NextApiRequest, res: Nex
   const token = getCookie(req, "admin_token");
   if (!token) return res.status(401).json({ error: "Unauthorized" });
   const payload = verifyAccessToken(token);
-  return res.status(200).json({ ok: true, email: payload.email });
+  return res.status(200).json({ ok: true, username: payload.username });
 });
 

@@ -7,7 +7,7 @@ import { useAdminI18n } from "@/components/admin/admin-i18n";
 
 export default function AdminHomePage() {
   const router = useRouter();
-  const [email, setEmail] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
   const { t } = useAdminI18n();
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export default function AdminHomePage() {
         if (!cancelled) router.replace("/admin/login");
         return;
       }
-      const data = (await res.json()) as { email?: string };
-      if (!cancelled) setEmail(data.email ?? null);
+      const data = (await res.json()) as { username?: string };
+      if (!cancelled) setUsername(data.username ?? null);
     })();
     return () => {
       cancelled = true;
@@ -40,8 +40,8 @@ export default function AdminHomePage() {
               {t("dashboard")}
             </h1>
             <p className="text-sm text-slate-600">
-              {email
-                ? `${t("signedInAs")} ${email}`
+              {username
+                ? `${t("signedInAs")} ${username}`
                 : t("checkingSession")}
             </p>
           </div>

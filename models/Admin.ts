@@ -2,7 +2,9 @@ import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 
 const AdminSchema = new Schema(
   {
-    email: { type: String, required: true, unique: true, index: true },
+    username: { type: String, required: true, unique: true, index: true },
+    /** @deprecated Legacy field; login may match email until account is recreated */
+    email: { type: String, required: false },
     passwordHash: { type: String, required: true },
   },
   { timestamps: true }
