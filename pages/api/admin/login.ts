@@ -103,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   }
 
-  let admin = await findAdminByLogin(username);
+  const admin = await findAdminByLogin(username);
 
   if (admin) {
     const ok = await verifyPassword(password, admin.passwordHash);
