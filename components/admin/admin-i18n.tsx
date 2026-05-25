@@ -42,6 +42,9 @@ type AdminDict = Record<
   | "riyadaFile"
   | "fileNotStored"
   | "openPdf"
+  | "downloadExcel"
+  | "downloadPdf"
+  | "downloadZip"
   | "delete"
   | "deleteSelected"
   | "confirmDeleteOne"
@@ -104,6 +107,9 @@ const EN: AdminDict = {
   fileNotStored:
     "File not on server (submit a new registration to store uploads).",
   openPdf: "Open PDF in new tab",
+  downloadExcel: "Download Excel",
+  downloadPdf: "Download PDF",
+  downloadZip: "Download ZIP (Excel + all uploads)",
   delete: "Delete",
   deleteSelected: "Delete selected",
   confirmDeleteOne:
@@ -158,6 +164,9 @@ const AR: AdminDict = {
   fileNotStored:
     "الملف غير موجود على الخادم (أرسل تسجيلاً جديداً لحفظ المرفقات).",
   openPdf: "فتح PDF في تبويب جديد",
+  downloadExcel: "تحميل Excel",
+  downloadPdf: "تحميل PDF",
+  downloadZip: "تحميل ZIP (Excel + المرفقات)",
   delete: "حذف",
   deleteSelected: "حذف المحدد",
   confirmDeleteOne: "حذف هذا التسجيل نهائياً؟ لا يمكن التراجع.",

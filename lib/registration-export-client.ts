@@ -131,16 +131,89 @@ async function appendRegistrationFilesToPdf(
   }
 }
 
-export async function downloadRegistrationsExcel(
-  subs: RegistrationSubmission[],
-  filenamePrefix = "osus-registrations"
-) {
+function extFromOriginalName(name: string): string {
+  const ext = (name.split(".").pop() ?? "bin").toLowerCase();
+  if (ext === "jpeg") return "jpg";
+  if (ext === "pdf" || ext === "jpg" || ext === "png") return ext;
+  return "bin";
+}
+
+const ZIP_FILE_ENTRY: Record<RegFileKey, string> = {
+  profile: "1-company-profile",
+  commercialReg: "2-commercial-registration",
+  riyada: "3-riyada-card",
+};
+
+function submissionFolderName(sub: RegistrationSubmission, index: number): string {
+  return `${String(index + 1).padStart(3, "0")}-${safeFilenamePart(sub.name)}-${sub.id.slice(-6)}`;
+}
+
+async function buildRegistrationsExcelBuffer(subs: RegistrationSubmission[]) {
   const XLSX = await import("xlsx");
   const rows = rowsFromSubs(subs);
   const sheet = XLSX.utils.json_to_sheet(rows, { header: [...REG_EXPORT_COLUMNS] });
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, sheet, "Registrations");
-  XLSX.writeFile(wb, `${filenamePrefix}-${stamp()}.xlsx`);
+  return XLSX.write(wb, { bookType: "xlsx", type: "array" }) as ArrayBuffer;
+}
+
+function triggerBlobDownload(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+export async function downloadRegistrationsExcel(
+  subs: RegistrationSubmission[],
+  filenamePrefix = "osus-registrations"
+) {
+  const buf = await buildRegistrationsExcelBuffer(subs);
+  triggerBlobDownload(
+    new Blob([buf], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    }),
+    `${filenamePrefix}-${stamp()}.xlsx`
+  );
+}
+
+/** ZIP: Excel summary + each submission’s 3 uploads (profile, CR, Riyada) when stored on server. */
+export async function downloadRegistrationsZip(
+  subs: RegistrationSubmission[],
+  filenamePrefix = "osus-registrations"
+) {
+  const JSZip = (await import("jszip")).default;
+  const zip = new JSZip();
+
+  zip.file("registrations.xlsx", await buildRegistrationsExcelBuffer(subs));
+
+  const uploads = zip.folder("uploads");
+  if (!uploads) throw new Error("Could not create ZIP folder");
+
+  for (let i = 0; i < subs.length; i++) {
+    const sub = subs[i];
+    const folder = uploads.folder(submissionFolderName(sub, i));
+    if (!folder) continue;
+
+    for (const fileKey of REG_FILE_KEYS) {
+      const meta = sub.meta?.files?.[fileKey];
+      if (!meta) continue;
+
+      const res = await fetch(adminRegistrationFileUrl(sub.id, fileKey), {
+        credentials: "include",
+      });
+      if (!res.ok) continue;
+
+      const buf = await res.arrayBuffer();
+      const ext = extFromOriginalName(meta.originalName);
+      folder.file(`${ZIP_FILE_ENTRY[fileKey]}.${ext}`, buf);
+    }
+  }
+
+  const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+  triggerBlobDownload(blob, `${filenamePrefix}-${stamp()}.zip`);
 }
 
 export async function downloadRegistrationsPdf(
