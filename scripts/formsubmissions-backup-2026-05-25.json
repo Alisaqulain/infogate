@@ -1,0 +1,305 @@
+[
+  {
+    "_id": "69dfc214a0b28fff13b2daaf",
+    "type": "contact",
+    "name": "ds",
+    "email": "divya@gmail.com",
+    "phone": "4744925279",
+    "message": "gfdgfddsadasdasdasdasd",
+    "meta": {
+      "service": "Content & blogs",
+      "company": "gdfg",
+      "composed": "Service: Content & blogs\nPhone: 4744925279\nCompany: gdfg\ngfdgfddsadasdasdasdasd"
+    },
+    "createdAt": "2026-04-15T16:51:32.522Z",
+    "updatedAt": "2026-04-15T16:51:32.522Z",
+    "__v": 0
+  },
+  {
+    "_id": "69dfc316a0b28fff13b2dab0",
+    "type": "contact",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "09876543210",
+    "message": "dsadasdasdasdasdas",
+    "meta": {
+      "service": "National / organic SEO",
+      "company": "dasda",
+      "composed": "Service: National / organic SEO\nPhone: 09876543210\nCompany: dasda\ndsadasdasdasdasdas"
+    },
+    "createdAt": "2026-04-15T16:55:50.698Z",
+    "updatedAt": "2026-04-15T16:55:50.698Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a03076a5365195835f59c06",
+    "type": "registration",
+    "name": "fsdfds",
+    "phone": "+919457818181",
+    "message": "Program registration\nCompany: fsdfds\nTrade name: fsdf\nCR: 32423\nEstablished: 2003-02-02\nGovernorate / Wilayat: fdsfsd\nMobile: +919457818181\nWebsite: https://www.devspheresolutions.in/\nInstagram: https://www.instagram.com/\nSector: Manufacturing & Light Industry\nAttached files (filenames):\n• Company profile: ALISAQULAIN.pdf\n• Commercial registration copy: ALISAQULAIN.pdf\n• Riyada card: ALISAQULAIN.pdf",
+    "meta": {
+      "tradeName": "fsdf",
+      "crNumber": "32423",
+      "establishment": "2003-02-02",
+      "governorate": "fdsfsd",
+      "website": "https://www.devspheresolutions.in/",
+      "instagram": "https://www.instagram.com/",
+      "sector": "s1",
+      "sectorLabel": "Manufacturing & Light Industry",
+      "files": {
+        "profile": "ALISAQULAIN.pdf",
+        "commercialReg": "ALISAQULAIN.pdf",
+        "riyada": "ALISAQULAIN.pdf"
+      }
+    },
+    "createdAt": "2026-05-12T10:56:42.176Z",
+    "updatedAt": "2026-05-12T10:56:42.176Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a03083a5365195835f59c07",
+    "type": "registration",
+    "name": "fds",
+    "phone": "+919457818861",
+    "message": "Program registration\nCompany: fds\nTrade name: fsad\nCR: ds\nEstablished: 2002-12-12\nGovernorate / Wilayat: fsd\nMobile: +919457818861\nWebsite: https://chetmani-interior.com/\nInstagram: https://www.devspheresolutions.in/\nSector: Professional & Business Services\nAttached files (filenames):\n• Company profile: ALISAQULAIN.pdf\n• Commercial registration copy: ALISAQULAIN.pdf\n• Riyada card: ALISAQULAIN.pdf",
+    "meta": {
+      "tradeName": "fsad",
+      "crNumber": "ds",
+      "establishment": "2002-12-12",
+      "governorate": "fsd",
+      "website": "https://chetmani-interior.com/",
+      "instagram": "https://www.devspheresolutions.in/",
+      "sector": "s6",
+      "sectorLabel": "Professional & Business Services",
+      "files": {
+        "profile": "ALISAQULAIN.pdf",
+        "commercialReg": "ALISAQULAIN.pdf",
+        "riyada": "ALISAQULAIN.pdf"
+      }
+    },
+    "createdAt": "2026-05-12T11:00:10.018Z",
+    "updatedAt": "2026-05-12T11:00:10.018Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a0308c45365195835f59c08",
+    "type": "registration",
+    "name": "da",
+    "phone": "+913434344343",
+    "message": "Program registration\nCompany: da\nTrade name: dsa\nCR: dada\nEstablished: 2003-12-12\nGovernorate / Wilayat: dasdas\nMobile: +913434344343\nWebsite: https://chetmani-interior.com/\nInstagram: https://www.devspheresolutions.in/\nSector: Energy, Sustainability & Local Content Services\nAttached files (filenames):\n• Company profile: ALISAQULAIN.pdf\n• Commercial registration copy: ALISAQULAIN.pdf\n• Riyada card: ALISAQULAIN.pdf",
+    "meta": {
+      "tradeName": "dsa",
+      "crNumber": "dada",
+      "establishment": "2003-12-12",
+      "governorate": "dasdas",
+      "website": "https://chetmani-interior.com/",
+      "instagram": "https://www.devspheresolutions.in/",
+      "sector": "s5",
+      "sectorLabel": "Energy, Sustainability & Local Content Services",
+      "files": {
+        "profile": "ALISAQULAIN.pdf",
+        "commercialReg": "ALISAQULAIN.pdf",
+        "riyada": "ALISAQULAIN.pdf"
+      }
+    },
+    "createdAt": "2026-05-12T11:02:28.512Z",
+    "updatedAt": "2026-05-12T11:02:28.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a0309455365195835f59c09",
+    "type": "registration",
+    "name": "fsd",
+    "phone": "+91945718818816",
+    "message": "Program registration\nCompany: fsd\nTrade name: fs\nCR: 121\nEstablished: 2003-12-12\nGovernorate / Wilayat: ffadf\nMobile: +91945718818816\nWebsite: https://www.devspheresolutions.in/\nInstagram: https://www.devspheresolutions.in/\nSector: Energy, Sustainability & Local Content Services\nAttached files (filenames):\n• Company profile: ALISAQULAIN.pdf\n• Commercial registration copy: ALISAQULAIN.pdf\n• Riyada card: ALISAQULAIN.pdf",
+    "meta": {
+      "tradeName": "fs",
+      "crNumber": "121",
+      "establishment": "2003-12-12",
+      "governorate": "ffadf",
+      "website": "https://www.devspheresolutions.in/",
+      "instagram": "https://www.devspheresolutions.in/",
+      "sector": "s5",
+      "sectorLabel": "Energy, Sustainability & Local Content Services",
+      "files": {
+        "profile": "ALISAQULAIN.pdf",
+        "commercialReg": "ALISAQULAIN.pdf",
+        "riyada": "ALISAQULAIN.pdf"
+      }
+    },
+    "createdAt": "2026-05-12T11:04:37.197Z",
+    "updatedAt": "2026-05-12T11:04:37.197Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a132ea1290de40d0d846a6a",
+    "type": "registration",
+    "name": "fds",
+    "phone": "97787887",
+    "message": "Program registration\nCompany: fds\nTrade name: fd\nCR: fd\nEstablished: 2000-12-12\nGovernorate / Wilayat: Dhofar (dhofar)\nMobile: 97787887\nWebsite: http://localhost:3000/admin/forms\nSector: Manufacturing & Light Industry\nAttached files:\n• Company profile: bajajlifeins.jpeg → stored as company-profile-1779642017865-d982fec23b0bf042.jpg (image/jpeg, 32193 bytes, 2026-05-24T17:00:17.865Z)\n• Commercial registration copy: image_1.png → stored as commercial-registration-1779642017865-5bfc083e7803bd95.png (image/png, 5057 bytes, 2026-05-24T17:00:17.866Z)\n• Riyada card: icici.jpeg → stored as riyada-card-1779642017866-cb8d4503dcfc025c.jpg (image/jpeg, 64765 bytes, 2026-05-24T17:00:17.866Z)",
+    "meta": {
+      "tradeName": "fd",
+      "crNumber": "fd",
+      "establishment": "2000-12-12",
+      "governorate": "dhofar",
+      "governorateLabel": "Dhofar",
+      "website": "http://localhost:3000/admin/forms",
+      "sector": "s1",
+      "sectorLabel": "Manufacturing & Light Industry",
+      "files": {
+        "profile": {
+          "originalName": "bajajlifeins.jpeg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 32193,
+          "uploadedAt": "2026-05-24T17:00:17.865Z",
+          "storedFilename": "company-profile-1779642017865-d982fec23b0bf042.jpg"
+        },
+        "commercialReg": {
+          "originalName": "image_1.png",
+          "mimeType": "image/png",
+          "sizeBytes": 5057,
+          "uploadedAt": "2026-05-24T17:00:17.866Z",
+          "storedFilename": "commercial-registration-1779642017865-5bfc083e7803bd95.png"
+        },
+        "riyada": {
+          "originalName": "icici.jpeg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 64765,
+          "uploadedAt": "2026-05-24T17:00:17.866Z",
+          "storedFilename": "riyada-card-1779642017866-cb8d4503dcfc025c.jpg"
+        }
+      }
+    },
+    "createdAt": "2026-05-24T17:00:17.880Z",
+    "updatedAt": "2026-05-24T17:00:17.880Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a13304e290de40d0d846a6b",
+    "type": "registration",
+    "name": "gfd",
+    "phone": "98989898",
+    "message": "Program registration\nCompany: gfd\nTrade name: gfd\nCR: gfd\nEstablished: 2026-05-01\nGovernorate / Wilayat: North Ash Sharqiyah (north_ash_sharqiyah)\nMobile: 98989898\nSector: Energy, Sustainability & Local Content Services\nAttached files:\n• Company profile: icici.jpeg → stored as profile.jpg (image/jpeg, 64765 bytes, 2026-05-24T17:07:26.799Z)\n• Commercial registration copy: icici.jpeg → stored as commercialReg.jpg (image/jpeg, 64765 bytes, 2026-05-24T17:07:26.807Z)\n• Riyada card: icici.jpeg → stored as riyada.jpg (image/jpeg, 64765 bytes, 2026-05-24T17:07:26.820Z)",
+    "meta": {
+      "tradeName": "gfd",
+      "crNumber": "gfd",
+      "establishment": "2026-05-01",
+      "governorate": "north_ash_sharqiyah",
+      "governorateLabel": "North Ash Sharqiyah",
+      "sector": "s5",
+      "sectorLabel": "Energy, Sustainability & Local Content Services",
+      "files": {
+        "profile": {
+          "originalName": "icici.jpeg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 64765,
+          "uploadedAt": "2026-05-24T17:07:26.799Z",
+          "storedFilename": "profile.jpg"
+        },
+        "commercialReg": {
+          "originalName": "icici.jpeg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 64765,
+          "uploadedAt": "2026-05-24T17:07:26.807Z",
+          "storedFilename": "commercialReg.jpg"
+        },
+        "riyada": {
+          "originalName": "icici.jpeg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 64765,
+          "uploadedAt": "2026-05-24T17:07:26.820Z",
+          "storedFilename": "riyada.jpg"
+        }
+      }
+    },
+    "createdAt": "2026-05-24T17:07:26.826Z",
+    "updatedAt": "2026-05-24T17:07:26.826Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a1427ee668484d8f6742669",
+    "type": "registration",
+    "name": "fa",
+    "phone": "99999999",
+    "message": "Program registration\nCompany: fa\nTrade name: fa\nCR: faf\nEstablished: 2026-05-15\nGovernorate / Wilayat: South Al Batinah (south_al_batinah)\nMobile: 99999999\nSector: Logistics & Supply Chain\nAttached files:\n• Company profile: battery.jpg → stored as profile.jpg (image/jpeg, 14584 bytes, 2026-05-25T10:43:58.982Z)\n• Commercial registration copy: display.jpg → stored as commercialReg.jpg (image/jpeg, 93539 bytes, 2026-05-25T10:43:58.983Z)\n• Riyada card: display.jpg → stored as riyada.jpg (image/jpeg, 93539 bytes, 2026-05-25T10:43:58.984Z)",
+    "meta": {
+      "tradeName": "fa",
+      "crNumber": "faf",
+      "establishment": "2026-05-15",
+      "governorate": "south_al_batinah",
+      "governorateLabel": "South Al Batinah",
+      "sector": "s2",
+      "sectorLabel": "Logistics & Supply Chain",
+      "files": {
+        "profile": {
+          "originalName": "battery.jpg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 14584,
+          "uploadedAt": "2026-05-25T10:43:58.982Z",
+          "storedFilename": "profile.jpg"
+        },
+        "commercialReg": {
+          "originalName": "display.jpg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 93539,
+          "uploadedAt": "2026-05-25T10:43:58.983Z",
+          "storedFilename": "commercialReg.jpg"
+        },
+        "riyada": {
+          "originalName": "display.jpg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 93539,
+          "uploadedAt": "2026-05-25T10:43:58.984Z",
+          "storedFilename": "riyada.jpg"
+        }
+      }
+    },
+    "createdAt": "2026-05-25T10:43:58.989Z",
+    "updatedAt": "2026-05-25T10:43:58.989Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a143794668484d8f674266b",
+    "type": "registration",
+    "name": "Robust Web Solution",
+    "phone": "+96878304385",
+    "message": "Program registration\nCompany: Robust Web Solution\nTrade name: IT\nCR: NCR454UPCIT1444613KP\nEstablished: 2026-05-05\nGovernorate / Wilayat: Al Wusta (al_wusta)\nMobile: +96878304385\nWebsite: www.robustwebsolution.com\nInstagram: @insta\nSector: ICT & Digital Services\nAttached files:\n• Company profile: 10.jpg → stored as profile.jpg (image/jpeg, 8712 bytes, 2026-05-25T11:50:44.801Z)\n• Commercial registration copy: 11.jpg → stored as commercialReg.jpg (image/jpeg, 7117 bytes, 2026-05-25T11:50:44.801Z)\n• Riyada card: Infogate logo.png → stored as riyada.png (image/png, 45358 bytes, 2026-05-25T11:50:44.802Z)",
+    "meta": {
+      "tradeName": "IT",
+      "crNumber": "NCR454UPCIT1444613KP",
+      "establishment": "2026-05-05",
+      "governorate": "al_wusta",
+      "governorateLabel": "Al Wusta",
+      "website": "www.robustwebsolution.com",
+      "instagram": "@insta",
+      "sector": "s3",
+      "sectorLabel": "ICT & Digital Services",
+      "files": {
+        "profile": {
+          "originalName": "10.jpg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 8712,
+          "uploadedAt": "2026-05-25T11:50:44.801Z",
+          "storedFilename": "profile.jpg"
+        },
+        "commercialReg": {
+          "originalName": "11.jpg",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 7117,
+          "uploadedAt": "2026-05-25T11:50:44.801Z",
+          "storedFilename": "commercialReg.jpg"
+        },
+        "riyada": {
+          "originalName": "Infogate logo.png",
+          "mimeType": "image/png",
+          "sizeBytes": 45358,
+          "uploadedAt": "2026-05-25T11:50:44.802Z",
+          "storedFilename": "riyada.png"
+        }
+      }
+    },
+    "createdAt": "2026-05-25T11:50:44.806Z",
+    "updatedAt": "2026-05-25T11:50:44.806Z",
+    "__v": 0
+  }
+]
