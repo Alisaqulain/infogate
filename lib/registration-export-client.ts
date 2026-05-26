@@ -226,7 +226,7 @@ export async function downloadRegistrationsPdf(
   const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
 
   doc.setFontSize(14);
-  doc.text("Osus Program — Registration submissions", 40, 36);
+  doc.text("Osus Program — Registration submission", 40, 36);
   doc.setFontSize(9);
   doc.setTextColor(100);
   doc.text(`Generated ${new Date().toLocaleString()} · ${subs.length} record(s)`, 40, 52);

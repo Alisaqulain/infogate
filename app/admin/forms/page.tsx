@@ -71,10 +71,10 @@ export default function AdminOsusRegistrationsPage() {
   }
 
   const btn =
-    "inline-flex min-h-12 w-full items-center justify-center rounded-xl border px-6 py-3 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-14 sm:text-base";
-  const btnExcel = `${btn} border-emerald-700 bg-gradient-to-r from-emerald-700 to-emerald-500 text-white shadow-md hover:brightness-110`;
-  const btnPdf = `${btn} border-blue-700 bg-gradient-to-r from-blue-700 to-cyan-600 text-white shadow-md hover:brightness-110`;
-  const btnZip = `${btn} border-violet-700 bg-gradient-to-r from-violet-700 to-purple-500 text-white shadow-md hover:brightness-110`;
+    "inline-flex min-h-12 w-full items-center justify-center rounded-xl border px-6 py-3 text-sm font-bold text-white transition disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-14 sm:text-base";
+  const btnExcel = `${btn} border-[#0a2744] bg-[#0a2744] shadow-md hover:brightness-110`;
+  const btnPdf = `${btn} border-[#2b6cb0] bg-[#2b6cb0] shadow-md hover:brightness-110`;
+  const btnZip = `${btn} border-[#5eb3e8] bg-[#5eb3e8] shadow-md hover:brightness-110`;
 
   return (
     <AdminShell>
