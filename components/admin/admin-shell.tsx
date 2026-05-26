@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { lang, dir, setLang, t } = useAdminI18n();
+  const { t } = useAdminI18n();
 
   const items = [
     { href: "/admin", label: t("dashboard") },
@@ -18,34 +18,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   ] as const;
 
   return (
-    <div dir={dir} className={cn("min-h-screen bg-slate-50 text-slate-900", lang === "ar" && "font-arabic")}>
+    <div dir="ltr" className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto grid w-full max-w-[min(100%,90rem)] gap-4 px-3 py-4 sm:gap-6 sm:px-4 sm:py-6 md:grid-cols-[220px_1fr] lg:grid-cols-[240px_1fr]">
         <aside className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center justify-between gap-3">
-            <div className="text-lg font-extrabold">{t("admin")}</div>
-            <div className="inline-flex overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-bold",
-                  lang === "en" ? "bg-white text-slate-900" : "text-slate-600"
-                )}
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("ar")}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-bold",
-                  lang === "ar" ? "bg-white text-slate-900" : "text-slate-600"
-                )}
-              >
-                AR
-              </button>
-            </div>
-          </div>
+          <div className="text-lg font-extrabold">{t("admin")}</div>
 
           <nav className="mt-4 grid gap-1">
             {items.map((it) => {
