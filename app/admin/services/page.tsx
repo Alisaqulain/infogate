@@ -15,7 +15,7 @@ type ServiceItem = {
 };
 
 export default function AdminServicesPage() {
-  const { t, dir } = useAdminI18n();
+  const { t } = useAdminI18n();
   const [items, setItems] = useState<ServiceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -119,7 +119,9 @@ export default function AdminServicesPage() {
                     )}
                   </td>
                   <td className="px-3 py-2">{item.title_en}</td>
-                  <td className={["px-3 py-2", dir === "rtl" ? "text-right" : ""].join(" ")} dir="rtl">{item.title_ar}</td>
+                  <td className="px-3 py-2 text-right" dir="rtl">
+                    {item.title_ar}
+                  </td>
                   <td className="px-3 py-2 text-right">
                     <button className="mr-2 rounded border px-2 py-1 text-xs font-bold" onClick={() => { setEditingId(item.id); setForm({ title_en: item.title_en, title_ar: item.title_ar, description_en: item.description_en, description_ar: item.description_ar }); }}>
                       Edit
