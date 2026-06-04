@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import {
   REGISTRATION_CHAMBER_LOGO_SRC,
+  REGISTRATION_DALEEL_LOGO_SRC,
   REGISTRATION_OSUS_LOGO_SRC,
 } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -32,24 +33,6 @@ function PartnerLogoBox({
       )}
     >
       {children}
-    </div>
-  );
-}
-
-function DaleelMark() {
-  const t = useTranslations();
-  return (
-    <div className="flex flex-col items-center gap-1.5 px-3 py-2 text-center sm:px-4">
-      <p className="text-sm font-semibold leading-snug text-slate-900 sm:text-base">
-        {t("reg_hero_daleel_ar")}
-      </p>
-      <p className="font-serif text-[11px] font-medium uppercase tracking-[0.12em] text-[#1e4d8c] sm:text-xs">
-        {t("reg_hero_daleel_en")}
-      </p>
-      <span
-        className="mt-0.5 h-0.5 w-[min(100%,11rem)] rounded-full bg-[#1e4d8c]"
-        aria-hidden
-      />
     </div>
   );
 }
@@ -136,7 +119,14 @@ export function RegistrationHero() {
               />
             </PartnerLogoBox>
             <PartnerLogoBox variant="light">
-              <DaleelMark />
+              <Image
+                src={REGISTRATION_DALEEL_LOGO_SRC}
+                alt={t("reg_hero_logo_daleel")}
+                width={360}
+                height={120}
+                className={PARTNER_LOGO_CLASS}
+                sizes="42vw"
+              />
             </PartnerLogoBox>
             <PartnerLogoBox variant="light">
               <Image
@@ -156,7 +146,14 @@ export function RegistrationHero() {
             className="hidden min-w-0 flex-row flex-nowrap items-center justify-center gap-5 py-1 md:flex md:gap-7"
           >
             <PartnerLogoBox variant="light">
-              <DaleelMark />
+              <Image
+                src={REGISTRATION_DALEEL_LOGO_SRC}
+                alt={t("reg_hero_logo_daleel")}
+                width={360}
+                height={120}
+                className={PARTNER_LOGO_CLASS}
+                sizes="320px"
+              />
             </PartnerLogoBox>
             <div
               className="h-16 w-px shrink-0 self-center bg-white/25 md:h-20"
