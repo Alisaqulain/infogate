@@ -5,6 +5,7 @@ import { dbConnect } from "@/lib/db";
 import { saveRegistrationFile, type RegFileKey } from "@/lib/registration-storage";
 import { FormSubmission } from "@/models/FormSubmission";
 import { sendAdminNotification, type MailAttachment } from "@/lib/mailer";
+import { apiFieldError, apiGenericError } from "@/lib/form-api-errors";
 import {
   isRegGovernorateSlug,
   REG_GOVERNORATE_LABEL_EN,
@@ -58,6 +59,7 @@ function safeExtFromFilename(name: string): string {
 async function filePart(
   formData: FormData,
   formKey: string,
+  fieldKey: "fileProfile" | "fileCr" | "fileRiyada",
   fileKey: RegFileKey,
   submissionId: string,
   attachments: MailAttachment[],
@@ -68,12 +70,10 @@ async function filePart(
 
   const violation = validateRegistrationFile(v);
   if (violation === "size") {
-    throw new Error(
-      `${label}: file exceeds ${REG_MAX_FILE_BYTES / 1024 / 1024}MB`
-    );
+    throw Object.assign(new Error("size"), { field: fieldKey, code: "file_size" });
   }
   if (violation === "type") {
-    throw new Error(`${label}: only PDF, JPG, JPEG, or PNG are allowed.`);
+    throw Object.assign(new Error("type"), { field: fieldKey, code: "file_type" });
   }
 
   const buf = Buffer.from(await v.arrayBuffer());
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
   try {
     formData = await request.formData();
   } catch {
-    return NextResponse.json({ error: "Invalid form data." }, { status: 400 });
+    return apiGenericError("Invalid form data.", 400);
   }
 
   const companyName = str(formData, "companyName");
@@ -118,64 +118,34 @@ export async function POST(request: Request) {
   const sectorOther = str(formData, "sectorOther");
 
   if (companyName.length < 2) {
-    return NextResponse.json(
-      { error: "Company name is required." },
-      { status: 400 }
-    );
+    return apiFieldError("companyName", "company_min");
   }
   if (!crNumber) {
-    return NextResponse.json(
-      { error: "Commercial registration number is required." },
-      { status: 400 }
-    );
+    return apiFieldError("crNumber", "cr_required");
   }
   if (!establishment) {
-    return NextResponse.json(
-      { error: "Date of establishment is required." },
-      { status: 400 }
-    );
+    return apiFieldError("establishment", "establishment_required");
   }
   if (!isValidEstablishmentDate(establishment)) {
-    return NextResponse.json(
-      { error: "Date of establishment must be a valid date not in the future." },
-      { status: 400 }
-    );
+    return apiFieldError("establishment", "establishment_invalid");
   }
   if (!governorateSlug || !isRegGovernorateSlug(governorateSlug)) {
-    return NextResponse.json(
-      { error: "Governorate / Wilayat is required." },
-      { status: 400 }
-    );
+    return apiFieldError("governorate", "governorate_required");
   }
   if (!mobile || !isValidOmanMobile(mobile)) {
-    return NextResponse.json(
-      { error: "Enter a valid Oman mobile number (e.g. 9XXXXXXX or +968 9XXXXXXX)." },
-      { status: 400 }
-    );
+    return apiFieldError("mobile", "mobile_invalid");
   }
   if (!isValidOptionalHttpUrl(website)) {
-    return NextResponse.json(
-      { error: "Website must be a valid http(s) URL or left empty." },
-      { status: 400 }
-    );
+    return apiFieldError("website", "website_invalid");
   }
   if (!isValidOptionalInstagram(instagram)) {
-    return NextResponse.json(
-      { error: "Instagram must be a valid Instagram URL, @handle, or left empty." },
-      { status: 400 }
-    );
+    return apiFieldError("instagram", "instagram_invalid");
   }
   if (!sectorChoice || !SECTOR_LABELS[sectorChoice]) {
-    return NextResponse.json(
-      { error: "Business sector is required." },
-      { status: 400 }
-    );
+    return apiFieldError("sector", "sector_required");
   }
   if (sectorChoice === "s9" && sectorOther.length < 2) {
-    return NextResponse.json(
-      { error: "Please specify your sector." },
-      { status: 400 }
-    );
+    return apiFieldError("sectorOther", "sector_other_required");
   }
 
   const submissionId = new mongoose.Types.ObjectId();
@@ -190,6 +160,7 @@ export async function POST(request: Request) {
     fileProfile = await filePart(
       formData,
       "fileProfile",
+      "fileProfile",
       "profile",
       submissionIdStr,
       attachments,
@@ -197,6 +168,7 @@ export async function POST(request: Request) {
     );
     fileCr = await filePart(
       formData,
+      "fileCr",
       "fileCr",
       "commercialReg",
       submissionIdStr,
@@ -206,14 +178,25 @@ export async function POST(request: Request) {
     fileRiyada = await filePart(
       formData,
       "fileRiyada",
+      "fileRiyada",
       "riyada",
       submissionIdStr,
       attachments,
       "riyada-card"
     );
   } catch (e) {
-    const msg = e instanceof Error ? e.message : "Invalid upload.";
-    return NextResponse.json({ error: msg }, { status: 400 });
+    const field =
+      e && typeof e === "object" && "field" in e
+        ? (e as { field: "fileProfile" | "fileCr" | "fileRiyada" }).field
+        : undefined;
+    const code =
+      e && typeof e === "object" && "code" in e
+        ? String((e as { code: string }).code)
+        : "file_invalid";
+    if (field) {
+      return apiFieldError(field, code);
+    }
+    return apiGenericError("Invalid upload.", 400);
   }
 
   const sectorLabel = SECTOR_LABELS[sectorChoice] ?? sectorChoice;
@@ -265,34 +248,38 @@ export async function POST(request: Request) {
     .filter(Boolean)
     .join("\n");
 
-  await dbConnect();
-
-  const submission = await FormSubmission.create({
-    _id: submissionId,
-    type: "registration",
-    name: companyName,
-    email: undefined,
-    phone: mobile,
-    message: messageBody,
-    meta,
-  });
-
-  let emailSent = false;
   try {
-    const res = await sendAdminNotification({
-      subject: `Program registration — ${companyName}`,
-      text: [
-        messageBody,
-        "",
-        `Submission ID: ${submission._id.toString()}`,
-        `Locale: ${str(formData, "locale") || "unknown"}`,
-      ].join("\n"),
-      attachments: attachments.length ? attachments : undefined,
-    });
-    emailSent = res.ok;
-  } catch {
-    emailSent = false;
-  }
+    await dbConnect();
 
-  return NextResponse.json({ ok: true, id: submission._id.toString(), emailSent });
+    const submission = await FormSubmission.create({
+      _id: submissionId,
+      type: "registration",
+      name: companyName,
+      email: undefined,
+      phone: mobile,
+      message: messageBody,
+      meta,
+    });
+
+    let emailSent = false;
+    try {
+      const res = await sendAdminNotification({
+        subject: `Program registration — ${companyName}`,
+        text: [
+          messageBody,
+          "",
+          `Submission ID: ${submission._id.toString()}`,
+          `Locale: ${str(formData, "locale") || "unknown"}`,
+        ].join("\n"),
+        attachments: attachments.length ? attachments : undefined,
+      });
+      emailSent = res.ok;
+    } catch {
+      emailSent = false;
+    }
+
+    return NextResponse.json({ ok: true, id: submission._id.toString(), emailSent });
+  } catch {
+    return apiGenericError("Unable to save your registration. Please try again later.");
+  }
 }

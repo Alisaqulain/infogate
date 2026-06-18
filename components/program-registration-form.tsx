@@ -15,7 +15,9 @@ import { RegistrationSuccessDialog } from "@/components/registration-success-dia
 import {
   REG_FILE_ACCEPT_ATTR,
   REG_GOVERNORATE_SLUGS,
+  isRegGovernorateSlug,
 } from "@/lib/registration-constants";
+import type { ApiErrorBody } from "@/lib/form-api-errors";
 import {
   isValidEstablishmentDate,
   isValidOmanMobile,
@@ -71,6 +73,37 @@ type FieldErrorKey =
   | "fileProfile"
   | "fileCr"
   | "fileRiyada";
+
+const REG_FIELD_ERROR_KEYS: Record<FieldErrorKey, string> = {
+  companyName: "reg_err_company",
+  crNumber: "reg_err_cr",
+  establishment: "reg_err_establishment",
+  governorate: "reg_err_governorate",
+  mobile: "reg_err_mobile",
+  website: "reg_err_website",
+  instagram: "reg_err_instagram",
+  sector: "reg_err_sector",
+  sectorOther: "reg_err_sector_other",
+  fileProfile: "reg_err_file_type",
+  fileCr: "reg_err_file_type",
+  fileRiyada: "reg_err_file_type",
+};
+
+const REG_FILE_CODE_KEYS: Record<string, string> = {
+  file_size: "reg_err_file_size",
+  file_type: "reg_err_file_type",
+};
+
+function regFieldMessage(
+  field: FieldErrorKey,
+  code: string | undefined,
+  t: (key: string) => string
+) {
+  if (field.startsWith("file") && code && REG_FILE_CODE_KEYS[code]) {
+    return t(REG_FILE_CODE_KEYS[code]);
+  }
+  return t(REG_FIELD_ERROR_KEYS[field]);
+}
 
 const ERROR_SCROLL_ORDER: FieldErrorKey[] = [
   "companyName",
@@ -304,6 +337,8 @@ export function ProgramRegistrationForm() {
     }
     if (!governorate) {
       next.governorate = t("reg_err_governorate");
+    } else if (!isRegGovernorateSlug(governorate)) {
+      next.governorate = t("reg_err_governorate");
     }
     if (!mobile || !isValidOmanMobile(mobile)) {
       next.mobile = t("reg_err_mobile");
@@ -342,8 +377,18 @@ export function ProgramRegistrationForm() {
         method: "POST",
         body: fd,
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
+      const data = (await res.json()) as ApiErrorBody & { ok?: boolean };
       if (!res.ok || !data.ok) {
+        if (data.field && (data.field as FieldErrorKey) in REG_FIELD_ERROR_KEYS) {
+          const field = data.field as FieldErrorKey;
+          const message = regFieldMessage(field, data.code, t);
+          setFieldErrors({ [field]: message });
+          setServerError(null);
+          document
+            .getElementById(`${FID}-${field}`)
+            ?.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
         setServerError(data.error ?? t("reg_err_submit"));
         return;
       }
