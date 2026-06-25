@@ -108,8 +108,10 @@ export default async function LocaleLayout({
       <ThemeProvider>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <LocaleHtml />
-          <FxScrollReveal />
-          <SiteShell>{children}</SiteShell>
+          <SiteShell>
+            {children}
+            <FxScrollReveal />
+          </SiteShell>
         </NextIntlClientProvider>
       </ThemeProvider>
     </div>

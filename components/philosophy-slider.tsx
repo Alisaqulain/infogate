@@ -81,6 +81,7 @@ export function PhilosophySlider() {
                 className="h-full w-full bg-slate-50 object-contain"
                 sizes="(max-width:1024px) 100vw, 896px"
                 loading="lazy"
+                data-fx-reveal="off"
               />
             </div>
           ))}
