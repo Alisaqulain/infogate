@@ -96,6 +96,7 @@ export function RegistrationHero() {
               className={OSUS_LOGO_CLASS}
               sizes="(max-width: 768px) 80vw, 360px"
               priority
+              data-fx-reveal="off"
             />
           </div>
 
@@ -116,6 +117,7 @@ export function RegistrationHero() {
                 className={OSUS_LOGO_CLASS}
                 sizes="70vw"
                 priority
+                data-fx-reveal="off"
               />
             </PartnerLogoBox>
             <PartnerLogoBox variant="light">
@@ -126,6 +128,7 @@ export function RegistrationHero() {
                 height={120}
                 className={PARTNER_LOGO_CLASS}
                 sizes="42vw"
+                data-fx-reveal="off"
               />
             </PartnerLogoBox>
             <PartnerLogoBox variant="light">
@@ -136,6 +139,7 @@ export function RegistrationHero() {
                 height={132}
                 className={PARTNER_LOGO_CLASS}
                 sizes="42vw"
+                data-fx-reveal="off"
               />
             </PartnerLogoBox>
           </div>
@@ -153,6 +157,7 @@ export function RegistrationHero() {
                 height={120}
                 className={PARTNER_LOGO_CLASS}
                 sizes="320px"
+                data-fx-reveal="off"
               />
             </PartnerLogoBox>
             <div
@@ -167,6 +172,7 @@ export function RegistrationHero() {
                 height={132}
                 className={PARTNER_LOGO_CLASS}
                 sizes="320px"
+                data-fx-reveal="off"
               />
             </PartnerLogoBox>
           </div>

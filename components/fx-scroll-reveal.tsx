@@ -40,6 +40,7 @@ function collectRevealTargets(root: Document | ParentNode) {
   const uniq = new Set<HTMLElement>([...candidates, ...tiltCards]);
   return Array.from(uniq).filter((el) => {
     if (el.getAttribute("data-fx-reveal") === "off") return false;
+    if (el.closest('[data-fx-reveal="off"]')) return false;
     if (el.closest("header") && !el.classList.contains("fx-btn")) return false;
     return true;
   });
@@ -49,6 +50,9 @@ export function FxScrollReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Registration pages use Next.js Image components — skip reveal to avoid hydration crashes.
+    if (pathname?.includes("/registration")) return;
+
     let cancelled = false;
     let io: IntersectionObserver | null = null;
     let idleId: number | undefined;

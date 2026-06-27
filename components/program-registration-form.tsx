@@ -15,6 +15,7 @@ import { RegistrationSuccessDialog } from "@/components/registration-success-dia
 import {
   REG_FILE_ACCEPT_ATTR,
   REG_GOVERNORATE_SLUGS,
+  REG_GOV_MESSAGE_KEYS,
   isRegGovernorateSlug,
 } from "@/lib/registration-constants";
 import type { ApiErrorBody } from "@/lib/form-api-errors";
@@ -609,7 +610,7 @@ export function ProgramRegistrationForm() {
                     </option>
                     {REG_GOVERNORATE_SLUGS.map((slug) => (
                       <option key={slug} value={slug}>
-                        {t(`reg_gov_${slug}`)}
+                        {t(REG_GOV_MESSAGE_KEYS[slug])}
                       </option>
                     ))}
                   </select>

@@ -29,6 +29,16 @@ export const REG_GOVERNORATE_LABEL_EN: Record<RegGovernorateSlug, string> = {
   "3_dhank": "Dhank",
 };
 
+/** next-intl message keys for governorate options (static keys — avoid dynamic `t()` lookups). */
+export const REG_GOV_MESSAGE_KEYS: Record<
+  RegGovernorateSlug,
+  "reg_gov_1_ibri" | "reg_gov_2_yanqul" | "reg_gov_3_dhank"
+> = {
+  "1_ibri": "reg_gov_1_ibri",
+  "2_yanqul": "reg_gov_2_yanqul",
+  "3_dhank": "reg_gov_3_dhank",
+};
+
 export function isRegGovernorateSlug(v: string): v is RegGovernorateSlug {
   return (REG_GOVERNORATE_SLUGS as readonly string[]).includes(v);
 }

@@ -28,7 +28,7 @@ export default async function RegistrationPage({
   setRequestLocale(locale);
 
   return (
-    <div className="min-h-screen bg-[#f0f4f8]">
+    <div className="min-h-screen bg-[#f0f4f8]" data-fx-reveal="off">
       <RegistrationHero />
       <ProgramRegistrationForm />
     </div>
