@@ -38,7 +38,7 @@ export const stock = {
       alt: "Electronic registration illustration",
     },
     local: {
-      src: "/Digital Business Cards.jpeg",
+      src: "/digital.jpeg",
       alt: "Digital business cards illustration",
     },
     webDev: {

@@ -50,9 +50,9 @@ export default async function ServicesPage({
   const highLevel = [
     t("services_item1_name"),
     t("home_eco_2_title"),
-    t("services_item5_name"),
     t("home_eco_3_title"),
     t("home_eco_4_title"),
+    t("services_item5_name"),
   ] as const;
 
   const services = [
