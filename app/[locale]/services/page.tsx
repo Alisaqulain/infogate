@@ -22,6 +22,21 @@ export async function generateMetadata({
   };
 }
 
+const SURVEY_BULLETS = [
+  "services_item1_b1",
+  "services_item1_b2",
+  "services_item1_b3",
+  "services_item1_b4",
+] as const;
+
+const DIGITAL_CARD_BULLETS = [
+  "services_item5_b1",
+  "services_item5_b2",
+  "services_item5_b3",
+  "services_item5_b4",
+  "services_item5_b5",
+] as const;
+
 export default async function ServicesPage({
   params,
 }: {
@@ -35,6 +50,7 @@ export default async function ServicesPage({
   const highLevel = [
     t("services_item1_name"),
     t("home_eco_2_title"),
+    t("services_item5_name"),
     t("home_eco_3_title"),
     t("home_eco_4_title"),
   ] as const;
@@ -60,7 +76,17 @@ export default async function ServicesPage({
       desc: t("services_item4_desc"),
       visual: stock.services.retainer,
     },
+    {
+      name: t("services_item5_name"),
+      tagline: t("services_item5_tagline"),
+      desc: t("services_item5_desc"),
+      whyTitle: t("services_item5_why"),
+      closing: t("services_item5_closing"),
+      visual: stock.services.local,
+    },
   ] as const;
+
+  const talkToLabel = t("services_cta_button", { site: SITE_NAME });
 
   return (
     <>
@@ -87,12 +113,17 @@ export default async function ServicesPage({
             const reverse = idx % 2 === 1;
             const isSurveyCompass = idx === 0;
             const isElectronicRegistration = idx === 1;
+            const isDigitalBusinessCard = idx === 4;
             const ctaHref = isElectronicRegistration
               ? REGISTRATION_PAGE_PATH
               : "/contact";
             const ctaLabel = isElectronicRegistration
               ? t("services_registration_cta")
-              : t("services_cta_button", { site: SITE_NAME });
+              : talkToLabel;
+            const secondaryHref = isElectronicRegistration ? "/contact" : "/";
+            const secondaryLabel = isElectronicRegistration
+              ? talkToLabel
+              : t("nav_home");
             return (
               <div
                 key={s.name}
@@ -105,19 +136,17 @@ export default async function ServicesPage({
                   <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
                     {s.name}
                   </h2>
+                  {"tagline" in s && s.tagline ? (
+                    <p className="mt-2 text-base font-semibold leading-snug text-blue-800">
+                      {s.tagline}
+                    </p>
+                  ) : null}
                   <p className="mt-4 text-base leading-relaxed text-slate-600">
                     {s.desc}
                   </p>
                   {isSurveyCompass ? (
                     <ul className="mt-5 max-w-xl space-y-2.5 text-base leading-snug text-slate-800">
-                      {(
-                        [
-                          "services_item1_b1",
-                          "services_item1_b2",
-                          "services_item1_b3",
-                          "services_item1_b4",
-                        ] as const
-                      ).map((key) => (
+                      {SURVEY_BULLETS.map((key) => (
                         <li key={key} className="flex gap-2.5">
                           <span
                             className="mt-0.5 shrink-0 font-bold text-emerald-600"
@@ -130,6 +159,31 @@ export default async function ServicesPage({
                       ))}
                     </ul>
                   ) : null}
+                  {isDigitalBusinessCard ? (
+                    <>
+                      <p className="mt-5 text-base font-bold text-slate-900">
+                        {"whyTitle" in s ? s.whyTitle : null}
+                      </p>
+                      <ul className="mt-3 max-w-xl space-y-2.5 text-base leading-snug text-slate-800">
+                        {DIGITAL_CARD_BULLETS.map((key) => (
+                          <li key={key} className="flex gap-2.5">
+                            <span
+                              className="mt-0.5 shrink-0 font-bold text-emerald-600"
+                              aria-hidden
+                            >
+                              ✓
+                            </span>
+                            <span>{t(key)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {"closing" in s && s.closing ? (
+                        <p className="mt-5 text-base leading-relaxed text-slate-700">
+                          {s.closing}
+                        </p>
+                      ) : null}
+                    </>
+                  ) : null}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       href={ctaHref}
@@ -138,10 +192,10 @@ export default async function ServicesPage({
                       {ctaLabel}
                     </Link>
                     <Link
-                      href="/"
+                      href={secondaryHref}
                       className="inline-flex rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-50"
                     >
-                      {t("nav_home")}
+                      {secondaryLabel}
                     </Link>
                   </div>
                 </div>
@@ -182,7 +236,7 @@ export default async function ServicesPage({
             href="/contact"
             className="fx-btn mt-6 inline-flex rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25"
           >
-            {t("services_cta_button", { site: SITE_NAME })}
+            {talkToLabel}
           </Link>
         </div>
       </Section>

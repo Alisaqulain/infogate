@@ -50,8 +50,8 @@ export type NavLink = (typeof allNavLinks)[number];
 /** Public path (no locale prefix; next-intl adds `/en` or `/ar`). */
 export const REGISTRATION_PAGE_PATH = "/registration/osus" as const;
 
-/** Osus program mark — `public/third logo.jpeg` (encoded for URLs). */
-export const REGISTRATION_OSUS_LOGO_SRC = "/third%20logo.jpeg" as const;
+/** Osus program mark — `public/third logo.jpeg`. */
+export const REGISTRATION_OSUS_LOGO_SRC = "/third logo.jpeg" as const;
 
 /** Partner marks on the registration header (Chamber of Commerce layout). */
 export const REGISTRATION_ACADEMY_LOGO_SRC = "/second.png" as const;

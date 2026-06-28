@@ -52,6 +52,7 @@ export function LeadForm({
     t("form_service_4"),
     t("form_service_5"),
     t("form_service_6"),
+    t("form_service_7"),
   ] as const;
 
   const clearFieldError = useCallback((key: ContactField) => {
