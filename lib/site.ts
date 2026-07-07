@@ -50,6 +50,10 @@ export type NavLink = (typeof allNavLinks)[number];
 /** Public path (no locale prefix; next-intl adds `/en` or `/ar`). */
 export const REGISTRATION_PAGE_PATH = "/registration/osus" as const;
 
+/** Digital Business Card product (external). */
+export const DIGITAL_BUSINESS_CARD_URL =
+  "https://infogate.bigdotsales.com/bizcard" as const;
+
 /** Osus program mark — `public/third logo.jpeg`. */
 export const REGISTRATION_OSUS_LOGO_SRC = "/third logo.jpeg" as const;
 

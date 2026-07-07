@@ -6,7 +6,11 @@ import { Section } from "@/components/section";
 import { TiltCard } from "@/components/tilt-card";
 import { stock } from "@/lib/remote-images";
 import { buildHreflangAlternates } from "@/lib/seo-metadata";
-import { REGISTRATION_PAGE_PATH, SITE_NAME } from "@/lib/site";
+import {
+  DIGITAL_BUSINESS_CARD_URL,
+  REGISTRATION_PAGE_PATH,
+  SITE_NAME,
+} from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -120,10 +124,17 @@ export default async function ServicesPage({
             const ctaLabel = isElectronicRegistration
               ? t("services_registration_cta")
               : talkToLabel;
-            const secondaryHref = isElectronicRegistration ? "/contact" : "/";
+            const secondaryHref = isElectronicRegistration
+              ? "/contact"
+              : isDigitalBusinessCard
+                ? DIGITAL_BUSINESS_CARD_URL
+                : "/";
             const secondaryLabel = isElectronicRegistration
               ? talkToLabel
-              : t("nav_home");
+              : isDigitalBusinessCard
+                ? t("services_dbc_cta")
+                : t("nav_home");
+            const secondaryExternal = isDigitalBusinessCard;
             return (
               <div
                 key={s.name}
@@ -191,12 +202,23 @@ export default async function ServicesPage({
                     >
                       {ctaLabel}
                     </Link>
-                    <Link
-                      href={secondaryHref}
-                      className="inline-flex rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-50"
-                    >
-                      {secondaryLabel}
-                    </Link>
+                    {secondaryExternal ? (
+                      <a
+                        href={secondaryHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-50"
+                      >
+                        {secondaryLabel}
+                      </a>
+                    ) : (
+                      <Link
+                        href={secondaryHref}
+                        className="inline-flex rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-slate-50"
+                      >
+                        {secondaryLabel}
+                      </Link>
+                    )}
                   </div>
                 </div>
 
